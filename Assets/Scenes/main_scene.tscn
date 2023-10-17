@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0dtao2rsd2q3"]
+
+[ext_resource type="Script" path="res://Sessions/GameSession.cs" id="1_e8p44"]
+[ext_resource type="Script" path="res://Entities/Actors/Hero.cs" id="2_5tnxb"]
+[ext_resource type="Script" path="res://Entities/Actors/Brains/PlayerBrain.cs" id="2_o1ktv"]
+[ext_resource type="Texture2D" uid="uid://b7xfq1cri4n0n" path="res://Assets/Sprites/icon.svg" id="2_oou24"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ljl5"]
+radius = 24.0
+
+[node name="MainScene" type="Node2D"]
+
+[node name="GameSession" type="Node" parent="." node_paths=PackedStringArray("_playerBrain", "_playerHero")]
+script = ExtResource("1_e8p44")
+_playerBrain = NodePath("PlayerBrain")
+_playerHero = NodePath("Hero")
+
+[node name="PlayerBrain" type="Node" parent="GameSession"]
+script = ExtResource("2_o1ktv")
+
+[node name="Hero" type="Node" parent="GameSession" node_paths=PackedStringArray("_body", "_visual")]
+script = ExtResource("2_5tnxb")
+_body = NodePath("RigidBody2D")
+_visual = NodePath("RigidBody2D/Visual")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="GameSession/Hero"]
+gravity_scale = 2.66454e-15
+
+[node name="Visual" type="Sprite2D" parent="GameSession/Hero/RigidBody2D"]
+texture = ExtResource("2_oou24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameSession/Hero/RigidBody2D"]
+shape = SubResource("CircleShape2D_4ljl5")
