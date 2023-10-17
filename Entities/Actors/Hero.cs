@@ -4,7 +4,6 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using Godot;
 using MouseKnightGD.Entities.Actors.Brains;
-using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
 namespace MouseKnightGD.Entities.Actors;
