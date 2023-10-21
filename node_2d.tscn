@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca01nnu4b7xyx"]
+
+[ext_resource type="Script" path="res://Tests/BouncerTester.cs" id="1_dj23s"]
+[ext_resource type="PackedScene" uid="uid://c8lugry5x5aq2" path="res://Assets/Prefabs/Enemies/bouncer.tscn" id="2_m7gqi"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_dj23s")
+_bouncerPack = ExtResource("2_m7gqi")

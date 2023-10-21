@@ -4,10 +4,10 @@ namespace MouseKnightGD.Entities.Actors.Actions.Attacks;
 
 public partial class AttackFactory : Node
 {
-    [Export] private Slash _slash;
+    [Export] private Sword _sword;
 
-    public void Initialize(Hero player)
+    public void Initialize(Heroes.Hero player)
     {
-        _slash.Initialize(player);
+        _sword.Initialize(player);
     }
 }

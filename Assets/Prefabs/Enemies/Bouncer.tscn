@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cloq753iso5nx"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_3y4yh"]
+[ext_resource type="Script" path="res://Entities/Enemies/Bouncer.cs" id="2_n5ydx"]
+[ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="3_3wdgx"]
+[ext_resource type="Texture2D" uid="uid://cywix5vgwgln5" path="res://Assets/Sprites/Enemies/Bouncer.png" id="4_x8c31"]
+[ext_resource type="Texture2D" uid="uid://bfgb1si0467gb" path="res://Assets/Sprites/Circle100.svg" id="5_xew48"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2lggc"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3iurn"]
+radius = 16.0
+
+[node name="Bouncer" type="RigidBody2D" node_paths=PackedStringArray("_damageShape2D", "_damageAreaVisual")]
+collision_mask = 2
+physics_material_override = ExtResource("1_3y4yh")
+gravity_scale = 2.66454e-15
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("2_n5ydx")
+_damageShape2D = NodePath("DamageArea/CollisionShape2D")
+_damageAreaVisual = NodePath("DamageArea/Sprite2D")
+_fun = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2lggc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("3_3wdgx")
+texture = ExtResource("4_x8c31")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("CircleShape2D_3iurn")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="DamageArea"]
+modulate = Color(0.901961, 0, 0.14902, 0)
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("5_xew48")
+
+[connection signal="body_entered" from="DamageArea" to="." method="GiveDamage"]
