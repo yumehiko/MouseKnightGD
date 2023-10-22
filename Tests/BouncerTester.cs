@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
-using MouseKnightGD.Entities.Enemies;
+using MouseKnightGD.InGame.Entities.Enemies;
 
 namespace MouseKnightGD.Tests;
 

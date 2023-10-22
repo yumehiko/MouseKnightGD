@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnhx513tyfbq4"]
+
+[ext_resource type="Script" path="res://Title/TitleSession.cs" id="1_1bw8w"]
+[ext_resource type="Script" path="res://Title/StartField.cs" id="1_68ux1"]
+[ext_resource type="Script" path="res://Title/ExitField.cs" id="1_ctfdw"]
+[ext_resource type="Texture2D" uid="uid://b6t01tra6niva" path="res://Assets/Sprites/Title/CloseField.png" id="1_u456k"]
+[ext_resource type="Material" uid="uid://ryxuwjngeioj" path="res://Assets/Sprites/CanvasItemMaterials/MaskedItem.tres" id="2_iiomx"]
+[ext_resource type="Texture2D" uid="uid://vltvbtw5gbp7" path="res://Assets/Sprites/Hero/Hero.png" id="2_ycbrr"]
+[ext_resource type="Texture2D" uid="uid://cf2t1lpxhj571" path="res://Assets/Sprites/Title/Title.png" id="5_4p2od"]
+[ext_resource type="Texture2D" uid="uid://byixjma1u8x8v" path="res://Assets/Sprites/Title/Cricle120.png" id="6_e6dc8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h3rjy"]
+radius = 240.0
+
+[node name="TitleSession" type="Node" node_paths=PackedStringArray("_startField", "_exitField", "_titleSprite")]
+script = ExtResource("1_1bw8w")
+_startField = NodePath("StartField")
+_exitField = NodePath("CloseField")
+_titleSprite = NodePath("TitleImage")
+
+[node name="StartField" type="Area2D" parent="." node_paths=PackedStringArray("_fillSprite")]
+position = Vector2(960, 540)
+script = ExtResource("1_68ux1")
+_fillSprite = NodePath("HeroSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartField"]
+shape = SubResource("CircleShape2D_h3rjy")
+
+[node name="HeroSprite" type="Sprite2D" parent="StartField"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_ycbrr")
+
+[node name="CloseField" type="Control" parent="." node_paths=PackedStringArray("_fillSprite")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -210.0
+offset_right = 60.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_ctfdw")
+_fillSprite = NodePath("CloseFieldFill")
+
+[node name="CloseFieldMask" type="PointLight2D" parent="CloseField"]
+position = Vector2(60, 60)
+blend_mode = 2
+texture = ExtResource("1_u456k")
+
+[node name="CloseFieldFill" type="Sprite2D" parent="CloseField"]
+material = ExtResource("2_iiomx")
+position = Vector2(60, 60)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("6_e6dc8")
+
+[node name="CloseFieldBack" type="Sprite2D" parent="CloseField"]
+modulate = Color(1, 1, 1, 0.247059)
+material = ExtResource("2_iiomx")
+position = Vector2(60, 60)
+texture = ExtResource("1_u456k")
+
+[node name="TitleImage" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.247059)
+position = Vector2(-6, 135)
+texture = ExtResource("5_4p2od")
+centered = false
+
+[connection signal="mouse_entered" from="StartField" to="StartField" method="OnMouseEntered"]
+[connection signal="mouse_exited" from="StartField" to="StartField" method="OnMouseExited"]
+[connection signal="mouse_entered" from="CloseField" to="CloseField" method="OnMouseEntered"]
+[connection signal="mouse_exited" from="CloseField" to="CloseField" method="OnMouseExited"]
