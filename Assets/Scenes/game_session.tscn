@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=27 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="2_irq5n"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Sword.cs" id="10_uwnck"]
 [ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="11_1eg6i"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Rifle.cs" id="13_ajakh"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
@@ -49,7 +50,7 @@ _playerBrain = NodePath("PlayerBrain")
 _playerHero = NodePath("Hero")
 _stageArea = NodePath("StageArea")
 _enemyFactory = NodePath("Enemies")
-_attackFactory = NodePath("Attacks")
+_attackFactory = NodePath("Hero/Attacks")
 
 [node name="StageArea" type="Area2D" parent="."]
 visible = false
@@ -130,23 +131,27 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hero/ChipCollector"]
 shape = SubResource("CircleShape2D_biavq")
 
-[node name="Attacks" type="Node" parent="." node_paths=PackedStringArray("_sword")]
+[node name="Attacks" type="Node2D" parent="Hero" node_paths=PackedStringArray("_sword", "_rifle")]
 script = ExtResource("9_bw5vl")
 _sword = NodePath("Sword")
+_rifle = NodePath("Rifle")
 
-[node name="Sword" type="Area2D" parent="Attacks" node_paths=PackedStringArray("_visual")]
+[node name="Sword" type="Area2D" parent="Hero/Attacks" node_paths=PackedStringArray("_visual")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("10_uwnck")
 _visual = NodePath("Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="Attacks/Sword"]
+[node name="Sprite2D" type="Sprite2D" parent="Hero/Attacks/Sword"]
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("11_1eg6i")
 offset = Vector2(2.08165e-12, 2.08165e-12)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Sword"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hero/Attacks/Sword"]
 shape = SubResource("CircleShape2D_8wi3g")
+
+[node name="Rifle" type="Node2D" parent="Hero/Attacks"]
+script = ExtResource("13_ajakh")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
@@ -158,7 +163,7 @@ _chipFactory = NodePath("../Chips")
 script = ExtResource("9_ubuin")
 _chipPack = ExtResource("12_simin")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="StageBackParticles" type="CPUParticles2D" parent="."]
 material = ExtResource("4_ei801")
 position = Vector2(960, 540)
 amount = 32

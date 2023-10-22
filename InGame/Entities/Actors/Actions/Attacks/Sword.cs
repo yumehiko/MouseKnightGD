@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Threading;
 using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
 using MouseKnightGD.InGame.Entities.Enemies;
@@ -17,22 +19,22 @@ namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 public partial class Sword : Area2D, IAttack
 {
 	[Export] private Sprite2D _visual;
+	private CooldownTimer _timer;
+	private CancellationTokenSource _cts;
 	private CompositeDisposable _disposable;
-	private bool _isCoolDown;
 	private bool _isAttackTriggered;
 	private Vector2 _slashPoint;
 
 	public void Initialize(Hero hero)
 	{
-		GetParent().RemoveChild(this);
-		hero.AddChild(this);
+		_timer = new CooldownTimer();
+		_cts = new CancellationTokenSource();
 		Position = new Vector2(0, -32);
 		_disposable = new CompositeDisposable();
 		hero.Brain.LeftTrigger
 			.Where(_ => !hero.IsDead)
-			.Where(_ => !_isCoolDown)
 			.Where(isOn => isOn)
-			.Subscribe(x => _ = Attack(hero.Position)).AddTo(_disposable);
+			.Subscribe(x => Attack(hero.Position, _cts.Token)).AddTo(_disposable);
 	}
 
 	public override void _ExitTree()
@@ -47,13 +49,12 @@ public partial class Sword : Area2D, IAttack
 		base._PhysicsProcess(delta);
 	}
 
-	private async Task Attack(Vector2 point)
+	private void Attack(Vector2 point, CancellationToken ct)
 	{
+		GD.Print("Sword.Attack");
 		const float cooldown = 0.5f;
-		_isAttackTriggered = true;
-		_isCoolDown = true;
-		await Task.Delay(TimeSpan.FromSeconds(cooldown));
-		_isCoolDown = false;
+		if(_timer.IsCompleted) _isAttackTriggered = true;
+		_timer.CountAsync(cooldown, ct).Forget();
 	}
 
 	private void GiveDamageToArea()

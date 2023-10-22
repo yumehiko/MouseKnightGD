@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0.121569, 0.121569, 0.121569, 1)
 config/icon="res://Assets/Sprites/icon.svg"
 
+[autoload]
+
+GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload.cs"
+
 [display]
 
 window/size/viewport_width=1920
