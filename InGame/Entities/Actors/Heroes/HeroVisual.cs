@@ -39,7 +39,7 @@ public partial class HeroVisual : Sprite2D
 
     private void Death()
     {
-        this.Visible = false;
+        Visible = false;
         _deathParticle.Emitting = true;
     }
 }

@@ -35,7 +35,11 @@ public class Health : IDisposable
     {
         if (IsDead) return;
         _current.Value -= amount;
-        if (IsDead) _onDeath.OnNext(Unit.Default);
+        if (IsDead)
+        {
+            _onDeath.OnNext(Unit.Default);
+            _onDeath.OnCompleted();
+        }
     }
     
     public void FullHeal()
@@ -47,5 +51,12 @@ public class Health : IDisposable
     public void Resurrection()
     {
         _current.Value = _max.Value;
+    }
+
+    public void Die()
+    {
+        _current.Value = 0;
+        _onDeath.OnNext(Unit.Default);
+        _onDeath.OnCompleted();
     }
 }

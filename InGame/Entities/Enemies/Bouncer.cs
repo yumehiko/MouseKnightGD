@@ -8,8 +8,7 @@ namespace MouseKnightGD.InGame.Entities.Enemies;
 
 public partial class Bouncer : EnemyBase
 {
-	[Export] private CollisionShape2D _damageShape2D;
-	[Export] private Sprite2D _damageAreaVisual;
+	[Export] private DamageArea _damageArea;
 	private readonly Random _random = new Random();
 	private CancellationTokenSource _cts;
 	public override void Initialize(Vector2 spawnPosition, Hero player)
@@ -25,31 +24,27 @@ public partial class Bouncer : EnemyBase
 		ApplyTorque(x * 40);
 		_ = DamageActionLoop(_cts.Token);
 	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		_cts?.Cancel();
+		_cts?.Dispose();
+	}
+
 	private async Task DamageActionLoop(CancellationToken ct)
 	{
-		var damageArea = new DamageAreaEffect(_damageAreaVisual);
 		while (!ct.IsCancellationRequested)
 		{
 			await Task.Delay(TimeSpan.FromSeconds(2.0f), ct);
-			await DamageAction(damageArea, ct);
+			await DamageAction(ct);
 		}
 	}
 
-	private async Task DamageAction(DamageAreaEffect damageAreaEffect, CancellationToken ct)
+	private async Task DamageAction(CancellationToken ct)
 	{
-		try
-		{
-			var tween = CreateTween();
-			await damageAreaEffect.Alert(tween, 1.5f, ct);
-			_damageShape2D.Disabled = false;
-			await Task.Delay(TimeSpan.FromSeconds(3.0f), ct);
-			_damageShape2D.Disabled = true;
-			tween = CreateTween();
-			await damageAreaEffect.FadeOut(tween, 0.5f, ct);
-		}
-		finally
-		{
-			_damageShape2D.Disabled = true;
-		}
+		await _damageArea.Alert(0.5f, ct);
+		await Task.Delay(TimeSpan.FromSeconds(3.0f), ct);
+		await _damageArea.FadeOut(0.5f, ct);
 	}
 }

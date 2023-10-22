@@ -15,7 +15,7 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 	private readonly Subject<Unit> _onRemove = new Subject<Unit>();
 	protected Hero Player;
 	public bool IsDead => _hp <= 0;
-	public IObservable<Unit> OnDead => _onDead;
+	public IObservable<Unit> OnDeath => _onDead;
 	public IObservable<Unit> OnRemove => _onRemove;
 	public double Fun => _fun;
 

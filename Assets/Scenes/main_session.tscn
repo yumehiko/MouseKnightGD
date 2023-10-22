@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://ba1qptjknh7ml"]
+[gd_scene load_steps=6 format=3 uid="uid://ba1qptjknh7ml"]
 
-[node name="MainSession" type="Node"]
+[ext_resource type="Script" path="res://App/AppSession.cs" id="1_40bds"]
+[ext_resource type="PackedScene" uid="uid://dnhx513tyfbq4" path="res://Assets/Scenes/title_session.tscn" id="2_jofxh"]
+[ext_resource type="Texture2D" uid="uid://cd7gjt3cidtnk" path="res://Assets/Sprites/App/Viewport.svg" id="3_is6ge"]
+[ext_resource type="PackedScene" uid="uid://bv75pxtmkco6h" path="res://Assets/Scenes/game_session.tscn" id="3_w5q0f"]
+[ext_resource type="Script" path="res://App/Curtain.cs" id="4_4kcns"]
+
+[node name="MainSession" type="Node" node_paths=PackedStringArray("_curtain")]
+script = ExtResource("1_40bds")
+_curtain = NodePath("Curtain")
+_titleSessionPack = ExtResource("2_jofxh")
+_gameSessionPack = ExtResource("3_w5q0f")
+
+[node name="Curtain" type="Sprite2D" parent="."]
+modulate = Color(0.121569, 0.121569, 0.121569, 1)
+z_index = 1
+texture = ExtResource("3_is6ge")
+centered = false
+script = ExtResource("4_4kcns")

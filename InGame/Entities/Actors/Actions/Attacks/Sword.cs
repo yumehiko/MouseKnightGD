@@ -29,6 +29,7 @@ public partial class Sword : Area2D, IAttack
 		Position = new Vector2(0, -32);
 		_disposable = new CompositeDisposable();
 		hero.Brain.LeftTrigger
+			.Where(_ => !hero.IsDead)
 			.Where(_ => !_isCoolDown)
 			.Where(isOn => isOn)
 			.Subscribe(x => _ = Attack(hero.Position)).AddTo(_disposable);

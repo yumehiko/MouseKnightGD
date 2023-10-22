@@ -45,7 +45,7 @@ public partial class EnemyFactory : Node
 		// 敵を生成
 		var enemy = GetRandomEnemy(bore);
 		_instances.Add(enemy);
-		enemy.OnDead.Subscribe(_ => { }, () => _chipFactory.Create(enemy.Position)).AddTo(_disposables);
+		enemy.OnDeath.Subscribe(_ => { }, () => _chipFactory.Create(enemy.Position)).AddTo(_disposables);
 		enemy.OnRemove.Subscribe(_ => { }, () => _instances.Remove(enemy)).AddTo(_disposables);
 		enemy.Initialize(spawnPosition, _player);
 		return bore - enemy.Fun;

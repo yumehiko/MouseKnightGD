@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnhx513tyfbq4"]
+[gd_scene load_steps=11 format=3 uid="uid://dnhx513tyfbq4"]
 
 [ext_resource type="Script" path="res://Title/TitleSession.cs" id="1_1bw8w"]
 [ext_resource type="Script" path="res://Title/StartField.cs" id="1_68ux1"]
@@ -11,6 +11,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3rjy"]
 radius = 240.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dykt"]
+size = Vector2(120, 120)
 
 [node name="TitleSession" type="Node" node_paths=PackedStringArray("_startField", "_exitField", "_titleSprite")]
 script = ExtResource("1_1bw8w")
@@ -30,38 +33,30 @@ shape = SubResource("CircleShape2D_h3rjy")
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("2_ycbrr")
 
-[node name="CloseField" type="Control" parent="." node_paths=PackedStringArray("_fillSprite")]
-layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -210.0
-offset_right = 60.0
-offset_bottom = -90.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="CloseField" type="Area2D" parent="." node_paths=PackedStringArray("_fillSprite")]
+position = Vector2(960, 920)
 script = ExtResource("1_ctfdw")
 _fillSprite = NodePath("CloseFieldFill")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloseField"]
+shape = SubResource("RectangleShape2D_6dykt")
+
+[node name="CloseFieldBack" type="Sprite2D" parent="CloseField"]
+modulate = Color(1, 1, 1, 0.247059)
+material = ExtResource("2_iiomx")
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("1_u456k")
+
 [node name="CloseFieldMask" type="PointLight2D" parent="CloseField"]
-position = Vector2(60, 60)
+position = Vector2(2.08165e-12, 2.08165e-12)
 blend_mode = 2
 texture = ExtResource("1_u456k")
 
 [node name="CloseFieldFill" type="Sprite2D" parent="CloseField"]
 material = ExtResource("2_iiomx")
-position = Vector2(60, 60)
+position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("6_e6dc8")
-
-[node name="CloseFieldBack" type="Sprite2D" parent="CloseField"]
-modulate = Color(1, 1, 1, 0.247059)
-material = ExtResource("2_iiomx")
-position = Vector2(60, 60)
-texture = ExtResource("1_u456k")
 
 [node name="TitleImage" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.247059)

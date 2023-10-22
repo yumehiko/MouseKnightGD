@@ -1,24 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://1mxdu035opf5"]
+[gd_scene load_steps=5 format=3 uid="uid://dd43uh6mssi6r"]
 
-[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_b1cxt"]
-[ext_resource type="Texture2D" uid="uid://dw1nttnawc0uy" path="res://Assets/Sprites/Chip.png" id="1_r4r6o"]
-[ext_resource type="Script" path="res://Entities/Chips/Chip.cs" id="2_2do35"]
+[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_rqkr1"]
+[ext_resource type="Script" path="res://InGame/Entities/Chips/Chip.cs" id="1_umqbh"]
+[ext_resource type="Texture2D" uid="uid://dw1nttnawc0uy" path="res://Assets/Sprites/Chip.png" id="2_nu422"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_olyvj"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjape"]
 radius = 12.0
 
 [node name="Chip" type="RigidBody2D"]
-collision_layer = 8
-collision_mask = 2
-physics_material_override = ExtResource("1_b1cxt")
+collision_layer = 4
+collision_mask = 5
+physics_material_override = ExtResource("1_rqkr1")
 gravity_scale = 2.66454e-15
 linear_damp_mode = 1
 angular_damp_mode = 1
-script = ExtResource("2_2do35")
-Value = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_olyvj")
+script = ExtResource("1_umqbh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_r4r6o")
+texture = ExtResource("2_nu422")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cjape")

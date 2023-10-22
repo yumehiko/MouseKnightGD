@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Godot;
@@ -10,25 +11,26 @@ namespace MouseKnightGD.App;
 /// </summary>
 public partial class Curtain : Sprite2D
 {
-    private Tween _tween;
-    
-    public async Task Open(float duration, CancellationToken ct)
-    {
-        _tween?.Kill();
-        _tween = GetTree().CreateTween();
-        _tween.TweenProperty(this, "modulate.a", 1.0f, duration);
-        _tween.SetEase(Tween.EaseType.Out);
-        _tween.Play();
-        await Task.Delay(TimeSpan.FromSeconds(duration), ct);
-    }
+	private Tween _tween;
+	
+	public async Task Open(float duration, CancellationToken ct)
+	{
+		GD.Print("Curtain Open");
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(this, "modulate:a", 0, duration);
+		_tween.SetEase(Tween.EaseType.Out);
+		_tween.Play();
+		await Task.Delay(TimeSpan.FromSeconds(duration), ct);
+	}
 
-    public async Task Close(float duration, CancellationToken ct)
-    {
-        _tween?.Kill();
-        _tween = GetTree().CreateTween();
-        _tween.TweenProperty(this, "modulate.a", 0.0f, duration);
-        _tween.SetEase(Tween.EaseType.Out);
-        _tween.Play();
-        await Task.Delay(TimeSpan.FromSeconds(duration), ct);
-    }
+	public async Task Close(float duration, CancellationToken ct)
+	{
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(this, "modulate:a", 1, duration);
+		_tween.SetEase(Tween.EaseType.Out);
+		_tween.Play();
+		await Task.Delay(TimeSpan.FromSeconds(duration), ct);
+	}
 }
