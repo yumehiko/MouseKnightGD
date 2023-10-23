@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame;
 using MouseKnightGD.Title;
@@ -30,7 +30,7 @@ public partial class AppSession : Node
 		_cts?.Cancel();
 	}
 
-	private async Task Begin()
+	private async GDTask Begin()
 	{
 		_cts = new CancellationTokenSource();
 		while (_cts.IsCancellationRequested == false)
@@ -46,11 +46,11 @@ public partial class AppSession : Node
 		}
 	}
 
-	private async Task<TitleSessionResult> CallTitle(CancellationToken ct)
+	private async GDTask<TitleSessionResult> CallTitle(CancellationToken ct)
 	{
 		var titleSession = _titleSessionPack.Instantiate<TitleSession>();
 		AddChild(titleSession);
-		await Task.Delay(TimeSpan.FromSeconds(0.2f), ct);
+		await GDTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: ct);
 		await _curtain.Open(1.0f, ct);
 		var result = await titleSession.Run(ct);
 		await _curtain.Close(0.5f, ct);
@@ -58,10 +58,11 @@ public partial class AppSession : Node
 		return result;
 	}
 
-	private async Task<GameSessionResult> CallGame(CancellationToken ct)
+	private async GDTask<GameSessionResult> CallGame(CancellationToken ct)
 	{
 		var gameSession = _gameSessionPack.Instantiate<GameSession>();
 		AddChild(gameSession);
+		await GDTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: ct);
 		await _curtain.Open(1.0f, ct);
 		var result = await gameSession.Run(ct);
 		await _curtain.Close(0.5f, ct);

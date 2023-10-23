@@ -1,8 +1,8 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
-using Hero = MouseKnightGD.InGame.Entities.Actors.Heroes.Hero;
+using MouseKnightGD.InGame.Entities.Actors.Heroes;
 
 namespace MouseKnightGD.InGame.Entities.Enemies;
 
@@ -32,19 +32,19 @@ public partial class Bouncer : EnemyBase
 		_cts?.Dispose();
 	}
 
-	private async Task DamageActionLoop(CancellationToken ct)
+	private async GDTask DamageActionLoop(CancellationToken ct)
 	{
 		while (!ct.IsCancellationRequested)
 		{
-			await Task.Delay(TimeSpan.FromSeconds(2.0f), ct);
+			await GDTask.Delay(TimeSpan.FromSeconds(2.0f), cancellationToken: ct);
 			await DamageAction(ct);
 		}
 	}
 
-	private async Task DamageAction(CancellationToken ct)
+	private async GDTask DamageAction(CancellationToken ct)
 	{
 		await _damageArea.Alert(0.5f, ct);
-		await Task.Delay(TimeSpan.FromSeconds(3.0f), ct);
+		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: ct);
 		await _damageArea.FadeOut(0.5f, ct);
 	}
 }

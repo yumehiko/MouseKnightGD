@@ -121,7 +121,7 @@ damping_max = 40.0
 scale_amount_min = 0.2
 color_ramp = SubResource("Gradient_uno05")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hero"]
+[node name="BodyCollision" type="CollisionShape2D" parent="Hero"]
 shape = SubResource("CircleShape2D_qw33i")
 
 [node name="ChipCollector" type="Area2D" parent="Hero"]

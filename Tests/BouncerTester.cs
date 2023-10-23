@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame.Entities.Enemies;
 
@@ -14,14 +15,14 @@ public partial class BouncerTester : Node
 		_ = Test();
 	}
 	
-	private async Task Test()
+	private async GDTask Test()
 	{
 		for (var i = 0; i < 10; i++)
 		{
 			_bouncer = _bouncerPack.Instantiate<Bouncer>();
 			AddChild(_bouncer);
 			_bouncer.Initialize(Vector2.Zero, null);
-			await Task.Delay(1000);
+			await GDTask.Delay(1000);
 		}
 	}
 }

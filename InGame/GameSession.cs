@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using MouseKnightGD.InGame.Entities.Actors.Brains;
@@ -19,13 +20,13 @@ public partial class GameSession : Node
 	[Export] private EnemyFactory _enemyFactory;
 	[Export] private AttackFactory _attackFactory;
 
-	private TaskCompletionSource<GameSessionResult> _tcs;
+	private GDTaskCompletionSource<GameSessionResult> _tcs;
 
-	public async Task<GameSessionResult> Run(CancellationToken ct)
+	public async GDTask<GameSessionResult> Run(CancellationToken ct)
 	{
 		GD.Print("GameSession.Run");
 		var disposables = new CompositeDisposable();
-		_tcs = new TaskCompletionSource<GameSessionResult>();
+		_tcs = new GDTaskCompletionSource<GameSessionResult>();
 		var gameCts = new CancellationTokenSource();
 		_playerHero.Initialize(_playerBrain);
 		_stageArea.Initialize(_playerHero);
@@ -33,19 +34,19 @@ public partial class GameSession : Node
 		_attackFactory.Initialize(_playerHero);
 		_playerHero.OnDeath.Subscribe(_ => { }, () => GameOver(gameCts)).AddTo(disposables);
 		_ =	MainLoop(gameCts.Token);
-		
-		var result = await _tcs.Task;
-		await Task.Delay(TimeSpan.FromSeconds(3.0f), ct);
+
+		var result = await _tcs.Task.AttachExternalCancellation(ct);
+		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: ct);
 		disposables.Dispose();
 		return result;
 	}
 	
-	private async Task MainLoop(CancellationToken ct)
+	private async GDTask MainLoop(CancellationToken ct)
 	{
 		_enemyFactory.Create(10);
 		while (ct.IsCancellationRequested == false)
 		{
-			await Task.Delay(TimeSpan.FromSeconds(1.0f), ct);
+			await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: ct);
 			_enemyFactory.Create(10);
 		}
 	}

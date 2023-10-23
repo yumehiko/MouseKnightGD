@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading;
-using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
@@ -51,7 +50,6 @@ public partial class Sword : Area2D, IAttack
 
 	private void Attack(Vector2 point, CancellationToken ct)
 	{
-		GD.Print("Sword.Attack");
 		const float cooldown = 0.5f;
 		if(_timer.IsCompleted) _isAttackTriggered = true;
 		_timer.CountAsync(cooldown, ct).Forget();

@@ -1,8 +1,7 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
 
 namespace MouseKnightGD.InGame.Entities.Enemies;
 
@@ -11,7 +10,7 @@ public partial class DamageArea : Area2D
     [Export] private Sprite2D _sprite2D;
     [Export] private CollisionShape2D _damageShape2D;
     
-    public async Task Alert(float alertTime, CancellationToken ct)
+    public async GDTask Alert(float alertTime, CancellationToken ct)
     {
         // 一定時間警告点滅weenを発する
         // 点滅は3回行う（アルファ0=>アルファ1=>アルファ0で1回）
@@ -29,16 +28,16 @@ public partial class DamageArea : Area2D
         tween.Play();
 		
         // アラート時間が終わるまで待機
-        await Task.Delay(TimeSpan.FromSeconds(alertTime), ct);
+        await GDTask.Delay(TimeSpan.FromSeconds(alertTime), cancellationToken: ct);
         _damageShape2D.Disabled = false;
     }
 	
-    public async Task FadeOut(float fadeTime, CancellationToken ct)
+    public async GDTask FadeOut(float fadeTime, CancellationToken ct)
     {
         _damageShape2D.Disabled = true;
         var tween = GetTree().CreateTween();
         tween.TweenProperty(_sprite2D, "modulate:a", 0.0, fadeTime);
         tween.Play();
-        await Task.Delay(TimeSpan.FromSeconds(fadeTime), ct);
+        await GDTask.Delay(TimeSpan.FromSeconds(fadeTime), cancellationToken: ct);
     }
 }

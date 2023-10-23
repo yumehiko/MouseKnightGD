@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnhx513tyfbq4"]
+[gd_scene load_steps=14 format=3 uid="uid://dnhx513tyfbq4"]
 
 [ext_resource type="Script" path="res://Title/TitleSession.cs" id="1_1bw8w"]
 [ext_resource type="Script" path="res://Title/StartField.cs" id="1_68ux1"]
@@ -8,12 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://vltvbtw5gbp7" path="res://Assets/Sprites/Hero/Hero.png" id="2_ycbrr"]
 [ext_resource type="Texture2D" uid="uid://cf2t1lpxhj571" path="res://Assets/Sprites/Title/Title.png" id="5_4p2od"]
 [ext_resource type="Texture2D" uid="uid://byixjma1u8x8v" path="res://Assets/Sprites/Title/Cricle120.png" id="6_e6dc8"]
+[ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="8_3hap8"]
+[ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="10_pos1o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3rjy"]
 radius = 240.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6dykt"]
 size = Vector2(120, 120)
+
+[sub_resource type="Gradient" id="Gradient_3pbc6"]
+offsets = PackedFloat32Array(0, 0.491686, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="TitleSession" type="Node" node_paths=PackedStringArray("_startField", "_exitField", "_titleSprite")]
 script = ExtResource("1_1bw8w")
@@ -60,9 +66,25 @@ texture = ExtResource("6_e6dc8")
 
 [node name="TitleImage" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.247059)
+material = ExtResource("8_3hap8")
 position = Vector2(-6, 135)
 texture = ExtResource("5_4p2od")
 centered = false
+
+[node name="StageBackParticles" type="CPUParticles2D" parent="."]
+material = ExtResource("8_3hap8")
+position = Vector2(960, 540)
+amount = 32
+lifetime = 5.0
+lifetime_randomness = 0.5
+texture = ExtResource("10_pos1o")
+emission_shape = 3
+emission_rect_extents = Vector2(960, 540)
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_max = 16.0
+color_ramp = SubResource("Gradient_3pbc6")
 
 [connection signal="mouse_entered" from="StartField" to="StartField" method="OnMouseEntered"]
 [connection signal="mouse_exited" from="StartField" to="StartField" method="OnMouseExited"]

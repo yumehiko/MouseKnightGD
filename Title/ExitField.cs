@@ -3,6 +3,7 @@ using System.Reactive;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
+using Fractural.Tasks;
 using Godot;
 
 namespace MouseKnightGD.Title;
@@ -34,31 +35,33 @@ public partial class ExitField : Area2D
 
 	private void OnMouseEntered()
 	{
+		const float duration = 1.0f;
 		if(!_isActive) return;
 		_cts = new CancellationTokenSource();
 		_fillScaleTween?.Kill();
 		_fillScaleTween = GetTree().CreateTween();
-		_fillScaleTween.TweenProperty(_fillSprite, "scale", new Vector2(1.0f, 1.0f), 1.5f);
+		_fillScaleTween.TweenProperty(_fillSprite, "scale", new Vector2(1.0f, 1.0f), duration);
 		_fillScaleTween.SetEase(Tween.EaseType.Out);
 		_fillScaleTween.Play();
-		_ = FillAsync(1.5f);
+		_ = FillAsync(duration);
 	}
 	
 	private void OnMouseExited()
 	{
+		const float duration = 0.5f;
 		if(!_isActive) return;
 		_cts?.Cancel();
 		_fillScaleTween?.Kill();
 		_fillScaleTween = GetTree().CreateTween();
-		_fillScaleTween.TweenProperty(_fillSprite, "scale", new Vector2(0.0f, 0.0f), 0.75f);
+		_fillScaleTween.TweenProperty(_fillSprite, "scale", new Vector2(0.0f, 0.0f), duration);
 		_fillScaleTween.SetEase(Tween.EaseType.Out);
 		_fillScaleTween.Play();
 	}
 
-	private async Task FillAsync(float duration)
+	private async GDTask FillAsync(float duration)
 	{
 		_cts = new CancellationTokenSource();
-		await Task.Delay(TimeSpan.FromSeconds(duration), _cts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: _cts.Token);
 		_onExit.OnNext(Unit.Default);
 	}
 }

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using MouseKnightGD.InGame.Entities.Actors.Heroes;
 using MouseKnightGD.InGame.Entities.Chips;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
-using Hero = MouseKnightGD.InGame.Entities.Actors.Heroes.Hero;
 
 namespace MouseKnightGD.InGame.Entities.Enemies;
 

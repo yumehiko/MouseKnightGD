@@ -1,6 +1,6 @@
 using System;
 using Godot;
-using Hero = MouseKnightGD.InGame.Entities.Actors.Heroes.Hero;
+using MouseKnightGD.InGame.Entities.Actors.Heroes;
 
 namespace MouseKnightGD.InGame;
 
