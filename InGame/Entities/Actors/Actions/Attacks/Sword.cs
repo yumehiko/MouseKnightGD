@@ -51,7 +51,7 @@ public partial class Sword : Area2D, IAttack
 	private void Attack(Vector2 point, CancellationToken ct)
 	{
 		const float cooldown = 0.5f;
-		if(_timer.IsCompleted) _isAttackTriggered = true;
+		if(!_timer.InCooldown.Value) _isAttackTriggered = true;
 		_timer.CountAsync(cooldown, ct).Forget();
 	}
 

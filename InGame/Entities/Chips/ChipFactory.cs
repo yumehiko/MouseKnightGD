@@ -8,6 +8,11 @@ public partial class ChipFactory : Node
 
 	public void Create(Vector2 point)
 	{
+		CallDeferred(nameof(DeferredCreate), point);
+	}
+	
+	private void DeferredCreate(Vector2 point)
+	{
 		var chip = _chipPack.Instantiate<Chip>();
 		chip.Awake(point);
 		AddChild(chip);

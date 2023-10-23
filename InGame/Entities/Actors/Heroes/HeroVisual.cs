@@ -18,6 +18,7 @@ public partial class HeroVisual : Sprite2D
         _disposable = new CompositeDisposable();
         health.Current.Subscribe(SyncDamageColor).AddTo(_disposable);
         health.OnDeath.Subscribe(_ => Death()).AddTo(_disposable);
+        health.IsInvisible.Subscribe(Invisible).AddTo(_disposable);
     }
 
     public override void _ExitTree()
@@ -26,7 +27,7 @@ public partial class HeroVisual : Sprite2D
         _disposable?.Dispose();
     }
 
-    public void SyncDamageColor(int current)
+    private void SyncDamageColor(int current)
     {
         Modulate = current switch
         {
@@ -35,6 +36,14 @@ public partial class HeroVisual : Sprite2D
             1 => _damageColor1,
             _ => Modulate
         };
+    }
+    
+    private void Invisible(bool isInvisible)
+    {
+        // 半透明になる
+        var invisibleAlpha = new Color(Modulate.R, Modulate.G, Modulate.B, 0.25f);
+        var normalAlpha = new Color(Modulate.R, Modulate.G, Modulate.B, 1.0f);
+        Modulate = isInvisible ? invisibleAlpha : normalAlpha;
     }
 
     private void Death()

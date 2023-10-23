@@ -15,9 +15,11 @@ namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
 public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 {
 	[Export] private HeroVisual _visual;
+	[Export] private Node2D _projectileRoot;
 
 	private CompositeDisposable _disposable;
 	private Subject<Unit> _onRemove;
+	public Node2D ProjectileRoot => _projectileRoot;
 	public Health Health { get; private set; }
 	public IBrain Brain { get; private set; }
 	public bool IsDead => Health.IsDead;
@@ -35,6 +37,7 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 		_onRemove = new Subject<Unit>();
 		Brain = brain;
 		Health = new Health(3);
+		_disposable.Add(Health);
 		_visual.Initialize(Health);
 		Health.OnDeath.Subscribe(_ => { }, Remove).AddTo(_disposable);
 		_isActive = true;

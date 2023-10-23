@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=28 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="2_irq5n"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="11_1eg6i"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Rifle.cs" id="13_ajakh"]
+[ext_resource type="PackedScene" uid="uid://dot54t4xm50h1" path="res://Assets/Prefabs/bullet.tscn" id="14_1fq8g"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
@@ -83,7 +84,7 @@ shape = SubResource("RectangleShape2D_qm5pu")
 [node name="PlayerBrain" type="Node" parent="."]
 script = ExtResource("3_hejmq")
 
-[node name="Hero" type="RigidBody2D" parent="." node_paths=PackedStringArray("_visual")]
+[node name="Hero" type="RigidBody2D" parent="." node_paths=PackedStringArray("_visual", "_projectileRoot")]
 position = Vector2(960, 540)
 collision_layer = 4
 collision_mask = 4
@@ -94,14 +95,15 @@ linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("3_xqmgf")
 _visual = NodePath("Visual")
+_projectileRoot = NodePath("../Projectiles")
 
 [node name="Visual" type="Sprite2D" parent="Hero" node_paths=PackedStringArray("_deathParticle")]
 material = ExtResource("4_ei801")
 texture = ExtResource("4_ky3lp")
 script = ExtResource("4_fhpyh")
 _deathParticle = NodePath("../DeathParticle")
-_damageColor0 = Color(0.2, 0.74902, 1, 1)
-_damageColor1 = Color(0, 0.345098, 0.501961, 1)
+_damageColor0 = Color(0.5, 0.841667, 1, 1)
+_damageColor1 = Color(0, 0.682353, 1, 1)
 
 [node name="DeathParticle" type="CPUParticles2D" parent="Hero"]
 material = ExtResource("4_ei801")
@@ -152,6 +154,7 @@ shape = SubResource("CircleShape2D_8wi3g")
 
 [node name="Rifle" type="Node2D" parent="Hero/Attacks"]
 script = ExtResource("13_ajakh")
+_bulletPack = ExtResource("14_1fq8g")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
@@ -162,6 +165,8 @@ _chipFactory = NodePath("../Chips")
 [node name="Chips" type="Node" parent="."]
 script = ExtResource("9_ubuin")
 _chipPack = ExtResource("12_simin")
+
+[node name="Projectiles" type="Node2D" parent="."]
 
 [node name="StageBackParticles" type="CPUParticles2D" parent="."]
 material = ExtResource("4_ei801")

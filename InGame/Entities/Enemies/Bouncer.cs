@@ -37,6 +37,7 @@ public partial class Bouncer : EnemyBase
 		while (!ct.IsCancellationRequested)
 		{
 			await GDTask.Delay(TimeSpan.FromSeconds(2.0f), cancellationToken: ct);
+			if (ct.IsCancellationRequested) return;
 			await DamageAction(ct);
 		}
 	}

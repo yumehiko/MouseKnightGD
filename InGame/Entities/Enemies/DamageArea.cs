@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
 
@@ -26,8 +27,7 @@ public partial class DamageArea : Area2D
         tween.TweenProperty(_sprite2D, "modulate:a", 0.0, singleAlertTime);
         tween.TweenProperty(_sprite2D, "modulate:a", 0.5, singleAlertTime);
         tween.Play();
-		
-        // アラート時間が終わるまで待機
+        ct.Register(() => tween.Kill());
         await GDTask.Delay(TimeSpan.FromSeconds(alertTime), cancellationToken: ct);
         _damageShape2D.Disabled = false;
     }
@@ -38,6 +38,7 @@ public partial class DamageArea : Area2D
         var tween = GetTree().CreateTween();
         tween.TweenProperty(_sprite2D, "modulate:a", 0.0, fadeTime);
         tween.Play();
+        ct.Register(() => tween.Kill());
         await GDTask.Delay(TimeSpan.FromSeconds(fadeTime), cancellationToken: ct);
     }
 }

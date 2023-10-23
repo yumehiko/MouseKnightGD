@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dot54t4xm50h1"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_2mecr"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Bullet.cs" id="1_ks8d3"]
+[ext_resource type="Texture2D" uid="uid://ceaeooejhdfrb" path="res://Assets/Sprites/Attacks/Bullet.png" id="2_8o0pf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b8w4u"]
+radius = 8.0
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 3
+mass = 0.5
+physics_material_override = ExtResource("1_2mecr")
+gravity_scale = 2.66454e-15
+contact_monitor = true
+lock_rotation = true
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_ks8d3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8o0pf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b8w4u")
