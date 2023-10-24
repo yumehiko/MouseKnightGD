@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://mj72ucifsljv"]
+
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyPack.cs" id="1_q5hh5"]
+[ext_resource type="PackedScene" uid="uid://ci43j027120ln" path="res://Assets/Prefabs/Enemies/bouncer.tscn" id="1_y4eb5"]
+
+[resource]
+script = ExtResource("1_q5hh5")
+_enemy = ExtResource("1_y4eb5")
+_fun = 2

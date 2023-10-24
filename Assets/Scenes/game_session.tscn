@@ -12,12 +12,12 @@
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/AttackFactory.cs" id="9_bw5vl"]
 [ext_resource type="Script" path="res://InGame/Entities/Chips/ChipFactory.cs" id="9_ubuin"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyFactory.cs" id="9_w7yn5"]
-[ext_resource type="PackedScene" uid="uid://ci43j027120ln" path="res://Assets/Prefabs/Enemies/bouncer.tscn" id="10_gkgpx"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Sword.cs" id="10_uwnck"]
 [ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="11_1eg6i"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Rifle.cs" id="13_ajakh"]
 [ext_resource type="PackedScene" uid="uid://dot54t4xm50h1" path="res://Assets/Prefabs/bullet.tscn" id="14_1fq8g"]
+[ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
@@ -158,7 +158,7 @@ _bulletPack = ExtResource("14_1fq8g")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
-_enemyPacks = Array[PackedScene]([ExtResource("10_gkgpx")])
+_enemyPacks = Array[Resource]([ExtResource("16_vprkf")])
 _stageArea = NodePath("../StageArea")
 _chipFactory = NodePath("../Chips")
 

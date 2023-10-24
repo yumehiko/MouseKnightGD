@@ -8,7 +8,6 @@ namespace MouseKnightGD.InGame.Entities.Enemies;
 
 public abstract partial class EnemyBase : RigidBody2D, IEnemy
 {
-	[Export] private double _fun;
 	[Export] private int _maxHp = 1;
 	private int _hp;
 	private readonly Subject<Unit> _onDead = new Subject<Unit>();
@@ -17,7 +16,7 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 	public bool IsDead => _hp <= 0;
 	public IObservable<Unit> OnDeath => _onDead;
 	public IObservable<Unit> OnRemove => _onRemove;
-	public double Fun => _fun;
+	public double Fun { get; set; }
 
 	public virtual void Initialize(Vector2 spawnPosition, Hero player)
 	{
