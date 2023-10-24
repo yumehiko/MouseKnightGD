@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://oyq6cr1lk5vb"]
+
+[ext_resource type="Texture2D" uid="uid://dol2uulb1rpxy" path="res://Assets/Sprites/UI/PwSlashWide.png" id="1_ml02v"]
+[ext_resource type="Script" path="res://InGame/PowerUps/PowerUp.cs" id="2_e4mve"]
+
+[resource]
+script = ExtResource("2_e4mve")
+_describe = ExtResource("1_ml02v")
+_isWeapon = false
