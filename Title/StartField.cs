@@ -10,6 +10,7 @@ namespace MouseKnightGD.Title;
 
 public partial class StartField : Area2D
 {
+	[Export] private AudioStreamPlayer _titleSe;
 	[Export] private Sprite2D _fillSprite;
 	private Tween _fillScaleTween;
 	private bool _isActive;
@@ -34,6 +35,7 @@ public partial class StartField : Area2D
 	{
 		const float duration = 1.0f;
 		if(!_isActive) return;
+		_titleSe.Play();
 		_fillScaleTween?.Kill();
 		_fillScaleTween = GetTree().CreateTween();
 		_fillScaleTween.TweenProperty(_fillSprite, "scale", new Vector2(1.0f, 1.0f), duration);
@@ -46,6 +48,7 @@ public partial class StartField : Area2D
 	{
 		const float duration = 0.5f;
 		if(!_isActive) return;
+		_titleSe.Stop();
 		_cts?.Cancel();
 		_fillScaleTween?.Kill();
 		_fillScaleTween = GetTree().CreateTween();

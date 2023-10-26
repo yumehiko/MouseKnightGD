@@ -7,6 +7,7 @@ using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using MouseKnightGD.InGame.Entities.Actors.Brains;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
 using MouseKnightGD.InGame.Entities.Enemies;
+using MouseKnightGD.InGame.PowerUps;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
@@ -18,8 +19,10 @@ public partial class GameSession : Node
 	[Export] private Hero _playerHero;
 	[Export] private StageArea _stageArea;
 	[Export] private EnemyFactory _enemyFactory;
-	[Export] private AttackFactory _attackFactory;
-
+	[Export] private PowerUpUi _powerUpUi;
+	[Export] private Node2D _projectileRoot;
+	
+	private PowerUpService _powerUpService;
 	private GDTaskCompletionSource<GameSessionResult> _tcs;
 
 	public async GDTask<GameSessionResult> Run(CancellationToken ct)
@@ -28,15 +31,15 @@ public partial class GameSession : Node
 		var disposables = new CompositeDisposable();
 		_tcs = new GDTaskCompletionSource<GameSessionResult>();
 		var gameCts = new CancellationTokenSource();
-		_playerHero.Initialize(_playerBrain);
+		_playerHero.Initialize(_playerBrain, _projectileRoot);
 		_stageArea.Initialize(_playerHero);
 		_enemyFactory.Initialize(_playerHero);
-		_attackFactory.Initialize(_playerHero);
+		_powerUpService = new PowerUpService(_playerHero, _powerUpUi, gameCts.Token).AddTo(disposables);
 		_playerHero.OnDeath.Subscribe(_ => { }, () => GameOver(gameCts)).AddTo(disposables);
 		_ =	MainLoop(gameCts.Token);
 
 		var result = await _tcs.Task.AttachExternalCancellation(ct);
-		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: ct);
+		await GDTask.Delay(TimeSpan.FromSeconds(4.0f), cancellationToken: ct);
 		disposables.Dispose();
 		return result;
 	}

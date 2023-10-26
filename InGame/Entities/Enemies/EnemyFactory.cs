@@ -57,10 +57,10 @@ public partial class EnemyFactory : Node
 	/// <returns></returns>
 	private IEnemy GetRandomEnemy(double bore)
 	{
-		var funList = _enemyPacks.Where(x => x.Fun < bore).ToList();
-		if (funList.Count == 0) throw new Exception("Cannot find enemy with fun < bore.");
-		var random = new Random().Next(funList.Count);
-		var pack = funList[random];
+		var allowList = _enemyPacks.Where(x => x.Fun < bore).ToList();
+		if (allowList.Count == 0) throw new Exception("Cannot find enemy with fun < bore.");
+		var randomId = GD.RandRange(0, allowList.Count - 1);
+		var pack = allowList[randomId];
 		var instance = pack.Instantiate();
 		AddChild(instance);
 		return instance;

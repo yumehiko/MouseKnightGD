@@ -4,6 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GTweensGodot" Version="0.2.0" />
     <PackageReference Include="ReactiveProperty" Version="9.3.3" />
     <PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />
     <PackageReference Include="System.Reactive.Core" Version="6.0.1-preview.1" />

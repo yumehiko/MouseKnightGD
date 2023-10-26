@@ -14,6 +14,7 @@ public partial class Bouncer : EnemyBase
 	public override void Initialize(Vector2 spawnPosition, Hero player)
 	{
 		base.Initialize(spawnPosition, player);
+		_damageArea.BodyEntered += GiveDamage;
 		_cts = new CancellationTokenSource();
 		var isRight = _random.Next(0, 2) == 0;
 		var isUp = _random.Next(0, 2) == 0;
@@ -28,6 +29,7 @@ public partial class Bouncer : EnemyBase
 	public override void _ExitTree()
 	{
 		base._ExitTree();
+		_damageArea.BodyEntered -= GiveDamage;
 		_cts?.Cancel();
 		_cts?.Dispose();
 	}

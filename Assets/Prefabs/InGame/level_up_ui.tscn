@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1l5sc6rxl0pu"]
+
+[ext_resource type="Script" path="res://InGame/PowerUps/PowerUpUi.cs" id="1_q6xlp"]
+[ext_resource type="Resource" uid="uid://bsghvpx2u0epu" path="res://Assets/Attacks/slash.tres" id="2_ydl5p"]
+[ext_resource type="Resource" uid="uid://5ynfhgcrlk60" path="res://Assets/Attacks/rifle.tres" id="3_1l0fx"]
+[ext_resource type="Resource" uid="uid://oyq6cr1lk5vb" path="res://Assets/Attacks/pwSlashWide.tres" id="4_tn4v1"]
+[ext_resource type="Shader" path="res://Assets/Miscs/Shaders/Blurv2.gdshader" id="5_jrm2d"]
+[ext_resource type="Script" path="res://InGame/PowerUps/PowerUpUiButton.cs" id="6_v8bt7"]
+[ext_resource type="Texture2D" uid="uid://dwelu0hatg7pe" path="res://Assets/Sprites/UI/PowerUpRect.png" id="7_12fq2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_52qsn"]
+shader = ExtResource("5_jrm2d")
+shader_parameter/blur_radius = 12.0
+shader_parameter/resolution = Vector2(1920, 1080)
+
+[node name="LevelUpUI" type="TextureRect" node_paths=PackedStringArray("_powerUpUiButtons")]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q6xlp")
+_powerUps = Array[Resource]([ExtResource("2_ydl5p"), ExtResource("3_1l0fx"), ExtResource("4_tn4v1")])
+_powerUpUiButtons = [NodePath("ButtonLeft"), NodePath("ButtonCenter"), NodePath("ButtonRight")]
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.121569, 0.121569, 0.121569, 0.768627)
+
+[node name="Blur" type="ColorRect" parent="BackGround"]
+material = SubResource("ShaderMaterial_52qsn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonLeft" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 620.0
+offset_bottom = 1020.0
+pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
+mouse_filter = 0
+script = ExtResource("6_v8bt7")
+
+[node name="Frame" type="NinePatchRect" parent="ButtonLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_12fq2")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="ButtonCenter" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 680.0
+offset_top = 60.0
+offset_right = 1240.0
+offset_bottom = 1020.0
+pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
+mouse_filter = 0
+script = ExtResource("6_v8bt7")
+
+[node name="Frame" type="NinePatchRect" parent="ButtonCenter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_12fq2")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="ButtonRight" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1300.0
+offset_top = 60.0
+offset_right = 1860.0
+offset_bottom = 1020.0
+pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
+mouse_filter = 0
+script = ExtResource("6_v8bt7")
+
+[node name="Frame" type="NinePatchRect" parent="ButtonRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_12fq2")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10

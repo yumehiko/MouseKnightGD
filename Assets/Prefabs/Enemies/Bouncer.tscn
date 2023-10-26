@@ -44,5 +44,3 @@ texture = ExtResource("5_qk2ma")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cenc1")
 disabled = true
-
-[connection signal="body_entered" from="Area2D" to="." method="GiveDamage"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dnhx513tyfbq4"]
+[gd_scene load_steps=15 format=3 uid="uid://dnhx513tyfbq4"]
 
 [ext_resource type="Script" path="res://Title/TitleSession.cs" id="1_1bw8w"]
 [ext_resource type="Script" path="res://Title/StartField.cs" id="1_68ux1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://byixjma1u8x8v" path="res://Assets/Sprites/Title/Cricle120.png" id="6_e6dc8"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="8_3hap8"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="10_pos1o"]
+[ext_resource type="AudioStream" uid="uid://wa78u3as5gbk" path="res://Assets/Audios/SE/MKstartbreath.wav" id="11_ewly2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3rjy"]
 radius = 240.0
@@ -27,9 +28,10 @@ _startField = NodePath("StartField")
 _exitField = NodePath("CloseField")
 _titleSprite = NodePath("TitleImage")
 
-[node name="StartField" type="Area2D" parent="." node_paths=PackedStringArray("_fillSprite")]
+[node name="StartField" type="Area2D" parent="." node_paths=PackedStringArray("_titleSe", "_fillSprite")]
 position = Vector2(960, 540)
 script = ExtResource("1_68ux1")
+_titleSe = NodePath("../StartSound")
 _fillSprite = NodePath("HeroSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartField"]
@@ -85,6 +87,9 @@ spread = 180.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
 initial_velocity_max = 16.0
 color_ramp = SubResource("Gradient_3pbc6")
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ewly2")
 
 [connection signal="mouse_entered" from="StartField" to="StartField" method="OnMouseEntered"]
 [connection signal="mouse_exited" from="StartField" to="StartField" method="OnMouseExited"]

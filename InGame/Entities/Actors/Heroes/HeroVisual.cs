@@ -7,6 +7,7 @@ namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
 
 public partial class HeroVisual : Sprite2D
 {
+    [Export] private AudioStreamPlayer2D _deathSound;
     [Export] private CpuParticles2D _deathParticle;
     [Export] private Color _damageColor0;
     [Export] private Color _damageColor1;
@@ -50,5 +51,6 @@ public partial class HeroVisual : Sprite2D
     {
         Visible = false;
         _deathParticle.Emitting = true;
+        _deathSound.Play();
     }
 }

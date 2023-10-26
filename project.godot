@@ -19,6 +19,7 @@ config/icon="res://Assets/Sprites/icon.svg"
 [autoload]
 
 GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload.cs"
+GTweensGodotUpdater="*res://Core/GTweensGodotUpdater.cs"
 
 [display]
 

@@ -13,6 +13,9 @@ namespace MouseKnightGD.App;
 public partial class AppSession : Node
 {
 	[Export] private Curtain _curtain;
+	[Export] private MusicPlayer _musicPlayer;
+	[Export] private AudioStream _titleMusic;
+	[Export] private AudioStream _gameMusic;
 	[Export] private PackedScene _titleSessionPack;
 	[Export] private PackedScene _gameSessionPack;
 
@@ -50,10 +53,13 @@ public partial class AppSession : Node
 	{
 		var titleSession = _titleSessionPack.Instantiate<TitleSession>();
 		AddChild(titleSession);
+		_musicPlayer.SetMusic(_titleMusic);
 		await GDTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: ct);
 		await _curtain.Open(1.0f, ct);
 		var result = await titleSession.Run(ct);
-		await _curtain.Close(0.5f, ct);
+		var musicFadeoutTask = _musicPlayer.Fadeout(0.5f, ct);
+		var curtainTask = _curtain.Close(0.5f, ct);
+		await GDTask.WhenAll(musicFadeoutTask, curtainTask);
 		titleSession.QueueFree();
 		return result;
 	}
@@ -62,10 +68,13 @@ public partial class AppSession : Node
 	{
 		var gameSession = _gameSessionPack.Instantiate<GameSession>();
 		AddChild(gameSession);
+		_musicPlayer.SetMusic(_gameMusic);
 		await GDTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: ct);
 		await _curtain.Open(1.0f, ct);
 		var result = await gameSession.Run(ct);
-		await _curtain.Close(0.5f, ct);
+		var musicFadeoutTask = _musicPlayer.Fadeout(0.5f, ct);
+		var curtainTask = _curtain.Close(0.5f, ct);
+		await GDTask.WhenAll(musicFadeoutTask, curtainTask);
 		gameSession.QueueFree();
 		return result;
 	}

@@ -1,24 +1,16 @@
-[gd_scene load_steps=28 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=16 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
-[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="2_irq5n"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Brains/PlayerBrain.cs" id="3_hejmq"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/Hero.cs" id="3_xqmgf"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="4_ei801"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/HeroVisual.cs" id="4_fhpyh"]
-[ext_resource type="Texture2D" uid="uid://vltvbtw5gbp7" path="res://Assets/Sprites/Hero/Hero.png" id="4_ky3lp"]
-[ext_resource type="Texture2D" uid="uid://enf3j1jr0egt" path="res://Assets/Sprites/Hero/HeroDeathParticle.png" id="7_sm0p6"]
+[ext_resource type="PackedScene" uid="uid://dq3qa3kw50pld" path="res://Assets/Prefabs/InGame/hero.tscn" id="4_x8apq"]
 [ext_resource type="Script" path="res://InGame/StageArea.cs" id="8_ii0rj"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/AttackFactory.cs" id="9_bw5vl"]
 [ext_resource type="Script" path="res://InGame/Entities/Chips/ChipFactory.cs" id="9_ubuin"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyFactory.cs" id="9_w7yn5"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Sword.cs" id="10_uwnck"]
-[ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="11_1eg6i"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Rifle.cs" id="13_ajakh"]
-[ext_resource type="PackedScene" uid="uid://dot54t4xm50h1" path="res://Assets/Prefabs/bullet.tscn" id="14_1fq8g"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
+[ext_resource type="PackedScene" uid="uid://c1l5sc6rxl0pu" path="res://Assets/Prefabs/InGame/level_up_ui.tscn" id="20_i10d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
 size = Vector2(1920, 1080)
@@ -29,29 +21,18 @@ size = Vector2(3120, 600)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qm5pu"]
 size = Vector2(600, 2280)
 
-[sub_resource type="Gradient" id="Gradient_uno05"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qw33i"]
-radius = 24.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_biavq"]
-radius = 40.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8wi3g"]
-radius = 96.0
-
 [sub_resource type="Gradient" id="Gradient_ju6ya"]
 offsets = PackedFloat32Array(0, 0.491686, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_enemyFactory", "_attackFactory")]
+[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_enemyFactory", "_powerUpUi", "_projectileRoot")]
 script = ExtResource("1_3vmkm")
 _playerBrain = NodePath("PlayerBrain")
 _playerHero = NodePath("Hero")
 _stageArea = NodePath("StageArea")
 _enemyFactory = NodePath("Enemies")
-_attackFactory = NodePath("Hero/Attacks")
+_powerUpUi = NodePath("LevelUpUI")
+_projectileRoot = NodePath("Projectiles")
 
 [node name="StageArea" type="Area2D" parent="."]
 visible = false
@@ -84,77 +65,7 @@ shape = SubResource("RectangleShape2D_qm5pu")
 [node name="PlayerBrain" type="Node" parent="."]
 script = ExtResource("3_hejmq")
 
-[node name="Hero" type="RigidBody2D" parent="." node_paths=PackedStringArray("_visual", "_projectileRoot")]
-position = Vector2(960, 540)
-collision_layer = 4
-collision_mask = 4
-physics_material_override = ExtResource("2_irq5n")
-gravity_scale = 2.66454e-15
-lock_rotation = true
-linear_damp_mode = 1
-angular_damp_mode = 1
-script = ExtResource("3_xqmgf")
-_visual = NodePath("Visual")
-_projectileRoot = NodePath("../Projectiles")
-
-[node name="Visual" type="Sprite2D" parent="Hero" node_paths=PackedStringArray("_deathParticle")]
-material = ExtResource("4_ei801")
-texture = ExtResource("4_ky3lp")
-script = ExtResource("4_fhpyh")
-_deathParticle = NodePath("../DeathParticle")
-_damageColor0 = Color(0.5, 0.841667, 1, 1)
-_damageColor1 = Color(0, 0.682353, 1, 1)
-
-[node name="DeathParticle" type="CPUParticles2D" parent="Hero"]
-material = ExtResource("4_ei801")
-emitting = false
-amount = 64
-lifetime = 4.0
-one_shot = true
-explosiveness = 0.98
-lifetime_randomness = 0.5
-texture = ExtResource("7_sm0p6")
-direction = Vector2(2.08165e-12, 2.08165e-12)
-spread = 180.0
-gravity = Vector2(2.08165e-12, 2.08165e-12)
-initial_velocity_min = 60.0
-initial_velocity_max = 600.0
-damping_max = 40.0
-scale_amount_min = 0.2
-color_ramp = SubResource("Gradient_uno05")
-
-[node name="BodyCollision" type="CollisionShape2D" parent="Hero"]
-shape = SubResource("CircleShape2D_qw33i")
-
-[node name="ChipCollector" type="Area2D" parent="Hero"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hero/ChipCollector"]
-shape = SubResource("CircleShape2D_biavq")
-
-[node name="Attacks" type="Node2D" parent="Hero" node_paths=PackedStringArray("_sword", "_rifle")]
-script = ExtResource("9_bw5vl")
-_sword = NodePath("Sword")
-_rifle = NodePath("Rifle")
-
-[node name="Sword" type="Area2D" parent="Hero/Attacks" node_paths=PackedStringArray("_visual")]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("10_uwnck")
-_visual = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="Hero/Attacks/Sword"]
-modulate = Color(1, 1, 1, 0)
-texture = ExtResource("11_1eg6i")
-offset = Vector2(2.08165e-12, 2.08165e-12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hero/Attacks/Sword"]
-shape = SubResource("CircleShape2D_8wi3g")
-
-[node name="Rifle" type="Node2D" parent="Hero/Attacks"]
-script = ExtResource("13_ajakh")
-_bulletPack = ExtResource("14_1fq8g")
+[node name="Hero" parent="." instance=ExtResource("4_x8apq")]
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
@@ -183,4 +94,4 @@ gravity = Vector2(2.08165e-12, 2.08165e-12)
 initial_velocity_max = 16.0
 color_ramp = SubResource("Gradient_ju6ya")
 
-[connection signal="body_entered" from="Hero/ChipCollector" to="Hero" method="OnAreaEntered"]
+[node name="LevelUpUI" parent="." instance=ExtResource("20_i10d6")]

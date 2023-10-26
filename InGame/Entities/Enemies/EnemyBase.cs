@@ -45,7 +45,7 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 		Remove();
 	}
 
-	private void GiveDamage(Node body)
+	protected void GiveDamage(Node body)
 	{
 		if (body is Hero hero)
 		{
