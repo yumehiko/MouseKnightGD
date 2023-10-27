@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ci43j027120ln"]
+[gd_scene load_steps=10 format=3 uid="uid://ci43j027120ln"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_2s20i"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/Bouncer.cs" id="1_m7hdq"]
 [ext_resource type="Texture2D" uid="uid://cywix5vgwgln5" path="res://Assets/Sprites/Enemies/Bouncer.png" id="2_as7dm"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="2_ohv6y"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/DamageArea.cs" id="4_pu58y"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyVisual.cs" id="5_gxia3"]
 [ext_resource type="Texture2D" uid="uid://bfgb1si0467gb" path="res://Assets/Sprites/Circle100.svg" id="5_qk2ma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6mohr"]
@@ -13,34 +14,37 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_cenc1"]
 radius = 16.0
 
-[node name="Bouncer" type="RigidBody2D" node_paths=PackedStringArray("_damageArea")]
+[node name="Bouncer" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
 collision_layer = 2
 physics_material_override = ExtResource("1_2s20i")
 gravity_scale = 2.66454e-15
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_m7hdq")
-_damageArea = NodePath("Area2D")
+_damageArea = NodePath("DamageArea")
+_visual = NodePath("Visual")
+_maxHp = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Visual" type="Sprite2D" parent="."]
 material = ExtResource("2_ohv6y")
 texture = ExtResource("2_as7dm")
+script = ExtResource("5_gxia3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BodyShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6mohr")
 
-[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("_sprite2D", "_damageShape2D")]
+[node name="DamageArea" type="Area2D" parent="." node_paths=PackedStringArray("_sprite2D", "_damageShape2D")]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("4_pu58y")
 _sprite2D = NodePath("Sprite2D")
 _damageShape2D = NodePath("CollisionShape2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="DamageArea"]
 modulate = Color(0.901961, 0, 0.223529, 0)
 scale = Vector2(0.32, 0.32)
 texture = ExtResource("5_qk2ma")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource("CircleShape2D_cenc1")
 disabled = true

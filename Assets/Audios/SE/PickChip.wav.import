@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bbsrtinaeduew"
-path="res://.godot/imported/dethring.wav-d2492f627c860d8f6f106a2620daf9c0.sample"
+uid="uid://dphgos1bkdxjt"
+path="res://.godot/imported/PickChip.wav-08eb5d45d5e2f52a13946b7a812c367b.sample"
 
 [deps]
 
-source_file="res://Assets/Audios/SE/dethring.wav"
-dest_files=["res://.godot/imported/dethring.wav-d2492f627c860d8f6f106a2620daf9c0.sample"]
+source_file="res://Assets/Audios/SE/PickChip.wav"
+dest_files=["res://.godot/imported/PickChip.wav-08eb5d45d5e2f52a13946b7a812c367b.sample"]
 
 [params]
 

@@ -41,4 +41,33 @@ public partial class DamageArea : Area2D
         ct.Register(() => tween.Kill());
         await GDTask.Delay(TimeSpan.FromSeconds(fadeTime), cancellationToken: ct);
     }
+    
+    /// <summary>
+    /// 指定した量だけ拡大する
+    /// ただし1.0を超えない。
+    /// </summary>
+    /// <param name="amount"></param>
+    public void ExpandAdd(float amount)
+    {
+        var current = Transform.Scale;
+        if (current >= Vector2.One) return;
+        var nextX = current.X + amount;
+        var nextY = current.Y + amount;
+        if (nextX > 1.0f) nextX = 1.0f;
+        if (nextY > 1.0f) nextY = 1.0f;
+        Transform = new Transform2D(Transform.Rotation, new Vector2(nextX, nextY));
+    }
+    
+    /// <summary>
+    /// 指定した割合まで乗算で拡大する
+    /// ただし1.0を超えない。
+    /// </summary>
+    public void ExpandMul(float ratio)
+    {
+        var currentScale = Scale;
+        var newScale = currentScale * ratio;
+        newScale.X = Math.Min(newScale.X, 1.0f);
+        newScale.Y = Math.Min(newScale.Y, 1.0f);
+        ApplyScale(newScale / currentScale);
+    }
 }

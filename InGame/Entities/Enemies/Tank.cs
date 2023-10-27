@@ -6,8 +6,9 @@ using MouseKnightGD.InGame.Entities.Actors.Heroes;
 
 namespace MouseKnightGD.InGame.Entities.Enemies;
 
-public partial class Bouncer : EnemyBase
+public partial class Tank : EnemyBase
 {
+	
 	[Export] private DamageArea _damageArea;
 	private readonly Random _random = new Random();
 	private CancellationTokenSource _cts;
@@ -16,13 +17,6 @@ public partial class Bouncer : EnemyBase
 		base.Initialize(spawnPosition, player);
 		_damageArea.BodyEntered += GiveDamage;
 		_cts = new CancellationTokenSource();
-		var isRight = _random.Next(0, 2) == 0;
-		var isUp = _random.Next(0, 2) == 0;
-		var x = isRight ? 160 : -160;
-		var y = isUp ? 120 : -120;
-		LinearVelocity = new Vector2(x, y);
-		// トルクも与える
-		ApplyTorque(x * 40);
 		DamageActionLoop(_cts.Token).Forget();
 	}
 
@@ -46,8 +40,9 @@ public partial class Bouncer : EnemyBase
 
 	private async GDTask DamageAction(CancellationToken ct)
 	{
-		await _damageArea.Alert(0.5f, ct);
+		await _damageArea.Alert(0.75f, ct);
 		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: ct);
 		await _damageArea.FadeOut(0.5f, ct);
+		_damageArea.ExpandMul(1.5f);
 	}
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=17 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Brains/PlayerBrain.cs" id="3_hejmq"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="4_ei801"]
 [ext_resource type="PackedScene" uid="uid://dq3qa3kw50pld" path="res://Assets/Prefabs/InGame/hero.tscn" id="4_x8apq"]
+[ext_resource type="Resource" uid="uid://cb55lnpdxxgfn" path="res://Assets/Prefabs/Enemies/tank_pack.tres" id="7_qkt77"]
 [ext_resource type="Script" path="res://InGame/StageArea.cs" id="8_ii0rj"]
 [ext_resource type="Script" path="res://InGame/Entities/Chips/ChipFactory.cs" id="9_ubuin"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyFactory.cs" id="9_w7yn5"]
@@ -26,6 +27,7 @@ offsets = PackedFloat32Array(0, 0.491686, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_enemyFactory", "_powerUpUi", "_projectileRoot")]
+process_mode = 1
 script = ExtResource("1_3vmkm")
 _playerBrain = NodePath("PlayerBrain")
 _playerHero = NodePath("Hero")
@@ -69,7 +71,7 @@ script = ExtResource("3_hejmq")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
-_enemyPacks = Array[Resource]([ExtResource("16_vprkf")])
+_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77")])
 _stageArea = NodePath("../StageArea")
 _chipFactory = NodePath("../Chips")
 

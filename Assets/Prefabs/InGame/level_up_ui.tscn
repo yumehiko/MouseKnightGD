@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1l5sc6rxl0pu"]
+[gd_scene load_steps=12 format=3 uid="uid://c1l5sc6rxl0pu"]
 
 [ext_resource type="Script" path="res://InGame/PowerUps/PowerUpUi.cs" id="1_q6xlp"]
 [ext_resource type="Resource" uid="uid://bsghvpx2u0epu" path="res://Assets/Attacks/slash.tres" id="2_ydl5p"]
@@ -7,13 +7,17 @@
 [ext_resource type="Shader" path="res://Assets/Miscs/Shaders/Blurv2.gdshader" id="5_jrm2d"]
 [ext_resource type="Script" path="res://InGame/PowerUps/PowerUpUiButton.cs" id="6_v8bt7"]
 [ext_resource type="Texture2D" uid="uid://dwelu0hatg7pe" path="res://Assets/Sprites/UI/PowerUpRect.png" id="7_12fq2"]
+[ext_resource type="AudioStream" uid="uid://bc6drb3ob1i6a" path="res://Assets/Audios/SE/SkillChoice.wav" id="8_8dwwk"]
+[ext_resource type="AudioStream" uid="uid://bxurhyjeokast" path="res://Assets/Audios/SE/SkillConfirm.wav" id="8_q77jw"]
+[ext_resource type="Script" path="res://Tests/TimeTest.cs" id="10_gf1bk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_52qsn"]
 shader = ExtResource("5_jrm2d")
 shader_parameter/blur_radius = 12.0
 shader_parameter/resolution = Vector2(1920, 1080)
 
-[node name="LevelUpUI" type="TextureRect" node_paths=PackedStringArray("_powerUpUiButtons")]
+[node name="LevelUpUI" type="TextureRect" node_paths=PackedStringArray("_powerUpUiButtons", "_confirmSePlayer")]
+process_mode = 3
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_q6xlp")
 _powerUps = Array[Resource]([ExtResource("2_ydl5p"), ExtResource("3_1l0fx"), ExtResource("4_tn4v1")])
 _powerUpUiButtons = [NodePath("ButtonLeft"), NodePath("ButtonCenter"), NodePath("ButtonRight")]
+_confirmSePlayer = NodePath("ConfirmSePlayer")
 
 [node name="BackGround" type="ColorRect" parent="."]
 layout_mode = 1
@@ -42,7 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonLeft" type="TextureRect" parent="."]
+[node name="ButtonLeft" type="TextureRect" parent="." node_paths=PackedStringArray("_chooseSePlayer")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 60.0
@@ -52,6 +57,7 @@ offset_bottom = 1020.0
 pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
 mouse_filter = 0
 script = ExtResource("6_v8bt7")
+_chooseSePlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Frame" type="NinePatchRect" parent="ButtonLeft"]
 layout_mode = 1
@@ -66,7 +72,11 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="ButtonCenter" type="TextureRect" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ButtonLeft"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+stream = ExtResource("8_8dwwk")
+
+[node name="ButtonCenter" type="TextureRect" parent="." node_paths=PackedStringArray("_chooseSePlayer")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 680.0
@@ -76,6 +86,7 @@ offset_bottom = 1020.0
 pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
 mouse_filter = 0
 script = ExtResource("6_v8bt7")
+_chooseSePlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Frame" type="NinePatchRect" parent="ButtonCenter"]
 layout_mode = 1
@@ -90,7 +101,11 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="ButtonRight" type="TextureRect" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ButtonCenter"]
+position = Vector2(280, 2.08165e-12)
+stream = ExtResource("8_8dwwk")
+
+[node name="ButtonRight" type="TextureRect" parent="." node_paths=PackedStringArray("_chooseSePlayer")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 1300.0
@@ -100,6 +115,7 @@ offset_bottom = 1020.0
 pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
 mouse_filter = 0
 script = ExtResource("6_v8bt7")
+_chooseSePlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Frame" type="NinePatchRect" parent="ButtonRight"]
 layout_mode = 1
@@ -113,3 +129,13 @@ patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ButtonRight"]
+position = Vector2(560, 2.08165e-12)
+stream = ExtResource("8_8dwwk")
+
+[node name="ConfirmSePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_q77jw")
+
+[node name="Node" type="Node2D" parent="."]
+script = ExtResource("10_gf1bk")

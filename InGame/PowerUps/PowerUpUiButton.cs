@@ -4,29 +4,38 @@ using System.Reactive.Subjects;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using GTweens.Easings;
-using GTweensGodot.Extensions;
+using MouseKnightGD.Core;
 
 namespace MouseKnightGD.InGame.PowerUps;
 
 public partial class PowerUpUiButton : TextureRect
 {
-	[Export] 
+	[Export] private AudioStreamPlayer2D _chooseSePlayer;
 	private PowerUp _powerUp;
 	public GDTaskCompletionSource<PowerUp> PowerUpTcs { get; private set; }
 	private readonly float _inActiveAlpha = 0.25f;
 	private bool _isPicked;
 	
-	public void Open(PowerUp powerUp)
+	public void SetPowerUp(PowerUp powerUp)
 	{
-		_isPicked = false;
 		_powerUp = powerUp;
 		Texture = _powerUp.Describe;
-		PowerUpTcs = new GDTaskCompletionSource<PowerUp>();
 		Modulate = new Color(1.0f, 1.0f, 1.0f, _inActiveAlpha);
-		GuiInput += OnGuiInput;
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;
+		
+		// この時点でマウスがエンター済みかどうかを判定する
+		var mousePos = GetGlobalMousePosition();
+		var rect = GetGlobalRect();
+		var isMouseEntered = rect.HasPoint(mousePos);
+		if (isMouseEntered) OnMouseEntered();
+	}
+	
+	public void Activate()
+	{
+		_isPicked = false;
+		PowerUpTcs = new GDTaskCompletionSource<PowerUp>();
+		GuiInput += OnGuiInput;
 	}
 	
 	public async GDTask Release(CancellationToken ct)
@@ -36,9 +45,11 @@ public partial class PowerUpUiButton : TextureRect
 		MouseExited -= OnMouseExited;
 		PowerUpTcs.TrySetCanceled(ct);
 		if (_isPicked) return;
-		await this.TweenModulateAlpha(0.0f, 0.3f)
-			.SetEasing(Easing.OutQuad)
-			.PlayAsync(ct);
+		var tween = CreateTween();
+		tween.TweenProperty(this, "modulate:a", 0.0f, 0.4f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.Out);
+		await tween.PlayAsync(ct);
 	}
 	
 	private void OnGuiInput(InputEvent @event)
@@ -51,6 +62,7 @@ public partial class PowerUpUiButton : TextureRect
 	private void OnMouseEntered()
 	{
 		Modulate = Colors.White;
+		_chooseSePlayer.Play();
 	}
 	
 	private void OnMouseExited()

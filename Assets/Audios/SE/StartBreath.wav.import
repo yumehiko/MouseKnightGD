@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://wa78u3as5gbk"
-path="res://.godot/imported/MKstartbreath.wav-2f5d3def8f4b39e873a3354b870caea9.sample"
+path="res://.godot/imported/StartBreath.wav-f2bd0f200ac511262e8acd7fd2b47ff4.sample"
 
 [deps]
 
-source_file="res://Assets/Audios/SE/MKstartbreath.wav"
-dest_files=["res://.godot/imported/MKstartbreath.wav-2f5d3def8f4b39e873a3354b870caea9.sample"]
+source_file="res://Assets/Audios/SE/StartBreath.wav"
+dest_files=["res://.godot/imported/StartBreath.wav-f2bd0f200ac511262e8acd7fd2b47ff4.sample"]
 
 [params]
 

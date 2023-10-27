@@ -3,11 +3,13 @@ using System.Reactive;
 using System.Reactive.Subjects;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using Reactive.Bindings;
 
 namespace MouseKnightGD.InGame.Entities.Enemies;
 
 public abstract partial class EnemyBase : RigidBody2D, IEnemy
 {
+	[Export] private EnemyVisual _visual;
 	[Export] private int _maxHp = 1;
 	private int _hp;
 	private readonly Subject<Unit> _onDead = new Subject<Unit>();
@@ -36,6 +38,8 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 	{
 		if (IsDead) return;
 		_hp -= amount;
+		var normalized = (float) _hp / _maxHp;
+		_visual.Damage(normalized);
 		if (IsDead) Die();
 	}
 	

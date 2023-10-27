@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://clicbwip40ia1"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_d5y2u"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/Tank.cs" id="2_smrd6"]
+[ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="3_ir4f0"]
+[ext_resource type="Texture2D" uid="uid://72ydiqodntxr" path="res://Assets/Sprites/Enemies/Tank.png" id="4_kqfqo"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/DamageArea.cs" id="5_6desm"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyVisual.cs" id="5_ihbak"]
+[ext_resource type="Texture2D" uid="uid://clq0hawqvksgj" path="res://Assets/Sprites/Enemies/TankAttack.png" id="6_1r650"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysdcw"]
+size = Vector2(90, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62kfd"]
+size = Vector2(458, 458)
+
+[node name="Tank" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
+collision_layer = 2
+mass = 2.0
+physics_material_override = ExtResource("1_d5y2u")
+gravity_scale = 2.66454e-15
+lock_rotation = true
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("2_smrd6")
+_damageArea = NodePath("DamageArea")
+_visual = NodePath("Visual")
+_maxHp = 20
+
+[node name="Visual" type="Sprite2D" parent="."]
+material = ExtResource("3_ir4f0")
+texture = ExtResource("4_kqfqo")
+script = ExtResource("5_ihbak")
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_ysdcw")
+
+[node name="DamageArea" type="Area2D" parent="." node_paths=PackedStringArray("_sprite2D", "_damageShape2D")]
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_6desm")
+_sprite2D = NodePath("Sprite2D")
+_damageShape2D = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="DamageArea"]
+modulate = Color(0.901961, 0, 0.223529, 0)
+texture = ExtResource("6_1r650")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_62kfd")
+disabled = true

@@ -1,20 +1,21 @@
 [gd_scene load_steps=9 format=3 uid="uid://ba1qptjknh7ml"]
 
 [ext_resource type="Script" path="res://App/AppSession.cs" id="1_40bds"]
+[ext_resource type="AudioStream" uid="uid://bthiufkdqfs26" path="res://Assets/Audios/Musics/Title.ogg" id="2_c7c47"]
 [ext_resource type="PackedScene" uid="uid://dnhx513tyfbq4" path="res://Assets/Scenes/title_session.tscn" id="2_jofxh"]
+[ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="3_enkvl"]
 [ext_resource type="Texture2D" uid="uid://cd7gjt3cidtnk" path="res://Assets/Sprites/App/Viewport.svg" id="3_is6ge"]
 [ext_resource type="PackedScene" uid="uid://bv75pxtmkco6h" path="res://Assets/Scenes/game_session.tscn" id="3_w5q0f"]
 [ext_resource type="Script" path="res://App/Curtain.cs" id="4_4kcns"]
-[ext_resource type="AudioStream" uid="uid://bthiufkdqfs26" path="res://Assets/Audios/Musics/MKtitleogg.ogg" id="6_5jv5b"]
-[ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/karashiogg.ogg" id="6_6pvs1"]
 [ext_resource type="Script" path="res://App/MusicPlayer.cs" id="7_ahb0o"]
 
 [node name="MainSession" type="Node" node_paths=PackedStringArray("_curtain", "_musicPlayer")]
+process_mode = 3
 script = ExtResource("1_40bds")
 _curtain = NodePath("Curtain")
 _musicPlayer = NodePath("MusicPlayer")
-_titleMusic = ExtResource("6_5jv5b")
-_gameMusic = ExtResource("6_6pvs1")
+_titleMusic = ExtResource("2_c7c47")
+_gameMusic = ExtResource("3_enkvl")
 _titleSessionPack = ExtResource("2_jofxh")
 _gameSessionPack = ExtResource("3_w5q0f")
 
@@ -26,6 +27,6 @@ centered = false
 script = ExtResource("4_4kcns")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_5jv5b")
+stream = ExtResource("2_c7c47")
 attenuation = 0.0
 script = ExtResource("7_ahb0o")

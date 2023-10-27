@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://byixjma1u8x8v" path="res://Assets/Sprites/Title/Cricle120.png" id="6_e6dc8"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="8_3hap8"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="10_pos1o"]
-[ext_resource type="AudioStream" uid="uid://wa78u3as5gbk" path="res://Assets/Audios/SE/MKstartbreath.wav" id="11_ewly2"]
+[ext_resource type="AudioStream" uid="uid://wa78u3as5gbk" path="res://Assets/Audios/SE/StartBreath.wav" id="11_0ssrh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3rjy"]
 radius = 240.0
@@ -89,7 +89,7 @@ initial_velocity_max = 16.0
 color_ramp = SubResource("Gradient_3pbc6")
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_ewly2")
+stream = ExtResource("11_0ssrh")
 
 [connection signal="mouse_entered" from="StartField" to="StartField" method="OnMouseEntered"]
 [connection signal="mouse_exited" from="StartField" to="StartField" method="OnMouseExited"]

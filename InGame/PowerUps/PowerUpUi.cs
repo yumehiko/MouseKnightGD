@@ -7,20 +7,24 @@ using Fractural.Tasks;
 using Godot;
 using GTweens.Easings;
 using GTweensGodot.Extensions;
+using MouseKnightGD.Core;
 
 namespace MouseKnightGD.InGame.PowerUps;
 public partial class PowerUpUi : Control
 {
 	[Export] private PowerUp[] _powerUps;
 	[Export] private PowerUpUiButton[] _powerUpUiButtons;
+	[Export] private AudioStreamPlayer _confirmSePlayer;
 
 	public async GDTask Call(CancellationToken ct)
 	{
+		GetTree().Paused = true;
 		await Open(ct);
 		GD.Print("PowerUpUi.Call await");
 		await GDTask.WhenAny(_powerUpUiButtons.Select(x => x.PowerUpTcs.Task));
 		await Close(ct);
 		GD.Print("PowerUpUi.Call end");
+		GetTree().Paused = false;
 	}
 
 	private async GDTask Open(CancellationToken ct)
@@ -28,16 +32,23 @@ public partial class PowerUpUi : Control
 		foreach (var button in _powerUpUiButtons)
 		{
 			var powerUp = GetPowerUp();
-			button.Open(powerUp);
+			button.SetPowerUp(powerUp);
 		}
 		Modulate = Colors.Transparent;
-		await this.TweenModulateAlpha(1.0f, 0.6f)
-			.SetEasing(Easing.OutQuad)
-			.PlayAsync(ct);
+		var tween = CreateTween();
+		tween.TweenProperty(this, "modulate:a", 1.0f, 1.0f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.Out);
+		await tween.PlayAsync(ct);
+		foreach (var button in _powerUpUiButtons)
+		{
+			button.Activate();
+		}
 	}
 	
 	private async GDTask Close(CancellationToken ct)
 	{
+		_confirmSePlayer.Play();
 		var closeTasks = new List<GDTask>();
 		foreach (var button in _powerUpUiButtons)
 		{
@@ -45,16 +56,17 @@ public partial class PowerUpUi : Control
 			closeTasks.Add(closeTask);
 		}
 		await GDTask.WhenAll(closeTasks);
-		await this.TweenModulateAlpha(0.0f, 0.6f)
-			.SetEasing(Easing.OutQuad)
-			.PlayAsync(ct);
+		var tween = CreateTween();
+		tween.TweenProperty(this, "modulate:a", 0.0f, 0.6f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.Out);
+		await tween.PlayAsync(ct);
 	}
 	
 	private PowerUp GetPowerUp()
 	{
 		// TODO: 取得できるパワーアップを選び、ランダムに取得する。
 		var randomId = GD.RandRange(0, _powerUps.Length - 1);
-		GD.Print($"PowerUpUi.GetPowerUp: {randomId}");
 		var powerUp = _powerUps[randomId];
 		return powerUp;
 	}
