@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Subjects;
 using Godot;
@@ -18,11 +19,12 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 {
 	[Export] private HeroVisual _visual;
 	[Export] private ChipCollector _chipCollector;
-	[Export] private AttackFactory _attackFactory;
 	private Node2D _projectileRoot;
+	private List<AttackBase> _weapons;
 
 	private CompositeDisposable _disposable;
 	private Subject<Unit> _onRemove;
+	public int WeaponCount => _weapons.Count;
 	public IReadOnlyReactiveProperty<int> Chips => _chipCollector.Chips;
 	public Node2D ProjectileRoot => _projectileRoot;
 	public Health Health { get; private set; }
@@ -41,13 +43,13 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 		_projectileRoot = projectileRoot;
 		Brain = brain;
 		Health = new Health(3);
+		_weapons = new List<AttackBase>();
 		_disposable = new CompositeDisposable();
 		_disposable.Add(Health);
 		_chipCollector.Initialize();
 		_visual.Initialize(Health, _chipCollector);
 		_onRemove = new Subject<Unit>().AddTo(_disposable);
 		Health.OnDeath.Subscribe(_ => { }, Remove).AddTo(_disposable);
-		_attackFactory.Initialize(this);
 		_isActive = true;
 	}
 	
@@ -71,4 +73,11 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 
 	public void TakeDamage(int amount) => Health.TakeDamage(1);
 	public void Die() => Health.Die();
+
+	public void AddWeapon(AttackBase weapon)
+	{
+		AddChild(weapon);
+		weapon.Initialize(this);
+		_weapons.Add(weapon);
+	}
 }

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://5ynfhgcrlk60"]
+
+[ext_resource type="PackedScene" uid="uid://bpknphby084tg" path="res://Assets/Weapons/InGameInstances/rifle.tscn" id="1_dgqhv"]
+[ext_resource type="Resource" uid="uid://bbrjy2l15wcf" path="res://Assets/PowerUps/RifleBarrel.tres" id="1_kabaa"]
+[ext_resource type="Resource" uid="uid://c2baol67kmgue" path="res://Assets/PowerUps/RifleCd.tres" id="2_e4062"]
+[ext_resource type="Texture2D" uid="uid://c6v1jwjswpmrp" path="res://Assets/Sprites/UI/WpRifle.png" id="2_xdbua"]
+[ext_resource type="Resource" uid="uid://dyivitjys4pjs" path="res://Assets/PowerUps/RifleRapid.tres" id="3_nr51b"]
+[ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="3_rxrjc"]
+
+[resource]
+script = ExtResource("3_rxrjc")
+_attackPrefab = ExtResource("1_dgqhv")
+_describe = ExtResource("2_xdbua")
+NextPowerUps = Array[Resource]([ExtResource("1_kabaa"), ExtResource("2_e4062"), ExtResource("3_nr51b")])

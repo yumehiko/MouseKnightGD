@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://6dschwxcb6sc"]
+
+[ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="1_kyg8u"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Sword.cs" id="1_nxwlk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gknf8"]
+radius = 96.0
+
+[node name="Sword" type="Node2D" node_paths=PackedStringArray("_area", "_visual")]
+script = ExtResource("1_nxwlk")
+_area = NodePath("Area2D")
+_visual = NodePath("Area2D/Sprite2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_kyg8u")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gknf8")

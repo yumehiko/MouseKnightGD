@@ -1,4 +1,5 @@
 using System;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Fractural.Tasks;
@@ -6,6 +7,7 @@ using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using MouseKnightGD.InGame.Entities.Actors.Brains;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using MouseKnightGD.InGame.Entities.Chips;
 using MouseKnightGD.InGame.Entities.Enemies;
 using MouseKnightGD.InGame.PowerUps;
 using Reactive.Bindings.Disposables;
@@ -18,11 +20,12 @@ public partial class GameSession : Node
 	[Export] private PlayerBrain _playerBrain;
 	[Export] private Hero _playerHero;
 	[Export] private StageArea _stageArea;
+	[Export] private ChipFactory _chipFactory;
 	[Export] private EnemyFactory _enemyFactory;
 	[Export] private PowerUpUi _powerUpUi;
 	[Export] private Node2D _projectileRoot;
+	[Export] private PowerUpService _powerUpService;
 	
-	private PowerUpService _powerUpService;
 	private GDTaskCompletionSource<GameSessionResult> _tcs;
 
 	public async GDTask<GameSessionResult> Run(CancellationToken ct)
@@ -34,14 +37,28 @@ public partial class GameSession : Node
 		_playerHero.Initialize(_playerBrain, _projectileRoot);
 		_stageArea.Initialize(_playerHero);
 		_enemyFactory.Initialize(_playerHero);
-		_powerUpService = new PowerUpService(_playerHero, _powerUpUi, gameCts.Token).AddTo(disposables);
+		_chipFactory.Initialize(_stageArea);
+		_powerUpService.Initialize(_playerHero, _powerUpUi, gameCts.Token);
 		_playerHero.OnDeath.Subscribe(_ => { }, () => GameOver(gameCts)).AddTo(disposables);
-		_ =	MainLoop(gameCts.Token);
-
+		
+		// まず、プレイヤーの最初のレベルアップを待機する。
+		await ReadyPart(gameCts.Token);
+		
+		// ゲームのメインループ開始
+		MainLoop(gameCts.Token).Forget();
 		var result = await _tcs.Task.AttachExternalCancellation(ct);
 		await GDTask.Delay(TimeSpan.FromSeconds(4.0f), cancellationToken: ct);
 		disposables.Dispose();
 		return result;
+	}
+
+	private async GDTask ReadyPart(CancellationToken ct)
+	{
+		for(var i = 0; i < 5; i++)
+		{
+			_chipFactory.CreateAtRandom();
+		}
+		await _powerUpService.OnLevelUp.FirstAsync().ToGDTask(cancellationToken: ct);
 	}
 	
 	private async GDTask MainLoop(CancellationToken ct)

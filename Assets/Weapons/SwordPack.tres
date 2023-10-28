@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://bsghvpx2u0epu"]
+
+[ext_resource type="Resource" uid="uid://b0y7gsmv53uyx" path="res://Assets/PowerUps/SwordCritical.tres" id="1_04lha"]
+[ext_resource type="PackedScene" uid="uid://6dschwxcb6sc" path="res://Assets/Weapons/InGameInstances/sword.tscn" id="1_un4t6"]
+[ext_resource type="Texture2D" uid="uid://d2l8hifjc253h" path="res://Assets/Sprites/UI/WpSlash.png" id="2_6l6kl"]
+[ext_resource type="Resource" uid="uid://7noywry0vvip" path="res://Assets/PowerUps/SwordDamage.tres" id="2_facy5"]
+[ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="3_ov6b7"]
+[ext_resource type="Resource" uid="uid://bfagw64ac6g1s" path="res://Assets/PowerUps/SwordWiden.tres" id="3_xb4vb"]
+
+[resource]
+script = ExtResource("3_ov6b7")
+_attackPrefab = ExtResource("1_un4t6")
+_describe = ExtResource("2_6l6kl")
+NextPowerUps = Array[Resource]([ExtResource("1_04lha"), ExtResource("2_facy5"), ExtResource("3_xb4vb")])

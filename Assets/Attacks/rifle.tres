@@ -1,9 +1,0 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://5ynfhgcrlk60"]
-
-[ext_resource type="Texture2D" uid="uid://c6v1jwjswpmrp" path="res://Assets/Sprites/UI/WpRifle.png" id="1_e43f6"]
-[ext_resource type="Script" path="res://InGame/PowerUps/PowerUp.cs" id="2_ekdyf"]
-
-[resource]
-script = ExtResource("2_ekdyf")
-_describe = ExtResource("1_e43f6")
-_isWeapon = true

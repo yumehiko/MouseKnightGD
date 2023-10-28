@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://d0bi8epko3ufw"]
+
+[ext_resource type="Script" path="res://InGame/PowerUps/PowerUpService.cs" id="1_p502g"]
+[ext_resource type="Resource" uid="uid://5ynfhgcrlk60" path="res://Assets/Weapons/RiflePack.tres" id="1_v282k"]
+[ext_resource type="Resource" uid="uid://bsghvpx2u0epu" path="res://Assets/Weapons/SwordPack.tres" id="2_3kdpq"]
+[ext_resource type="Resource" uid="uid://duvvpjelpjim8" path="res://Assets/Weapons/SpearPack.tres" id="2_vdxpg"]
+
+[resource]
+script = ExtResource("1_p502g")
+_initWeaponPacks = Array[Resource]([ExtResource("1_v282k"), ExtResource("2_vdxpg"), ExtResource("2_3kdpq")])

@@ -12,10 +12,10 @@ using Reactive.Bindings.TinyLinq;
 namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 
 /// <summary>
-/// スラッシュ。
-/// マウスクリック時、使用者の上方向へ範囲攻撃を行う。
+/// スピア
+/// マウスクリックを離したとき、最も近い敵を刺突する範囲攻撃。
 /// </summary>
-public partial class Sword : AttackBase
+public partial class Spear : AttackBase
 {
 	[Export] private Area2D _area;
 	[Export] private Sprite2D _visual;
@@ -24,17 +24,16 @@ public partial class Sword : AttackBase
 	private CompositeDisposable _disposable;
 	private bool _isAttackTriggered;
 	private Vector2 _slashPoint;
-	private int _damage = 4;
+	private int _damage = 6;
 
 	public override void Initialize(Hero hero)
 	{
 		_timer = new CooldownTimer();
 		_cts = new CancellationTokenSource();
-		Position = new Vector2(0, -32);
 		_disposable = new CompositeDisposable();
 		hero.Brain.LeftTrigger
 			.Where(_ => !hero.IsDead)
-			.Where(isOn => isOn)
+			.Where(isOn => !isOn)
 			.Subscribe(x => Attack(hero.Position, _cts.Token)).AddTo(_disposable);
 	}
 
@@ -52,7 +51,7 @@ public partial class Sword : AttackBase
 
 	private void Attack(Vector2 point, CancellationToken ct)
 	{
-		const float cooldown = 0.5f;
+		const float cooldown = 0.6f;
 		if(!_timer.InCooldown.Value) _isAttackTriggered = true;
 		_timer.CountAsync(cooldown, ct).Forget();
 	}
@@ -60,7 +59,8 @@ public partial class Sword : AttackBase
 	private void GiveDamageToArea()
 	{
 		if (!_isAttackTriggered) return;
-		SlashAnimation();
+		PierceAnimation();
+		// TODO: 最も近い敵を取得し、その方向に_areaを向ける
 		// 範囲内の敵にダメージを与える
 		var bodies = _area.GetOverlappingBodies();
 		var enemies = bodies.OfType<IEnemy>();
@@ -71,7 +71,7 @@ public partial class Sword : AttackBase
 		_isAttackTriggered = false;
 	}
 	
-	private void SlashAnimation()
+	private void PierceAnimation()
 	{
 		// _visualを表示する
 		_visual.Show();

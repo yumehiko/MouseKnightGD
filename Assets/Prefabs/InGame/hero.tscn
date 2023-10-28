@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dq3qa3kw50pld"]
+[gd_scene load_steps=14 format=3 uid="uid://dq3qa3kw50pld"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_ob8sp"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/Hero.cs" id="2_3ebh7"]
@@ -9,12 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://enf3j1jr0egt" path="res://Assets/Sprites/Hero/HeroDeathParticle.png" id="7_eqdma"]
 [ext_resource type="AudioStream" uid="uid://d3ymv1t5wa4j3" path="res://Assets/Audios/SE/HeroInvisible.wav" id="7_f7lh5"]
 [ext_resource type="AudioStream" uid="uid://dphgos1bkdxjt" path="res://Assets/Audios/SE/PickChip.wav" id="8_20v0o"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/AttackFactory.cs" id="8_imd8x"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Sword.cs" id="9_2f6b2"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/ChipCollector.cs" id="9_i1y3p"]
-[ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="10_fva45"]
-[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Rifle.cs" id="11_bdgms"]
-[ext_resource type="PackedScene" uid="uid://dot54t4xm50h1" path="res://Assets/Prefabs/bullet.tscn" id="12_qqwju"]
 
 [sub_resource type="Gradient" id="Gradient_uno05"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -25,10 +20,7 @@ radius = 24.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_biavq"]
 radius = 40.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8wi3g"]
-radius = 96.0
-
-[node name="Hero" type="RigidBody2D" node_paths=PackedStringArray("_visual", "_chipCollector", "_attackFactory")]
+[node name="Hero" type="RigidBody2D" node_paths=PackedStringArray("_visual", "_chipCollector")]
 position = Vector2(960, 540)
 collision_layer = 4
 collision_mask = 4
@@ -40,7 +32,6 @@ angular_damp_mode = 1
 script = ExtResource("2_3ebh7")
 _visual = NodePath("Visual")
 _chipCollector = NodePath("ChipCollector")
-_attackFactory = NodePath("Attacks")
 
 [node name="Visual" type="Sprite2D" parent="." node_paths=PackedStringArray("_deathSePlayer", "_chipSePlayer", "_deathParticle")]
 material = ExtResource("3_kqq1p")
@@ -88,26 +79,3 @@ shape = SubResource("CircleShape2D_biavq")
 
 [node name="ChipSound" type="AudioStreamPlayer2D" parent="ChipCollector"]
 stream = ExtResource("8_20v0o")
-
-[node name="Attacks" type="Node2D" parent="." node_paths=PackedStringArray("_sword", "_rifle")]
-script = ExtResource("8_imd8x")
-_sword = NodePath("Sword")
-_rifle = NodePath("Rifle")
-
-[node name="Sword" type="Area2D" parent="Attacks" node_paths=PackedStringArray("_visual")]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("9_2f6b2")
-_visual = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="Attacks/Sword"]
-modulate = Color(1, 1, 1, 0)
-texture = ExtResource("10_fva45")
-offset = Vector2(2.08165e-12, 2.08165e-12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Sword"]
-shape = SubResource("CircleShape2D_8wi3g")
-
-[node name="Rifle" type="Node2D" parent="Attacks"]
-script = ExtResource("11_bdgms")
-_bulletPack = ExtResource("12_qqwju")

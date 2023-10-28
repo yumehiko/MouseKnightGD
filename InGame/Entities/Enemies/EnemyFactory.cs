@@ -33,7 +33,7 @@ public partial class EnemyFactory : Node
 	
 	public double Create(double bore)
 	{
-		var spawnPosition = _stageArea.GetRandomSpawnPoint();
+		var spawnPosition = _stageArea.GetRandomSafetyPoint();
 		
 		// 敵を生成
 		var enemy = GetRandomEnemy(bore);

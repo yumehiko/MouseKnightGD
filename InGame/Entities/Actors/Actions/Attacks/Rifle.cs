@@ -10,7 +10,7 @@ using Reactive.Bindings.Extensions;
 
 namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 
-public partial class Rifle : Node2D
+public partial class Rifle : AttackBase
 {
 	[Export] private PackedScene _bulletPack;
 	private float _coolTimeMax = 1.5f;
@@ -22,7 +22,7 @@ public partial class Rifle : Node2D
 	private CompositeDisposable _disposable;
 	private CancellationTokenSource _cts;
 
-	public void Initialize(Hero hero)
+	public override void Initialize(Hero hero)
 	{
 		_timer = new CooldownTimer();
 		_disposable = new CompositeDisposable();
@@ -72,7 +72,7 @@ public partial class Rifle : Node2D
 		{
 			var instance = _bulletPack.Instantiate<Bullet>();
 			_projectileRoot.AddChild(instance);
-			instance.Shot(GlobalPosition, barrelAngle, 640.0f);
+			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 2);
 		}
 		_timer.CountAsync(_coolTime, _cts.Token).Forget();
 		_coolTime = Mathf.Max(_coolTimeMin, _coolTime - 0.25f);

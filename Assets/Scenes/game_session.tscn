@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=18 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
+[ext_resource type="Resource" uid="uid://d0bi8epko3ufw" path="res://Assets/PowerUps/PowerUpService.tres" id="2_qh4ok"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Brains/PlayerBrain.cs" id="3_hejmq"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="4_ei801"]
 [ext_resource type="PackedScene" uid="uid://dq3qa3kw50pld" path="res://Assets/Prefabs/InGame/hero.tscn" id="4_x8apq"]
@@ -26,15 +27,17 @@ size = Vector2(600, 2280)
 offsets = PackedFloat32Array(0, 0.491686, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_enemyFactory", "_powerUpUi", "_projectileRoot")]
+[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_chipFactory", "_enemyFactory", "_powerUpUi", "_projectileRoot")]
 process_mode = 1
 script = ExtResource("1_3vmkm")
 _playerBrain = NodePath("PlayerBrain")
 _playerHero = NodePath("Hero")
 _stageArea = NodePath("StageArea")
+_chipFactory = NodePath("Chips")
 _enemyFactory = NodePath("Enemies")
 _powerUpUi = NodePath("LevelUpUI")
 _projectileRoot = NodePath("Projectiles")
+_powerUpService = ExtResource("2_qh4ok")
 
 [node name="StageArea" type="Area2D" parent="."]
 visible = false

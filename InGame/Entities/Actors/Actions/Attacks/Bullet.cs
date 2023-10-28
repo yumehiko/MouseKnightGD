@@ -5,8 +5,10 @@ namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 
 public partial class Bullet : RigidBody2D
 {
-	public void Shot(Vector2 position, Vector2 direction, float speed)
+	private int _damage;
+	public void Shot(Vector2 position, Vector2 direction, float speed, int damage)
 	{
+		_damage = damage;
 		Position = position;
 		LinearVelocity = direction * speed;
 		ContactMonitor = true;
@@ -24,7 +26,7 @@ public partial class Bullet : RigidBody2D
 	{
 		if (body is EnemyBase enemy)
 		{
-			enemy.TakeDamage(1);
+			enemy.TakeDamage(_damage);
 		}
 
 		QueueFree();

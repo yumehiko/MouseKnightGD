@@ -8,7 +8,7 @@ namespace MouseKnightGD.InGame.Entities.Actors.Brains;
 /// </summary>
 public partial class PlayerBrain : Node, IBrain
 {
-	private readonly ReactiveProperty<Vector2> _wayPoint = new ReactiveProperty<Vector2>();
+	private readonly ReactiveProperty<Vector2> _wayPoint = new ReactiveProperty<Vector2>(new Vector2(960, 540));
 	private readonly ReactiveProperty<bool> _leftTrigger = new ReactiveProperty<bool>();
 	
 	public IReadOnlyReactiveProperty<Vector2> WayPoint => _wayPoint;
