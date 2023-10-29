@@ -24,6 +24,7 @@ centered = false
 script = ExtResource("4_4kcns")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+process_mode = 1
 stream = ExtResource("2_c7c47")
 attenuation = 0.0
 script = ExtResource("7_ahb0o")

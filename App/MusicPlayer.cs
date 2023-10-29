@@ -17,7 +17,6 @@ public partial class MusicPlayer : AudioStreamPlayer2D
         Stream = music;
         Play();
     }
-    
     public async GDTask Fadein(float fadeTime, CancellationToken ct)
     {
         await this.TweenVolumeDb(0.0f, fadeTime)

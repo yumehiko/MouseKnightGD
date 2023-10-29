@@ -7,15 +7,22 @@ using Fractural.Tasks;
 using Godot;
 using GTweens.Easings;
 using GTweensGodot.Extensions;
+using MouseKnightGD.App;
 using MouseKnightGD.Core;
 
 namespace MouseKnightGD.InGame.PowerUps;
 public partial class PowerUpUi : Control
 {
 	[Export] private PowerUpUiButton[] _powerUpUiButtons;
-	[Export] private AudioStreamPlayer _confirmSePlayer;
+	[Export] private AudioStreamPlayer _sePlayer;
+	[Export] private AudioStream _levelUpSe;
+	[Export] private AudioStream _confirmSe;
+	[Export] private AudioStreamPlayer _environmentPlayer;
 	[Export] private Texture2D _powerUpStatFrame;
 	[Export] private Texture2D _weaponFrame;
+	
+	private Tween _environmentVolumeTween;
+	
 	public async GDTask<PowerUpBase> Call(IReadOnlyList<PowerUpBase> powerUps, CancellationToken ct)
 	{
 		GetTree().Paused = true;
@@ -30,6 +37,15 @@ public partial class PowerUpUi : Control
 
 	private async GDTask Open(IReadOnlyList<PowerUpBase> powerUps, CancellationToken ct)
 	{
+		_sePlayer.Stream = _levelUpSe;
+		_sePlayer.Play();
+		_environmentPlayer.StreamPaused = false;
+		_environmentVolumeTween?.Kill();
+		_environmentVolumeTween = CreateTween();
+		_environmentVolumeTween.TweenProperty(_environmentPlayer, "volume_db", 0.0f, 0.8f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.Out);
+		_environmentVolumeTween.Play();
 		for(var i = 0; i < 3; i++)
 		{
 			var button = _powerUpUiButtons[i];
@@ -52,7 +68,14 @@ public partial class PowerUpUi : Control
 	
 	private async GDTask Close(CancellationToken ct)
 	{
-		_confirmSePlayer.Play();
+		_sePlayer.Stream = _confirmSe;
+		_sePlayer.Play();
+		_environmentVolumeTween?.Kill();
+		_environmentVolumeTween = CreateTween();
+		_environmentVolumeTween.TweenProperty(_environmentPlayer, "volume_db", -80.0f, 1.2f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.Out);
+		_environmentVolumeTween.Play();
 		var closeTasks = new List<GDTask>();
 		foreach (var button in _powerUpUiButtons)
 		{
@@ -65,6 +88,7 @@ public partial class PowerUpUi : Control
 			.SetTrans(Tween.TransitionType.Quad)
 			.SetEase(Tween.EaseType.Out);
 		await tween.PlayAsync(ct);
+		_environmentPlayer.StreamPaused = true;
 	}
 
 	private Texture2D GetFrame(PowerUpBase powerUp)

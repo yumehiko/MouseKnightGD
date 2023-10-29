@@ -1,19 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1l5sc6rxl0pu"]
+[gd_scene load_steps=11 format=3 uid="uid://c1l5sc6rxl0pu"]
 
 [ext_resource type="Script" path="res://InGame/PowerUps/PowerUpUi.cs" id="1_q6xlp"]
+[ext_resource type="AudioStream" uid="uid://bosh1sqa8gkgx" path="res://Assets/Audios/SE/LevelUp.wav" id="2_fod38"]
 [ext_resource type="Texture2D" uid="uid://bk151rs08sojf" path="res://Assets/Sprites/UI/WeaponRect.png" id="3_x5ikq"]
 [ext_resource type="Shader" path="res://Assets/Miscs/Shaders/Blurv2.gdshader" id="5_jrm2d"]
 [ext_resource type="Script" path="res://InGame/PowerUps/PowerUpUiButton.cs" id="6_v8bt7"]
 [ext_resource type="Texture2D" uid="uid://dwelu0hatg7pe" path="res://Assets/Sprites/UI/PowerUpRect.png" id="7_12fq2"]
 [ext_resource type="AudioStream" uid="uid://bc6drb3ob1i6a" path="res://Assets/Audios/SE/SkillChoice.wav" id="8_8dwwk"]
 [ext_resource type="AudioStream" uid="uid://bxurhyjeokast" path="res://Assets/Audios/SE/SkillConfirm.wav" id="8_q77jw"]
+[ext_resource type="AudioStream" uid="uid://d1pvd06vv81qp" path="res://Assets/Audios/Musics/Environment.ogg" id="9_d6xo6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_52qsn"]
 shader = ExtResource("5_jrm2d")
 shader_parameter/blur_radius = 12.0
 shader_parameter/resolution = Vector2(1920, 1080)
 
-[node name="LevelUpUI" type="TextureRect" node_paths=PackedStringArray("_powerUpUiButtons", "_confirmSePlayer")]
+[node name="LevelUpUI" type="TextureRect" node_paths=PackedStringArray("_powerUpUiButtons", "_sePlayer", "_environmentPlayer")]
 process_mode = 3
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
@@ -23,7 +25,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q6xlp")
 _powerUpUiButtons = [NodePath("ButtonLeft"), NodePath("ButtonCenter"), NodePath("ButtonRight")]
-_confirmSePlayer = NodePath("ConfirmSePlayer")
+_sePlayer = NodePath("UiSePlayer")
+_levelUpSe = ExtResource("2_fod38")
+_confirmSe = ExtResource("8_q77jw")
+_environmentPlayer = NodePath("EnvironmentPlayer")
 _powerUpStatFrame = ExtResource("7_12fq2")
 _weaponFrame = ExtResource("3_x5ikq")
 
@@ -135,5 +140,10 @@ patch_margin_bottom = 20
 position = Vector2(560, 2.08165e-12)
 stream = ExtResource("8_8dwwk")
 
-[node name="ConfirmSePlayer" type="AudioStreamPlayer" parent="."]
+[node name="UiSePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_q77jw")
+max_polyphony = 2
+
+[node name="EnvironmentPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_d6xo6")
+autoplay = true

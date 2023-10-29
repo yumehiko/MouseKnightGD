@@ -8,6 +8,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading;
 using Godot;
+using MouseKnightGD.App;
 using MouseKnightGD.Core;
 using Reactive.Bindings.Extensions;
 
