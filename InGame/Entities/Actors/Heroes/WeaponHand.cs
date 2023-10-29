@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Reactive;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using Reactive.Bindings;
@@ -12,14 +14,14 @@ public class WeaponHand
     public int WeaponCount => _weapons.Count;
     public Node2D ProjectileRoot { get; }
     
-    public IReadOnlyReactiveProperty<bool> LeftTrigger { get; }
+    public IReadOnlyReactiveProperty<bool> LeftTrigger => _body.Brain.LeftTrigger;
     public bool IsDead => _body.IsDead;
+    public IObservable<Unit> OnDeath => _body.OnDeath; 
     
-    public WeaponHand(Hero body, Node2D projectileRoot, IReadOnlyReactiveProperty<bool> leftTrigger)
+    public WeaponHand(Hero body, Node2D projectileRoot)
     {
         _body = body;
         ProjectileRoot = projectileRoot;
-        LeftTrigger = leftTrigger;
         _weapons = new List<AttackBase>();
     }
 

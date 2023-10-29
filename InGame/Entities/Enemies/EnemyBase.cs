@@ -3,7 +3,6 @@ using System.Reactive;
 using System.Reactive.Subjects;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
-using Reactive.Bindings;
 
 namespace MouseKnightGD.InGame.Entities.Enemies;
 
@@ -34,13 +33,15 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 		QueueFree();
 	}
 
-	public void TakeDamage(int amount)
+	public bool TakeDamage(int amount)
 	{
-		if (IsDead) return;
+		if (IsDead) return false;
 		_hp -= amount;
 		var normalized = (float) _hp / _maxHp;
 		_visual.Damage(normalized);
-		if (IsDead) Die();
+		if (!IsDead) return false;
+		Die();
+		return true;
 	}
 	
 	public void Die()

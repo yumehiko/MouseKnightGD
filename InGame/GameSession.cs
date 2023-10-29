@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
+using MouseKnightGD.App;
 using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using MouseKnightGD.InGame.Entities.Actors.Brains;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
@@ -17,6 +18,7 @@ namespace MouseKnightGD.InGame;
 
 public partial class GameSession : Node
 {
+	[Export] private AudioStream _gameMusic;
 	[Export] private PlayerBrain _playerBrain;
 	[Export] private Hero _playerHero;
 	[Export] private StageArea _stageArea;
@@ -28,7 +30,7 @@ public partial class GameSession : Node
 	
 	private GDTaskCompletionSource<GameSessionResult> _tcs;
 
-	public async GDTask<GameSessionResult> Run(CancellationToken ct)
+	public async GDTask<GameSessionResult> Run(MusicPlayer musicPlayer, CancellationToken ct)
 	{
 		GD.Print("GameSession.Run");
 		var disposables = new CompositeDisposable();
@@ -45,6 +47,7 @@ public partial class GameSession : Node
 		await ReadyPart(gameCts.Token);
 		
 		// ゲームのメインループ開始
+		musicPlayer.SetMusic(_gameMusic);
 		MainLoop(gameCts.Token).Forget();
 		var result = await _tcs.Task.AttachExternalCancellation(ct);
 		await GDTask.Delay(TimeSpan.FromSeconds(4.0f), cancellationToken: ct);

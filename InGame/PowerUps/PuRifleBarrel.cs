@@ -15,7 +15,7 @@ public partial class PuRifleBarrel : PowerUpStats
 
     public override void Apply(WeaponHand weaponHand)
     {
-        GD.Print("PowerUp: RifleBarrel");
+        _rifle.AddBarrel();
     }
 
     public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
 
@@ -15,7 +14,7 @@ public partial class PuSpearBlood : PowerUpStats
 
     public override void Apply(WeaponHand weaponHand)
     {
-        GD.Print("PowerUp: PuSpearCritical");
+        _spear.IncreaseBloodPower();
     }
 
     public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

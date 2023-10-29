@@ -15,7 +15,7 @@ public partial class PuRifleRapid : PowerUpStats
     }
     public override void Apply(WeaponHand weaponHand)
     {
-        GD.Print("PowerUp: RifleBarrel");
+        _rifle.AccelerationFireRate();
     }
 
     public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

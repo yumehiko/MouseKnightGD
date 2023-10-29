@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba1qptjknh7ml"]
+[gd_scene load_steps=8 format=3 uid="uid://ba1qptjknh7ml"]
 
 [ext_resource type="Script" path="res://App/AppSession.cs" id="1_40bds"]
+[ext_resource type="Resource" uid="uid://jmt4m17q2yym" path="res://Assets/Scenes/GameSessionPack.tres" id="2_7t1ct"]
 [ext_resource type="AudioStream" uid="uid://bthiufkdqfs26" path="res://Assets/Audios/Musics/Title.ogg" id="2_c7c47"]
-[ext_resource type="PackedScene" uid="uid://dnhx513tyfbq4" path="res://Assets/Scenes/title_session.tscn" id="2_jofxh"]
-[ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="3_enkvl"]
+[ext_resource type="Resource" uid="uid://bcsyokgxxy4f7" path="res://Assets/Scenes/TitleSessionPack.tres" id="3_0qkfh"]
 [ext_resource type="Texture2D" uid="uid://cd7gjt3cidtnk" path="res://Assets/Sprites/App/Viewport.svg" id="3_is6ge"]
-[ext_resource type="PackedScene" uid="uid://bv75pxtmkco6h" path="res://Assets/Scenes/game_session.tscn" id="3_w5q0f"]
 [ext_resource type="Script" path="res://App/Curtain.cs" id="4_4kcns"]
 [ext_resource type="Script" path="res://App/MusicPlayer.cs" id="7_ahb0o"]
 
@@ -14,10 +13,8 @@ process_mode = 3
 script = ExtResource("1_40bds")
 _curtain = NodePath("Curtain")
 _musicPlayer = NodePath("MusicPlayer")
-_titleMusic = ExtResource("2_c7c47")
-_gameMusic = ExtResource("3_enkvl")
-_titleSessionPack = ExtResource("2_jofxh")
-_gameSessionPack = ExtResource("3_w5q0f")
+_gameSessionPack = ExtResource("2_7t1ct")
+_titleSessionPack = ExtResource("3_0qkfh")
 
 [node name="Curtain" type="Sprite2D" parent="."]
 modulate = Color(0.121569, 0.121569, 0.121569, 1)

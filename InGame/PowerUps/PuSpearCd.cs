@@ -15,7 +15,7 @@ public partial class PuSpearCd : PowerUpStats
 
 	public override void Apply(WeaponHand weaponHand)
 	{
-		GD.Print("PowerUp: SpearCd");
+		_spear.ReduceBaseCooldown();
 	}
 
 	public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

@@ -39,7 +39,7 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 	{
 		Brain = brain;
 		Health = new Health(3);
-		WeaponHand = new WeaponHand(this, projectileRoot, Brain.LeftTrigger);
+		WeaponHand = new WeaponHand(this, projectileRoot); //Memo 外から渡してやる方が適切ではある。 その場合Healthも外から渡す（HeroFactoryクラスが必要になりそう）
 		_disposable = new CompositeDisposable();
 		_disposable.Add(Health);
 		_chipCollector.Initialize();
@@ -67,6 +67,6 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 	
 	public void SubChips(int amount) => _chipCollector.SubChips(amount);
 
-	public void TakeDamage(int amount) => Health.TakeDamage(1);
+	public bool TakeDamage(int amount) => Health.TakeDamage(1);
 	public void Die() => Health.Die();
 }

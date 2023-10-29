@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=19 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
+[ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="2_4rfsh"]
 [ext_resource type="Resource" uid="uid://d0bi8epko3ufw" path="res://Assets/PowerUps/PowerUpService.tres" id="2_qh4ok"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Brains/PlayerBrain.cs" id="3_hejmq"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="4_ei801"]
@@ -30,6 +31,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 [node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_chipFactory", "_enemyFactory", "_powerUpUi", "_projectileRoot")]
 process_mode = 1
 script = ExtResource("1_3vmkm")
+_gameMusic = ExtResource("2_4rfsh")
 _playerBrain = NodePath("PlayerBrain")
 _playerHero = NodePath("Hero")
 _stageArea = NodePath("StageArea")

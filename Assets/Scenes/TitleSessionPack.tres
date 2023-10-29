@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bcsyokgxxy4f7"]
+
+[ext_resource type="Script" path="res://App/LoadableSession.cs" id="1_hn0nx"]
+[ext_resource type="PackedScene" uid="uid://dnhx513tyfbq4" path="res://Assets/Scenes/title_session.tscn" id="1_kw2ts"]
+[ext_resource type="AudioStream" uid="uid://bthiufkdqfs26" path="res://Assets/Audios/Musics/Title.ogg" id="1_uu575"]
+
+[resource]
+script = ExtResource("1_hn0nx")
+_sessionPack = ExtResource("1_kw2ts")
+_initMusic = ExtResource("1_uu575")

@@ -15,7 +15,7 @@ public partial class PuSpearCount : PowerUpStats
 
     public override void Apply(WeaponHand weaponHand)
     {
-        GD.Print("PowerUp: PuSpearCount");
+        _spear.AddBlade();
     }
 
     public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

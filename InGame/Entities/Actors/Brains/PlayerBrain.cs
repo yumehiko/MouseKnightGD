@@ -1,3 +1,6 @@
+using System;
+using System.Reactive;
+using System.Reactive.Linq;
 using Godot;
 using Reactive.Bindings;
 

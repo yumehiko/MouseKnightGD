@@ -14,10 +14,8 @@ public partial class AppSession : Node
 {
 	[Export] private Curtain _curtain;
 	[Export] private MusicPlayer _musicPlayer;
-	[Export] private AudioStream _titleMusic;
-	[Export] private AudioStream _gameMusic;
-	[Export] private PackedScene _titleSessionPack;
-	[Export] private PackedScene _gameSessionPack;
+	[Export] private LoadableSession _gameSessionPack;
+	[Export] private LoadableSession _titleSessionPack;
 
 	private CancellationTokenSource _cts;
 	
@@ -51,9 +49,8 @@ public partial class AppSession : Node
 
 	private async GDTask<TitleSessionResult> CallTitle(CancellationToken ct)
 	{
-		var titleSession = _titleSessionPack.Instantiate<TitleSession>();
+		var titleSession = _titleSessionPack.Load<TitleSession>(_musicPlayer);
 		AddChild(titleSession);
-		_musicPlayer.SetMusic(_titleMusic);
 		await GDTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: ct);
 		await _curtain.Open(1.0f, ct);
 		var result = await titleSession.Run(ct);
@@ -66,12 +63,11 @@ public partial class AppSession : Node
 
 	private async GDTask<GameSessionResult> CallGame(CancellationToken ct)
 	{
-		var gameSession = _gameSessionPack.Instantiate<GameSession>();
+		var gameSession = _gameSessionPack.Load<GameSession>(_musicPlayer);
 		AddChild(gameSession);
-		_musicPlayer.SetMusic(_gameMusic);
 		await GDTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: ct);
 		await _curtain.Open(1.0f, ct);
-		var result = await gameSession.Run(ct);
+		var result = await gameSession.Run(_musicPlayer, ct);
 		var musicFadeoutTask = _musicPlayer.Fadeout(0.5f, ct);
 		var curtainTask = _curtain.Close(0.5f, ct);
 		await GDTask.WhenAll(musicFadeoutTask, curtainTask);

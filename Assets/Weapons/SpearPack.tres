@@ -1,14 +1,14 @@
 [gd_resource type="Resource" load_steps=7 format=3 uid="uid://duvvpjelpjim8"]
 
 [ext_resource type="Resource" uid="uid://c666d44mk151j" path="res://Assets/PowerUps/SpearCd.tres" id="1_18nri"]
-[ext_resource type="PackedScene" uid="uid://lkw2742n58od" path="res://Assets/Weapons/InGameInstances/spear.tscn" id="1_bud16"]
 [ext_resource type="Texture2D" uid="uid://cubwhwuv2i7y3" path="res://Assets/Sprites/UI/WpSpear.png" id="1_l83cq"]
 [ext_resource type="Resource" uid="uid://dgcjw7a1tqoky" path="res://Assets/PowerUps/SpearCount.tres" id="2_n2svj"]
 [ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="2_us2nb"]
-[ext_resource type="Resource" uid="uid://dy5mifqir5dqg" path="res://Assets/PowerUps/SpearBlood.tres" id="3_wtrvq"]
+[ext_resource type="Resource" uid="uid://dy5mifqir5dqg" path="res://Assets/PowerUps/SpearBlood.tres" id="3_xbtu4"]
+[ext_resource type="PackedScene" uid="uid://djivfr41qoqkf" path="res://Assets/Weapons/InGameInstances/Spear.tscn" id="4_fmrmo"]
 
 [resource]
 script = ExtResource("2_us2nb")
-_attackPrefab = ExtResource("1_bud16")
-NextPowerUps = Array[Resource]([ExtResource("1_18nri"), ExtResource("2_n2svj"), ExtResource("3_wtrvq")])
+_attackPrefab = ExtResource("4_fmrmo")
+NextPowerUps = Array[Resource]([ExtResource("1_18nri"), ExtResource("2_n2svj"), ExtResource("3_xbtu4")])
 _describe = ExtResource("1_l83cq")

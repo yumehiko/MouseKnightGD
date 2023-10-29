@@ -40,19 +40,20 @@ public class Health : IDisposable
 		_cts?.Cancel();
 	}
 	
-	public void TakeDamage(int amount)
+	public bool TakeDamage(int amount)
 	{
-		if (IsDead) return;
-		if (_isInvisible.Value) return;
+		if (IsDead) return false;
+		if (_isInvisible.Value) return false;
 		_current.Value -= amount;
 		if (IsDead)
 		{
 			_onDeath.OnNext(Unit.Default);
 			_onDeath.OnCompleted();
-			return;
+			return true;
 		}
 		
 		Invisible(2.5f, _cts.Token).Forget();
+		return false;
 	}
 	
 	private async GDTask Invisible(float duration, CancellationToken ct)

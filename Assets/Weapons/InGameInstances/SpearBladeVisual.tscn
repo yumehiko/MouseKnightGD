@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6x7rkxprexol"]
+
+[ext_resource type="Texture2D" uid="uid://caoofcvh6sm6s" path="res://Assets/Sprites/Attacks/Spear.png" id="1_onv28"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/SpearBladeVisual.cs" id="2_q4ch4"]
+
+[node name="BladeVisual" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_onv28")
+offset = Vector2(176, 2.08165e-12)
+script = ExtResource("2_q4ch4")

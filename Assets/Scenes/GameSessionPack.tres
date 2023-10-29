@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://jmt4m17q2yym"]
+
+[ext_resource type="Script" path="res://App/LoadableSession.cs" id="1_far88"]
+[ext_resource type="PackedScene" uid="uid://bv75pxtmkco6h" path="res://Assets/Scenes/game_session.tscn" id="1_w4u4a"]
+
+[resource]
+script = ExtResource("1_far88")
+_sessionPack = ExtResource("1_w4u4a")
