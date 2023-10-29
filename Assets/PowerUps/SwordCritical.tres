@@ -1,9 +1,9 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://b0y7gsmv53uyx"]
 
-[ext_resource type="Texture2D" uid="uid://dol2uulb1rpxy" path="res://Assets/Sprites/UI/PwSlashWide.png" id="1_di1e0"]
+[ext_resource type="Texture2D" uid="uid://b6g3aj050aojh" path="res://Assets/Sprites/UI/PuSwordCritical.png" id="1_5u745"]
 [ext_resource type="Script" path="res://InGame/PowerUps/PuSlashCritical.cs" id="1_t1nss"]
 
 [resource]
 script = ExtResource("1_t1nss")
-_describe = ExtResource("1_di1e0")
 NextPowerUps = null
+_describe = ExtResource("1_5u745")

@@ -5,7 +5,7 @@ using MouseKnightGD.InGame.Entities.Actors.Heroes;
 
 namespace MouseKnightGD.InGame.PowerUps;
 
-public partial class PuSlashDamage : PowerUpStats
+public partial class PuSlashCd : PowerUpStats
 {
     private Sword _sword;
 
@@ -13,9 +13,10 @@ public partial class PuSlashDamage : PowerUpStats
     {
         _sword = (Sword) weaponInstance;
     }
+
     public override void Apply(WeaponHand weaponHand)
     {
-        _sword.IncreaseDamage();
+        _sword.IncreaseCooldownReductionRateOnCritical();
     }
 
     public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

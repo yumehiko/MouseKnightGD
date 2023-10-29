@@ -22,12 +22,12 @@ public partial class Rifle : AttackBase
 	private CompositeDisposable _disposable;
 	private CancellationTokenSource _cts;
 
-	public override void Initialize(Hero hero)
+	public override void Initialize(WeaponHand weaponHand)
 	{
 		_timer = new CooldownTimer();
 		_disposable = new CompositeDisposable();
 		_cts = new CancellationTokenSource();
-		_projectileRoot = hero.ProjectileRoot;
+		_projectileRoot = weaponHand.ProjectileRoot;
 		_barrelAngles = new List<Vector2>();
 		// 上下左右にバレルアングルを設定する
 		_barrelAngles.Add(Vector2.Up);
@@ -37,20 +37,20 @@ public partial class Rifle : AttackBase
 		
 		_coolTime = _coolTimeMax;
 		
-		hero.Brain.LeftTrigger
-			.Where(_ => !hero.IsDead)
+		weaponHand.LeftTrigger
+			.Where(_ => !weaponHand.IsDead)
 			.Where(isOn => isOn)
 			.Where(_ => !_timer.InCooldown.Value)
 			.Subscribe(_ => Shot()).AddTo(_disposable);
 		
-		hero.Brain.LeftTrigger
-			.Where(_ => !hero.IsDead)
+		weaponHand.LeftTrigger
+			.Where(_ => !weaponHand.IsDead)
 			.Where(isOn => !isOn)
 			.Subscribe(_ => ReleaseTrigger()).AddTo(_disposable);
 		
 		_timer.InCooldown
 			.Where(inCd => !inCd)
-			.Where(_ => hero.Brain.LeftTrigger.Value)
+			.Where(_ => weaponHand.LeftTrigger.Value)
 			.Subscribe(_ => Shot()).AddTo(_disposable);
 	}
 

@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://d2l8hifjc253h" path="res://Assets/Sprites/UI/WpSlash.png" id="2_6l6kl"]
 [ext_resource type="Resource" uid="uid://7noywry0vvip" path="res://Assets/PowerUps/SwordDamage.tres" id="2_facy5"]
 [ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="3_ov6b7"]
-[ext_resource type="Resource" uid="uid://bfagw64ac6g1s" path="res://Assets/PowerUps/SwordWiden.tres" id="3_xb4vb"]
+[ext_resource type="Resource" uid="uid://bfagw64ac6g1s" path="res://Assets/PowerUps/SwordCd.tres" id="3_xb4vb"]
 
 [resource]
 script = ExtResource("3_ov6b7")
 _attackPrefab = ExtResource("1_un4t6")
-_describe = ExtResource("2_6l6kl")
 NextPowerUps = Array[Resource]([ExtResource("1_04lha"), ExtResource("2_facy5"), ExtResource("3_xb4vb")])
+_describe = ExtResource("2_6l6kl")

@@ -11,15 +11,17 @@ namespace MouseKnightGD.InGame.PowerUps;
 public partial class PowerUpUiButton : TextureRect
 {
 	[Export] private AudioStreamPlayer2D _chooseSePlayer;
+	[Export] private NinePatchRect _frame;
 	private PowerUpBase _powerUp;
 	public GDTaskCompletionSource<PowerUpBase> PowerUpTcs { get; private set; }
 	private readonly float _inActiveAlpha = 0.25f;
 	private bool _isPicked;
 	
-	public void SetPowerUp(PowerUpBase powerUp)
+	public void SetPowerUp(PowerUpBase powerUp, Texture2D frame)
 	{
 		_powerUp = powerUp;
 		Texture = _powerUp.Describe;
+		_frame.Texture = frame;
 		Modulate = new Color(1.0f, 1.0f, 1.0f, _inActiveAlpha);
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;

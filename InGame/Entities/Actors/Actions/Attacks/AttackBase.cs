@@ -5,5 +5,5 @@ namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 
 public abstract partial class AttackBase : Node2D
 {
-    public abstract void Initialize(Hero hero);
+    public abstract void Initialize(WeaponHand weaponHand);
 }

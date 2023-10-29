@@ -14,7 +14,8 @@ public partial class PowerUpUi : Control
 {
 	[Export] private PowerUpUiButton[] _powerUpUiButtons;
 	[Export] private AudioStreamPlayer _confirmSePlayer;
-
+	[Export] private Texture2D _powerUpStatFrame;
+	[Export] private Texture2D _weaponFrame;
 	public async GDTask<PowerUpBase> Call(IReadOnlyList<PowerUpBase> powerUps, CancellationToken ct)
 	{
 		GetTree().Paused = true;
@@ -33,7 +34,8 @@ public partial class PowerUpUi : Control
 		{
 			var button = _powerUpUiButtons[i];
 			var powerUp = powerUps[i];
-			button.SetPowerUp(powerUp);
+			var frame = GetFrame(powerUp);
+			button.SetPowerUp(powerUp, frame);
 		}
 		
 		Modulate = Colors.Transparent;
@@ -63,5 +65,16 @@ public partial class PowerUpUi : Control
 			.SetTrans(Tween.TransitionType.Quad)
 			.SetEase(Tween.EaseType.Out);
 		await tween.PlayAsync(ct);
+	}
+
+	private Texture2D GetFrame(PowerUpBase powerUp)
+	{
+		var frame = powerUp switch
+		{
+			PowerUpStats _ => _powerUpStatFrame,
+			WeaponPack _ => _weaponFrame,
+			_ => throw new ArgumentOutOfRangeException(nameof(powerUp))
+		};
+		return frame;
 	}
 }

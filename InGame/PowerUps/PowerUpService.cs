@@ -57,7 +57,7 @@ public partial class PowerUpService : Resource
         var weaponTempList = new List<WeaponPack>(_weaponPacks);
         var chooses = PickPowerUpChoices(weaponTempList);
         var powerUp = await _ui.Call(chooses, sessionCt);
-        powerUp.Apply(_player);
+        powerUp.Apply(_player.WeaponHand);
         // このパワーアップから、追加のパワーアップ候補を取得する。
         var nextPowerUps = powerUp.GetNextPowerUps();
         if (nextPowerUps == null || nextPowerUps.Count == 0) return;
@@ -73,16 +73,18 @@ public partial class PowerUpService : Resource
     
     private IReadOnlyList<PowerUpBase> PickPowerUpChoices(List<WeaponPack> weapons)
     {
-        var result = new List<PowerUpBase>();
+        var choices = new List<PowerUpBase>();
         weapons.Shuffle();
         var shuffledWeaponQueue = new Queue<WeaponPack>(weapons);
+        _powerUps.Shuffle();
+        var shuffledPowerUpQueue = new Queue<PowerUpBase>(_powerUps);
         for (var i = 0; i < 3; i++)
         {
-            var powerUp = PickPowerUp(shuffledWeaponQueue);
-            result.Add(powerUp);
+            var powerUp = PickPowerUp(shuffledWeaponQueue, shuffledPowerUpQueue);
+            choices.Add(powerUp);
         }
 
-        return result;
+        return choices;
     }
     
     /// <summary>
@@ -90,11 +92,11 @@ public partial class PowerUpService : Resource
     /// Weaponがピックされる可能性もある。
     /// </summary>
     /// <returns></returns>
-    private PowerUpBase PickPowerUp(Queue<WeaponPack> shuffledWeaponQueue)
+    private PowerUpBase PickPowerUp(Queue<WeaponPack> shuffledWeaponQueue, Queue<PowerUpBase> shuffledPowerUpQueue)
     {
         // プレイヤーの武器が0なら100%、1なら25%、2なら6.25%、3なら1.5625%の確率で武器がピックされる。
         // =最低1つは選出される確立：　0：100%, 1：57.8125%, 2：17.602539%, 3：4.614639%
-        var weaponPickChance = Mathf.Pow(0.25f, _player.WeaponCount);
+        var weaponPickChance = Mathf.Pow(0.25f, _player.WeaponHand.WeaponCount);
         var pick = GD.Randf();
         var weaponPick = pick < weaponPickChance && shuffledWeaponQueue.Count > 0;
         
@@ -103,9 +105,8 @@ public partial class PowerUpService : Resource
             var weapon = shuffledWeaponQueue.Dequeue();
             return weapon;
         }
-        
-        var index = GD.RandRange(0, _powerUps.Count - 1);
-        var powerUp = _powerUps[index];
+
+        var powerUp = shuffledPowerUpQueue.Dequeue();
         return powerUp;
     }
 }

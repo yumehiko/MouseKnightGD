@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cubwhwuv2i7y3" path="res://Assets/Sprites/UI/WpSpear.png" id="1_l83cq"]
 [ext_resource type="Resource" uid="uid://dgcjw7a1tqoky" path="res://Assets/PowerUps/SpearCount.tres" id="2_n2svj"]
 [ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="2_us2nb"]
-[ext_resource type="Resource" uid="uid://dy5mifqir5dqg" path="res://Assets/PowerUps/SpearCritical.tres" id="3_wtrvq"]
+[ext_resource type="Resource" uid="uid://dy5mifqir5dqg" path="res://Assets/PowerUps/SpearBlood.tres" id="3_wtrvq"]
 
 [resource]
 script = ExtResource("2_us2nb")
 _attackPrefab = ExtResource("1_bud16")
-_describe = ExtResource("1_l83cq")
 NextPowerUps = Array[Resource]([ExtResource("1_18nri"), ExtResource("2_n2svj"), ExtResource("3_wtrvq")])
+_describe = ExtResource("1_l83cq")

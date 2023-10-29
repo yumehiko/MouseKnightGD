@@ -11,10 +11,18 @@ public partial class WeaponPack : PowerUpBase
     /// この武器の実体。
     /// </summary>
     [Export] private PackedScene _attackPrefab;
-    public override void Apply(Hero hero)
+    [Export] protected PowerUpStats[] NextPowerUps;
+    public override void Apply(WeaponHand weaponHand)
     {
         var instance = _attackPrefab.Instantiate<AttackBase>();
-        hero.AddWeapon(instance);
+        weaponHand.AddWeapon(instance);
+        
+        //　この武器に関するパワーアップを初期化する。
+        if (NextPowerUps == null) return;
+        foreach (var next in NextPowerUps)
+        {
+            next.Initialize(instance);
+        }
     }
 
     public override IReadOnlyList<PowerUpBase> GetNextPowerUps()

@@ -10,5 +10,5 @@
 [resource]
 script = ExtResource("3_rxrjc")
 _attackPrefab = ExtResource("1_dgqhv")
+NextPowerUps = Array[Resource]([ExtResource("2_e4062"), ExtResource("3_nr51b"), ExtResource("1_kabaa")])
 _describe = ExtResource("2_xdbua")
-NextPowerUps = Array[Resource]([ExtResource("1_kabaa"), ExtResource("2_e4062"), ExtResource("3_nr51b")])

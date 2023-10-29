@@ -26,15 +26,15 @@ public partial class Spear : AttackBase
 	private Vector2 _slashPoint;
 	private int _damage = 6;
 
-	public override void Initialize(Hero hero)
+	public override void Initialize(WeaponHand weaponHand)
 	{
 		_timer = new CooldownTimer();
 		_cts = new CancellationTokenSource();
 		_disposable = new CompositeDisposable();
-		hero.Brain.LeftTrigger
-			.Where(_ => !hero.IsDead)
+		weaponHand.LeftTrigger
+			.Where(_ => !weaponHand.IsDead)
 			.Where(isOn => !isOn)
-			.Subscribe(x => Attack(hero.Position, _cts.Token)).AddTo(_disposable);
+			.Subscribe(x => Attack(_cts.Token)).AddTo(_disposable);
 	}
 
 	public override void _ExitTree()
@@ -49,7 +49,7 @@ public partial class Spear : AttackBase
 		base._PhysicsProcess(delta);
 	}
 
-	private void Attack(Vector2 point, CancellationToken ct)
+	private void Attack(CancellationToken ct)
 	{
 		const float cooldown = 0.6f;
 		if(!_timer.InCooldown.Value) _isAttackTriggered = true;
