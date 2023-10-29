@@ -8,6 +8,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading;
 using Godot;
+using MouseKnightGD.Core;
 using Reactive.Bindings.Extensions;
 
 namespace MouseKnightGD.InGame.PowerUps;
@@ -70,12 +71,14 @@ public partial class PowerUpService : Resource
         _onLevelUp.OnNext(Unit.Default);
     }
     
-    private IReadOnlyList<PowerUpBase> PickPowerUpChoices(List<WeaponPack> weaponQueue)
+    private IReadOnlyList<PowerUpBase> PickPowerUpChoices(List<WeaponPack> weapons)
     {
         var result = new List<PowerUpBase>();
+        weapons.Shuffle();
+        var shuffledWeaponQueue = new Queue<WeaponPack>(weapons);
         for (var i = 0; i < 3; i++)
         {
-            var powerUp = PickPowerUp(weaponQueue);
+            var powerUp = PickPowerUp(shuffledWeaponQueue);
             result.Add(powerUp);
         }
 
@@ -87,17 +90,17 @@ public partial class PowerUpService : Resource
     /// Weaponがピックされる可能性もある。
     /// </summary>
     /// <returns></returns>
-    private PowerUpBase PickPowerUp(List<WeaponPack> weaponQueue)
+    private PowerUpBase PickPowerUp(Queue<WeaponPack> shuffledWeaponQueue)
     {
         // プレイヤーの武器が0なら100%、1なら25%、2なら6.25%、3なら1.5625%の確率で武器がピックされる。
+        // =最低1つは選出される確立：　0：100%, 1：57.8125%, 2：17.602539%, 3：4.614639%
         var weaponPickChance = Mathf.Pow(0.25f, _player.WeaponCount);
         var pick = GD.Randf();
+        var weaponPick = pick < weaponPickChance && shuffledWeaponQueue.Count > 0;
         
-        if (pick < weaponPickChance)
+        if (weaponPick)
         {
-            var wpId = GD.RandRange(0, _weaponPacks.Count - 1);
-            var weapon = _weaponPacks[wpId];
-            weaponQueue.Remove(weapon);
+            var weapon = shuffledWeaponQueue.Dequeue();
             return weapon;
         }
         
