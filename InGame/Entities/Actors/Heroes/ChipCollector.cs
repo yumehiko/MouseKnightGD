@@ -11,14 +11,17 @@ namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
 public partial class ChipCollector : Area2D
 {
     private ReactivePropertySlim<int> _chips;
+    private ReactivePropertySlim<int> _score;
     private Subject<Unit> _onCollect;
     public IReadOnlyReactiveProperty<int> Chips => _chips;
+    public IReadOnlyReactiveProperty<int> Score => _score;
     public IObservable<Unit> OnCollect => _onCollect;
     
     public void Initialize()
     {
         GD.Print("ChipCollector.Initialize");
         _chips = new ReactivePropertySlim<int>(0);
+        _score = new ReactivePropertySlim<int>(0);
         _onCollect = new Subject<Unit>();
         BodyEntered += OnAreaEntered;
     }
@@ -32,6 +35,7 @@ public partial class ChipCollector : Area2D
     {
         if (body is not Chip chip) return;
         _chips.Value += chip.Value;
+        _score.Value += chip.Value;
         _onCollect.OnNext(Unit.Default);
         chip.QueueFree();
     }

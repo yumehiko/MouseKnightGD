@@ -27,31 +27,46 @@ public partial class GameSession : Node
 	[Export] private PowerUpUi _powerUpUi;
 	[Export] private Node2D _projectileRoot;
 	[Export] private PowerUpService _powerUpService;
-	
+	[Export] private ScoreLabel _scoreLabel;
+
+	private CancellationTokenSource _sessionCts;
+	private CancellationTokenSource _loopCts;
 	private GDTaskCompletionSource<GameSessionResult> _tcs;
 	private AiDirector _aiDirector;
+
+	public override void _ExitTree()
+	{
+		_loopCts?.Cancel();
+		_loopCts?.Dispose();
+		_sessionCts?.Cancel();
+		_sessionCts?.Dispose();
+		base._ExitTree();
+	}
 
 	public async GDTask<GameSessionResult> Run(MusicPlayer musicPlayer, CancellationToken ct)
 	{
 		GD.Print("GameSession.Run");
 		var disposables = new CompositeDisposable();
 		_tcs = new GDTaskCompletionSource<GameSessionResult>();
-		var gameCts = new CancellationTokenSource();
+		_loopCts = new CancellationTokenSource();
+		_sessionCts = new CancellationTokenSource();
 		_playerHero.Initialize(_playerBrain, _projectileRoot);
 		_stageArea.Initialize(_playerHero);
 		_enemyFactory.Initialize(_playerHero);
 		_chipFactory.Initialize(_stageArea);
-		_powerUpService.Initialize(_playerHero, _powerUpUi, gameCts.Token);
-		_playerHero.OnDeath.Subscribe(_ => { }, () => GameOver(gameCts)).AddTo(disposables);
+		_powerUpService.Initialize(_playerHero, _powerUpUi, _loopCts.Token);
+		_scoreLabel.Initialize(_playerHero);
+		_playerHero.OnDeath.Subscribe(_ => { }, () => GameOver(_loopCts).Forget()).AddTo(disposables);
 		_aiDirector = new AiDirector(_enemyFactory, 2.05);
 		// まず、プレイヤーの最初のレベルアップを待機する。
-		await ReadyPart(gameCts.Token);
+		await ReadyPart(_loopCts.Token);
 		
 		// ゲームのメインループ開始
 		musicPlayer.SetMusic(_gameMusic);
-		MainLoop(gameCts.Token).Forget();
+		ProgressCount(_loopCts).Forget();
+		MainLoop(_loopCts.Token).Forget();
 		var result = await _tcs.Task.AttachExternalCancellation(ct);
-		await GDTask.Delay(TimeSpan.FromSeconds(4.0f), cancellationToken: ct);
+		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: ct);
 		disposables.Dispose();
 		return result;
 	}
@@ -74,10 +89,39 @@ public partial class GameSession : Node
 		}
 	}
 
-	private void GameOver(CancellationTokenSource gameCts)
+	private async GDTask ProgressCount(CancellationTokenSource loopCts)
 	{
-		gameCts.Cancel();
+		const float musicLength = 481.0f;
+		await GDTask.Delay(TimeSpan.FromSeconds(musicLength - 5.0f), cancellationToken: loopCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
+		await BeatGame(loopCts);
+	}
+
+	private async GDTask GameOver(CancellationTokenSource loopCts)
+	{
+		loopCts.Cancel();
+		loopCts.Dispose();
+		_loopCts = null;
+		var result = new GameSessionResult(100);
+		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: _sessionCts.Token);
+		_tcs.TrySetResult(result);
+	}
+
+	private async GDTask BeatGame(CancellationTokenSource loopCts)
+	{
+		loopCts.Cancel();
+		loopCts.Dispose();
+		_loopCts = null;
+		_powerUpService.UnRegister(); // レベルアップ機能を停止。
+		await _enemyFactory.KillAll(_sessionCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: _sessionCts.Token);
 		var result = new GameSessionResult(100);
 		_tcs.TrySetResult(result);
 	}
+	
+	
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=23 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="2_4rfsh"]
@@ -12,8 +12,10 @@
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyFactory.cs" id="9_w7yn5"]
 [ext_resource type="Resource" uid="uid://cb22whgoy001s" path="res://Assets/Prefabs/Enemies/stalker_pack.tres" id="10_p2h8g"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
+[ext_resource type="FontFile" uid="uid://dfw5yuakxjmdf" path="res://Assets/Miscs/Fonts/GlacialIndifference-Regular.ttf" id="16_45lcs"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
+[ext_resource type="Script" path="res://InGame/ScoreLabel.cs" id="17_tum1e"]
 [ext_resource type="PackedScene" uid="uid://c1l5sc6rxl0pu" path="res://Assets/Prefabs/InGame/level_up_ui.tscn" id="20_i10d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
@@ -29,7 +31,15 @@ size = Vector2(600, 2280)
 offsets = PackedFloat32Array(0, 0.491686, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_chipFactory", "_enemyFactory", "_powerUpUi", "_projectileRoot")]
+[sub_resource type="LabelSettings" id="LabelSettings_b4n51"]
+line_spacing = 8.0
+font = ExtResource("16_45lcs")
+font_size = 240
+font_color = Color(1, 1, 1, 0.0313726)
+shadow_size = 0
+shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_chipFactory", "_enemyFactory", "_powerUpUi", "_projectileRoot", "_scoreLabel")]
 process_mode = 1
 script = ExtResource("1_3vmkm")
 _gameMusic = ExtResource("2_4rfsh")
@@ -41,6 +51,7 @@ _enemyFactory = NodePath("Enemies")
 _powerUpUi = NodePath("LevelUpUI")
 _projectileRoot = NodePath("Projectiles")
 _powerUpService = ExtResource("2_qh4ok")
+_scoreLabel = NodePath("ScoreLabel")
 
 [node name="StageArea" type="Area2D" parent="."]
 visible = false
@@ -103,3 +114,15 @@ initial_velocity_max = 16.0
 color_ramp = SubResource("Gradient_ju6ya")
 
 [node name="LevelUpUI" parent="." instance=ExtResource("20_i10d6")]
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = -100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_b4n51")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("17_tum1e")

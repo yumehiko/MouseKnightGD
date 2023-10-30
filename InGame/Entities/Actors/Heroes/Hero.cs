@@ -22,6 +22,7 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 
 	private CompositeDisposable _disposable;
 	private Subject<Unit> _onRemove;
+	public IReadOnlyReactiveProperty<int> Score => _chipCollector.Score;
 	public IReadOnlyReactiveProperty<int> Chips => _chipCollector.Chips;
 	public Health Health { get; private set; }
 	public IBrain Brain { get; private set; }

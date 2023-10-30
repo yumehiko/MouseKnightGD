@@ -37,12 +37,11 @@ public partial class PowerUpService : Resource
         _ui = ui;
         _player.Chips.Subscribe(amount => OnEarnedChip(amount, ct)).AddTo(_disposables);
     }
-
-    protected override void Dispose(bool disposing)
+    
+    public void UnRegister()
     {
         _disposables?.Dispose();
         _onLevelUp?.Dispose();
-        base.Dispose(disposing);
     }
 
     private void OnEarnedChip(int chip, CancellationToken sessionCt)

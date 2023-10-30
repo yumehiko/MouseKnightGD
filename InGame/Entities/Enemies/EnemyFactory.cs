@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Heroes;
 using MouseKnightGD.InGame.Entities.Chips;
@@ -46,10 +48,14 @@ public partial class EnemyFactory : Node
 		return bore - enemy.Fun;
 	}
 
-	public void RemoveAll()
+	public async GDTask KillAll(CancellationToken ct)
 	{
-		_instances.ForEach(x => x.Remove());
-		_instances.Clear();
+		var tempList = new List<IEnemy>(_instances);
+		foreach(var enemy in tempList)
+		{
+			enemy.Die();
+			await GDTask.DelayFrame(3, cancellationToken: ct);
+		}
 	}
 	
 	/// <summary>
