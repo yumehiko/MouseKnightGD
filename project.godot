@@ -14,7 +14,8 @@ config/name="MouseKnightGD"
 run/main_scene="res://Assets/Scenes/main_session.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0.121569, 0.121569, 0.121569, 1)
-config/icon="res://Assets/Sprites/icon.svg"
+boot_splash/show_image=false
+config/icon="res://Assets/Icons/512x@1x.png"
 
 [autoload]
 
