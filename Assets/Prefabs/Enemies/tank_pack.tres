@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("2_j040a")
 _enemy = ExtResource("1_1ssl5")
-_fun = 5
+_fun = 7

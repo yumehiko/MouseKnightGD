@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=20 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="2_4rfsh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://InGame/StageArea.cs" id="8_ii0rj"]
 [ext_resource type="Script" path="res://InGame/Entities/Chips/ChipFactory.cs" id="9_ubuin"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyFactory.cs" id="9_w7yn5"]
+[ext_resource type="Resource" uid="uid://cb22whgoy001s" path="res://Assets/Prefabs/Enemies/stalker_pack.tres" id="10_p2h8g"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
@@ -76,7 +77,7 @@ script = ExtResource("3_hejmq")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
-_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77")])
+_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77"), ExtResource("10_p2h8g")])
 _stageArea = NodePath("../StageArea")
 _chipFactory = NodePath("../Chips")
 

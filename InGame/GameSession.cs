@@ -29,6 +29,7 @@ public partial class GameSession : Node
 	[Export] private PowerUpService _powerUpService;
 	
 	private GDTaskCompletionSource<GameSessionResult> _tcs;
+	private AiDirector _aiDirector;
 
 	public async GDTask<GameSessionResult> Run(MusicPlayer musicPlayer, CancellationToken ct)
 	{
@@ -42,7 +43,7 @@ public partial class GameSession : Node
 		_chipFactory.Initialize(_stageArea);
 		_powerUpService.Initialize(_playerHero, _powerUpUi, gameCts.Token);
 		_playerHero.OnDeath.Subscribe(_ => { }, () => GameOver(gameCts)).AddTo(disposables);
-		
+		_aiDirector = new AiDirector(_enemyFactory, 2.05);
 		// まず、プレイヤーの最初のレベルアップを待機する。
 		await ReadyPart(gameCts.Token);
 		
@@ -66,11 +67,10 @@ public partial class GameSession : Node
 	
 	private async GDTask MainLoop(CancellationToken ct)
 	{
-		_enemyFactory.Create(10);
 		while (ct.IsCancellationRequested == false)
 		{
 			await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: ct);
-			_enemyFactory.Create(10);
+			_aiDirector.OnBoreTick(ct).Forget();
 		}
 	}
 

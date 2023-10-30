@@ -2,12 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
-using GTweens.Easings;
-using GTweensGodot.Extensions;
-using MouseKnightGD.App;
 using MouseKnightGD.Core;
 
 namespace MouseKnightGD.InGame.PowerUps;
@@ -27,10 +23,8 @@ public partial class PowerUpUi : Control
 	{
 		GetTree().Paused = true;
 		await Open(powerUps, ct);
-		GD.Print("PowerUpUi.Call await");
 		var confirm = await GDTask.WhenAny(_powerUpUiButtons.Select(x => x.PowerUpTcs.Task));
 		await Close(ct);
-		GD.Print("PowerUpUi.Call end");
 		GetTree().Paused = false;
 		return confirm.result;
 	}

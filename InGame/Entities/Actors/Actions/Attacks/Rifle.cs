@@ -80,7 +80,6 @@ public partial class Rifle : AttackBase
 		}
 		_timer.CountAsync(_coolTime, _cts.Token).Forget();
 		_coolTime = Mathf.Max(_coolTimeMin, _coolTime - _rapidFireRate);
-		GD.Print($"_coolTime: {_coolTime}");
 	}
 	
 	// --- パワーアップ用 ---

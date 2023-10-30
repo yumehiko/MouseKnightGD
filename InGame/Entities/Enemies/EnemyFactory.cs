@@ -18,6 +18,7 @@ public partial class EnemyFactory : Node
 	private Hero _player;
 	private SceneTree _tree;
 	private CompositeDisposable _disposables;
+	public double LowestFun { get; private set; }
 
 	public override void _ExitTree()
 	{
@@ -29,6 +30,7 @@ public partial class EnemyFactory : Node
 	{
 		_disposables = new CompositeDisposable();
 		_player = player;
+		LowestFun = _enemyPacks.Min(x => x.Fun);
 	}
 	
 	public double Create(double bore)
@@ -64,5 +66,10 @@ public partial class EnemyFactory : Node
 		var instance = pack.Instantiate();
 		AddChild(instance);
 		return instance;
+	}
+	
+	public double GetTotalFun()
+	{
+		return _instances.Sum(x => x.Fun);
 	}
 }

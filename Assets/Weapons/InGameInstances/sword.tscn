@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://6dschwxcb6sc"]
+[gd_scene load_steps=7 format=3 uid="uid://6dschwxcb6sc"]
 
 [ext_resource type="Texture2D" uid="uid://dfom8qig3f08k" path="res://Assets/Sprites/Attacks/Sword.png" id="1_kyg8u"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Sword.cs" id="1_nxwlk"]
 [ext_resource type="Texture2D" uid="uid://damomjty0xa6k" path="res://Assets/Sprites/Attacks/AbstractParticle.png" id="3_urx4k"]
+[ext_resource type="AudioStream" uid="uid://521apwsme7vs" path="res://Assets/Audios/SE/WpSlash.ogg" id="4_8qt0l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gknf8"]
 radius = 96.0
@@ -10,11 +11,12 @@ radius = 96.0
 [sub_resource type="Gradient" id="Gradient_hran8"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="Sword" type="Node2D" node_paths=PackedStringArray("_area", "_visual", "_particles")]
+[node name="Sword" type="Node2D" node_paths=PackedStringArray("_area", "_visual", "_particles", "_se")]
 script = ExtResource("1_nxwlk")
 _area = NodePath("Area2D")
 _visual = NodePath("Area2D/Sprite2D")
 _particles = NodePath("CPUParticles2D")
+_se = NodePath("SePlayer")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -45,3 +47,7 @@ initial_velocity_max = 16.0
 angle_min = -18.0
 scale_amount_min = 0.5
 color_ramp = SubResource("Gradient_hran8")
+
+[node name="SePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8qt0l")
+max_polyphony = 4

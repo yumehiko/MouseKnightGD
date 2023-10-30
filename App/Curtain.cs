@@ -14,7 +14,6 @@ public partial class Curtain : Sprite2D
 	
 	public async GDTask Open(float duration, CancellationToken ct)
 	{
-		GD.Print("Curtain Open");
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(this, "modulate:a", 0, duration);

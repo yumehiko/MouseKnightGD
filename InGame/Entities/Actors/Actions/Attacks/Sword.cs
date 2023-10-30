@@ -20,14 +20,15 @@ public partial class Sword : AttackBase
 	[Export] private Area2D _area;
 	[Export] private Sprite2D _visual;
 	[Export] private CpuParticles2D _particles;
+	[Export] private AudioStreamPlayer2D _se;
 	private CooldownTimer _timer;
 	private CancellationTokenSource _cts;
 	private CompositeDisposable _disposable;
 	private bool _isAttackTriggered;
 	private Vector2 _slashPoint;
 	private int _damage = 4;
-	private float _criticalRate = 0.0f;
-	private float _cooldownReductionRateOnCritical = 0.0f;
+	private float _criticalRate;
+	private float _cooldownReductionRateOnCritical;
 	private float _baseCooldown = 0.5f;
 	private float ReducedCooldown => _baseCooldown * (1.0f / (1.0f + _cooldownReductionRateOnCritical));
 	private bool _isCritical;
@@ -41,7 +42,7 @@ public partial class Sword : AttackBase
 		weaponHand.LeftTrigger
 			.Where(_ => !weaponHand.IsDead)
 			.Where(isOn => isOn)
-			.Subscribe(x => Attack(_cts.Token)).AddTo(_disposable);
+			.Subscribe(_ => Attack(_cts.Token)).AddTo(_disposable);
 	}
 
 	public override void _ExitTree()
@@ -90,6 +91,7 @@ public partial class Sword : AttackBase
 		// _visualを表示する
 		_visual.Show();
 		_visual.Modulate = Colors.White;
+		_se.Play();
 		// _visualをTweenで徐々にフェードアウトする
 		var tween = CreateTween();
 		tween.TweenProperty(_visual, "modulate:a", 0, 0.2f);
