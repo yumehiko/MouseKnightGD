@@ -23,12 +23,15 @@ public partial class PowerUpService : Resource
     private CompositeDisposable _disposables;
     private Hero _player;
     private PowerUpUi _ui;
+    private int _level = 0;
     private int _nextLevelUpChip = 5;
     private Subject<Unit> _onLevelUp;
     public IObservable<Unit> OnLevelUp => _onLevelUp;
     
     public void Initialize(Hero player, PowerUpUi ui, CancellationToken ct)
     {
+        _level = 0;
+        _nextLevelUpChip = 5;
         _onLevelUp = new Subject<Unit>();
         _weaponPacks = _initWeaponPacks.ToList();
         _powerUps = new List<PowerUpBase>();
@@ -44,16 +47,19 @@ public partial class PowerUpService : Resource
         _onLevelUp?.Dispose();
     }
 
-    private void OnEarnedChip(int chip, CancellationToken sessionCt)
+    private void OnEarnedChip(int totalChip, CancellationToken sessionCt)
     {
-        if (chip < _nextLevelUpChip) return;
+        if (totalChip < _nextLevelUpChip) return;
         CallUi(sessionCt).Forget();
     }
 
     private async GDTask CallUi(CancellationToken sessionCt)
     {
         _player.SubChips(_nextLevelUpChip);
-        // _nextLevelUpChip += 5; TODO: 次のレベルアップに必要な経験治療を増加させる。レベルアップ曲線を考える
+        _player.Health.Heal(1);
+        _player.Invisible(0.5f, sessionCt).Forget();
+        _level++;
+        GainNextLevelUpChip();
         var weaponTempList = new List<WeaponPack>(_weaponPacks);
         var chooses = PickPowerUpChoices(weaponTempList);
         var powerUp = await _ui.Call(chooses, sessionCt);
@@ -69,6 +75,13 @@ public partial class PowerUpService : Resource
             _weaponPacks.Remove((WeaponPack) powerUp);
         }
         _onLevelUp.OnNext(Unit.Default);
+    }
+    
+    private void GainNextLevelUpChip()
+    {
+        const int baseValue = 5;
+        const float levelUpRate = 1.4f;
+        _nextLevelUpChip = Mathf.RoundToInt(baseValue * Mathf.Pow(levelUpRate, _level));
     }
     
     private IReadOnlyList<PowerUpBase> PickPowerUpChoices(List<WeaponPack> weapons)

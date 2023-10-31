@@ -107,11 +107,11 @@ public partial class Sword : AttackBase
 	
 	public void IncreaseCriticalRate()
 	{
-		_criticalRate += 0.1f;
+		_criticalRate += 0.2f;
 	}
 	
 	public void IncreaseCooldownReductionRateOnCritical()
 	{
-		_cooldownReductionRateOnCritical += 0.2f;
+		_cooldownReductionRateOnCritical += 0.25f;
 	}
 }

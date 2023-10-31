@@ -42,8 +42,7 @@ _deathSe = ExtResource("6_ac1d3")
 _invisibleSe = ExtResource("7_f7lh5")
 _chipSePlayer = NodePath("../ChipCollector/ChipSound")
 _deathParticle = NodePath("../DeathParticle")
-_damageColor0 = Color(0.5, 0.841667, 1, 1)
-_damageColor1 = Color(0, 0.682353, 1, 1)
+_fullDamageColor = Color(0, 0.698039, 1, 1)
 
 [node name="DeathSe" type="AudioStreamPlayer2D" parent="Visual"]
 stream = ExtResource("6_ac1d3")

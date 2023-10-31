@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnhx513tyfbq4"]
+[gd_scene load_steps=18 format=3 uid="uid://dnhx513tyfbq4"]
 
 [ext_resource type="Script" path="res://Title/TitleSession.cs" id="1_1bw8w"]
 [ext_resource type="Script" path="res://Title/StartField.cs" id="1_68ux1"]
@@ -11,6 +11,8 @@
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="8_3hap8"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="10_pos1o"]
 [ext_resource type="AudioStream" uid="uid://wa78u3as5gbk" path="res://Assets/Audios/SE/StartBreath.wav" id="11_0ssrh"]
+[ext_resource type="FontFile" uid="uid://dfw5yuakxjmdf" path="res://Assets/Miscs/Fonts/GlacialIndifference-Regular.ttf" id="12_hkpsr"]
+[ext_resource type="Script" path="res://Title/HighScoreLabel.cs" id="13_bb7ts"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3rjy"]
 radius = 240.0
@@ -22,11 +24,18 @@ size = Vector2(120, 120)
 offsets = PackedFloat32Array(0, 0.491686, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="TitleSession" type="Node" node_paths=PackedStringArray("_startField", "_exitField", "_titleSprite")]
+[sub_resource type="LabelSettings" id="LabelSettings_e6gk2"]
+line_spacing = 8.0
+font = ExtResource("12_hkpsr")
+font_size = 60
+font_color = Color(1, 1, 1, 0.247059)
+
+[node name="TitleSession" type="Node" node_paths=PackedStringArray("_startField", "_exitField", "_titleSprite", "_highScoreLabel")]
 script = ExtResource("1_1bw8w")
 _startField = NodePath("StartField")
 _exitField = NodePath("CloseField")
 _titleSprite = NodePath("TitleImage")
+_highScoreLabel = NodePath("HighScoreLabel")
 
 [node name="StartField" type="Area2D" parent="." node_paths=PackedStringArray("_titleSe", "_fillSprite")]
 position = Vector2(960, 540)
@@ -90,6 +99,16 @@ color_ramp = SubResource("Gradient_3pbc6")
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_0ssrh")
+
+[node name="HighScoreLabel" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 120.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_e6gk2")
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("13_bb7ts")
 
 [connection signal="mouse_entered" from="StartField" to="StartField" method="OnMouseEntered"]
 [connection signal="mouse_exited" from="StartField" to="StartField" method="OnMouseExited"]

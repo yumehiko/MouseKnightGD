@@ -13,6 +13,7 @@ namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 public partial class Rifle : AttackBase
 {
 	[Export] private PackedScene _bulletPack;
+	[Export] private AudioStreamPlayer2D _shotSound;
 	private float _coolTimeMax = 1.5f;
 	private float _coolTimeMin = 0.5f;
 	private float _rapidFireRate = 0.25f;
@@ -76,8 +77,9 @@ public partial class Rifle : AttackBase
 		{
 			var instance = _bulletPack.Instantiate<Bullet>();
 			_projectileRoot.AddChild(instance);
-			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 2);
+			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 3);
 		}
+		_shotSound.Play();
 		_timer.CountAsync(_coolTime, _cts.Token).Forget();
 		_coolTime = Mathf.Max(_coolTimeMin, _coolTime - _rapidFireRate);
 	}
@@ -119,7 +121,7 @@ public partial class Rifle : AttackBase
 	public void IncreaseFireRate()
 	{
 		const float baseMinCooldown = 0.5f;
-		const float reduceRatio = 0.1f;
+		const float reduceRatio = 0.11f;
 		_increaseFireRatePowerCount++;
 		_coolTimeMin = baseMinCooldown * (1.0f / (1.0f + _increaseFireRatePowerCount * reduceRatio));
 		ReCalculateMaxCoolTime();

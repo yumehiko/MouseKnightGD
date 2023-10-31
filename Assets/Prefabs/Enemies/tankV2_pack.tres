@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://g5da5uxipkgd"]
+
+[ext_resource type="PackedScene" uid="uid://cf8wbqg0vat5q" path="res://Assets/Prefabs/Enemies/tankV2.tscn" id="1_ss07c"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyPack.cs" id="2_ybf6b"]
+
+[resource]
+script = ExtResource("2_ybf6b")
+_enemy = ExtResource("1_ss07c")
+_fun = 22

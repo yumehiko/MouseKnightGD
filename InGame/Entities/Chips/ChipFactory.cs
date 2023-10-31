@@ -12,21 +12,24 @@ public partial class ChipFactory : Node
 		_stageArea = stageArea;
 	}
 
-	public void Create(Vector2 point)
+	public void Create(Vector2 point, int amount)
 	{
-		CallDeferred(nameof(DeferredCreate), point);
+		CallDeferred(nameof(DeferredCreate), point, amount);
 	}
 	
 	public void CreateAtRandom()
 	{
 		var point = _stageArea.GetRandomPoint();
-		Create(point);
+		Create(point, 1);
 	}
 	
-	private void DeferredCreate(Vector2 point)
+	private void DeferredCreate(Vector2 point, int amount)
 	{
-		var chip = _chipPack.Instantiate<Chip>();
-		chip.Awake(point);
-		AddChild(chip);
+		for (var i = 0; i < amount; i++)
+		{
+			var chip = _chipPack.Instantiate<Chip>();
+			chip.Awake(point);
+			AddChild(chip);
+		}
 	}
 }

@@ -25,9 +25,7 @@ public partial class SpearBlade : Area2D
 	public void ShiftAngle()
 	{
 		if (_isInitialBlade) return;
-		var angle = Rotation;
-		angle += (float) GD.RandRange(-0.1f, 0.1f);
-		Rotation = angle;
+		Rotation = (float) GD.RandRange(-0.15f, 0.15f);
 	}
 
 	public bool Attack(int damage)

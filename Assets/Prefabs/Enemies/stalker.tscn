@@ -28,7 +28,7 @@ polygon = PackedVector2Array(2.08165e-12, -24, 52, 2.08165e-12, 2.08165e-12, 24,
 [node name="Visual" type="Sprite2D" parent="."]
 material = ExtResource("3_lc10m")
 texture = ExtResource("4_d7hn8")
-offset = Vector2(18.5, 2.08165e-12)
+offset = Vector2(22, 2.08165e-12)
 script = ExtResource("5_om55f")
 
 [node name="DamageArea" type="Area2D" parent="." node_paths=PackedStringArray("_sprite2D", "_damageShape2D")]

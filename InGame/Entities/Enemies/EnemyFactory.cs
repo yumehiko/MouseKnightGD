@@ -42,20 +42,20 @@ public partial class EnemyFactory : Node
 		// 敵を生成
 		var enemy = GetRandomEnemy(bore);
 		_instances.Add(enemy);
-		enemy.OnDeath.Subscribe(_ => { }, () => _chipFactory.Create(enemy.Position)).AddTo(_disposables);
+		enemy.OnDeath.Subscribe(_ => { }, () => _chipFactory.Create(enemy.Position, enemy.Fun)).AddTo(_disposables);
 		enemy.OnRemove.Subscribe(_ => { }, () => _instances.Remove(enemy)).AddTo(_disposables);
 		enemy.Initialize(spawnPosition, _player);
 		return bore - enemy.Fun;
 	}
 
-	public async GDTask KillAll(CancellationToken ct)
+	public void KillAll()
 	{
 		var tempList = new List<IEnemy>(_instances);
 		foreach(var enemy in tempList)
 		{
 			enemy.Die();
-			await GDTask.DelayFrame(3, cancellationToken: ct);
 		}
+		GD.Print("EnemyFactory.KillAll: done");
 	}
 	
 	/// <summary>

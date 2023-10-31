@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpknphby084tg"]
+[gd_scene load_steps=4 format=3 uid="uid://bpknphby084tg"]
 
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Rifle.cs" id="1_jkkjb"]
 [ext_resource type="PackedScene" uid="uid://dot54t4xm50h1" path="res://Assets/Prefabs/bullet.tscn" id="2_ndq73"]
+[ext_resource type="AudioStream" uid="uid://yojelmevlucn" path="res://Assets/Audios/SE/WpRifle.ogg" id="3_r8p8m"]
 
-[node name="Rifle" type="Node2D"]
+[node name="Rifle" type="Node2D" node_paths=PackedStringArray("_shotSound")]
 script = ExtResource("1_jkkjb")
 _bulletPack = ExtResource("2_ndq73")
+_shotSound = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_r8p8m")
+max_polyphony = 8

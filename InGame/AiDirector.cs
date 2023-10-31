@@ -18,7 +18,7 @@ public class AiDirector
         _maxBore = maxBore;
     }
 
-    public async GDTask OnBoreTick(CancellationToken ct)
+    public void OnBoreTick(CancellationToken ct)
     {
         // 現在のFun値。高ければ高いほど敵がいる（退屈ではない）
         var currentTotalFun = _enemyFactory.GetTotalFun();
@@ -27,15 +27,15 @@ public class AiDirector
         var currentBore = _maxBore - currentTotalFun;
         var boreRatio = currentBore / _maxBore;
         
-        // 十分に退屈なら、敵を生成する。1フレームに1体ずつ。
+        // 十分に退屈なら、敵を生成する。
         while (currentBore > _enemyFactory.LowestFun)
         {
+            if (ct.IsCancellationRequested) return;
             currentBore = _enemyFactory.Create(currentBore);
-            await GDTask.NextFrame(cancellationToken: ct);
         }
         
         // このTickの退屈比率分、maxBoreを増加させる。
-        const double increaseRatio = 0.25;
+        const double increaseRatio = 0.15;
         _maxBore += _maxBore * boreRatio * increaseRatio;
     }
 }

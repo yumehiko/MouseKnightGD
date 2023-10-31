@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Subjects;
+using System.Threading;
+using Fractural.Tasks;
 using Godot;
 using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 using MouseKnightGD.InGame.Entities.Actors.Brains;
@@ -22,7 +24,7 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 
 	private CompositeDisposable _disposable;
 	private Subject<Unit> _onRemove;
-	public IReadOnlyReactiveProperty<int> Score => _chipCollector.Score;
+	public IReadOnlyReactiveProperty<uint> Score => _chipCollector.Score;
 	public IReadOnlyReactiveProperty<int> Chips => _chipCollector.Chips;
 	public Health Health { get; private set; }
 	public IBrain Brain { get; private set; }
@@ -39,7 +41,7 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 	public void Initialize(IBrain brain, Node2D projectileRoot)
 	{
 		Brain = brain;
-		Health = new Health(3);
+		Health = new Health(5);
 		WeaponHand = new WeaponHand(this, projectileRoot); //Memo 外から渡してやる方が適切ではある。 その場合Healthも外から渡す（HeroFactoryクラスが必要になりそう）
 		_disposable = new CompositeDisposable();
 		_disposable.Add(Health);
@@ -67,7 +69,8 @@ public partial class Hero : RigidBody2D, IEntity, IDamageable, IDieable
 	}
 	
 	public void SubChips(int amount) => _chipCollector.SubChips(amount);
-
+	
+	public async GDTask Invisible(float duration, CancellationToken ct) => await Health.Invisible(duration, ct);
 	public bool TakeDamage(int amount) => Health.TakeDamage(1);
 	public void Die() => Health.Die();
 }

@@ -17,7 +17,7 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 	public bool IsDead => _hp <= 0;
 	public IObservable<Unit> OnDeath => _onDead;
 	public IObservable<Unit> OnRemove => _onRemove;
-	public double Fun { get; set; }
+	public int Fun { get; set; }
 
 	public virtual void Initialize(Vector2 spawnPosition, Hero player)
 	{

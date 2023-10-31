@@ -18,7 +18,14 @@ public partial class TitleSession : Node
 	[Export] private StartField _startField;
 	[Export] private ExitField _exitField;
 	[Export] private Sprite2D _titleSprite;
-	
+	[Export] private HighScoreLabel _highScoreLabel;
+
+	public override void _Ready()
+	{
+		base._Ready();
+		_highScoreLabel.ShowHighScore();
+	}
+
 	public async GDTask<TitleSessionResult> Run(CancellationToken ct)
 	{
 		CompositeDisposable disposable = new();

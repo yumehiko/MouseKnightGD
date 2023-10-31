@@ -2,9 +2,9 @@ namespace MouseKnightGD.InGame;
 
 public class GameSessionResult
 {
-    public int Score { get; }
+    public uint Score { get; }
     
-    public GameSessionResult(int score)
+    public GameSessionResult(uint score)
     {
         Score = score;
     }

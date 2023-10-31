@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c1d6ije0yceq6"]
+
+[ext_resource type="PackedScene" uid="uid://chqxjujoiqwaw" path="res://Assets/Prefabs/Enemies/wallCaller.tscn" id="1_lrtrs"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyPack.cs" id="2_rgawi"]
+
+[resource]
+script = ExtResource("2_rgawi")
+_enemy = ExtResource("1_lrtrs")
+_fun = 12

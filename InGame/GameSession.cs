@@ -28,6 +28,7 @@ public partial class GameSession : Node
 	[Export] private Node2D _projectileRoot;
 	[Export] private PowerUpService _powerUpService;
 	[Export] private ScoreLabel _scoreLabel;
+	[Export] private GameProgressBar _gameProgressBar;
 
 	private CancellationTokenSource _sessionCts;
 	private CancellationTokenSource _loopCts;
@@ -40,6 +41,7 @@ public partial class GameSession : Node
 		_loopCts?.Dispose();
 		_sessionCts?.Cancel();
 		_sessionCts?.Dispose();
+		GD.Print("GameSession._ExitTree");
 		base._ExitTree();
 	}
 
@@ -66,7 +68,6 @@ public partial class GameSession : Node
 		ProgressCount(_loopCts).Forget();
 		MainLoop(_loopCts.Token).Forget();
 		var result = await _tcs.Task.AttachExternalCancellation(ct);
-		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: ct);
 		disposables.Dispose();
 		return result;
 	}
@@ -84,44 +85,38 @@ public partial class GameSession : Node
 	{
 		while (ct.IsCancellationRequested == false)
 		{
-			await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: ct);
-			_aiDirector.OnBoreTick(ct).Forget();
+			await GDTask.Delay(TimeSpan.FromSeconds(2.0f), cancellationToken: ct);
+			_aiDirector.OnBoreTick(ct);
 		}
 	}
 
 	private async GDTask ProgressCount(CancellationTokenSource loopCts)
 	{
 		const float musicLength = 481.0f;
-		await GDTask.Delay(TimeSpan.FromSeconds(musicLength - 5.0f), cancellationToken: loopCts.Token);
-		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
-		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
-		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
-		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
-		await GDTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: loopCts.Token);
+		await _gameProgressBar.StartAsync(musicLength, loopCts.Token);
 		await BeatGame(loopCts);
 	}
 
 	private async GDTask GameOver(CancellationTokenSource loopCts)
 	{
-		loopCts.Cancel();
-		loopCts.Dispose();
+		GD.Print("GameSession.GameOver");
+		loopCts?.Cancel();
+		loopCts?.Dispose();
 		_loopCts = null;
-		var result = new GameSessionResult(100);
-		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: _sessionCts.Token);
+		var result = new GameSessionResult(_playerHero.Score.Value);
+		await GDTask.Delay(TimeSpan.FromSeconds(4.0f), cancellationToken: _sessionCts.Token);
 		_tcs.TrySetResult(result);
 	}
 
 	private async GDTask BeatGame(CancellationTokenSource loopCts)
 	{
-		loopCts.Cancel();
-		loopCts.Dispose();
+		GD.Print("GameSession.BeatGame");
+		loopCts?.Cancel();
+		loopCts?.Dispose();
 		_loopCts = null;
 		_powerUpService.UnRegister(); // レベルアップ機能を停止。
-		await _enemyFactory.KillAll(_sessionCts.Token);
+		_enemyFactory.KillAll();
 		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: _sessionCts.Token);
-		var result = new GameSessionResult(100);
-		_tcs.TrySetResult(result);
+		_playerHero.Die();
 	}
-	
-	
 }

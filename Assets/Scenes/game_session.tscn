@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=28 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="2_4rfsh"]
@@ -11,11 +11,15 @@
 [ext_resource type="Script" path="res://InGame/Entities/Chips/ChipFactory.cs" id="9_ubuin"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyFactory.cs" id="9_w7yn5"]
 [ext_resource type="Resource" uid="uid://cb22whgoy001s" path="res://Assets/Prefabs/Enemies/stalker_pack.tres" id="10_p2h8g"]
+[ext_resource type="Resource" uid="uid://chdvja1kisnnk" path="res://Assets/Prefabs/Enemies/stalkerV2_pack.tres" id="11_slupl"]
+[ext_resource type="Resource" uid="uid://g5da5uxipkgd" path="res://Assets/Prefabs/Enemies/tankV2_pack.tres" id="12_kw3ym"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
+[ext_resource type="Resource" uid="uid://c1d6ije0yceq6" path="res://Assets/Prefabs/Enemies/wallCaller_Pack.tres" id="13_75efb"]
 [ext_resource type="FontFile" uid="uid://dfw5yuakxjmdf" path="res://Assets/Miscs/Fonts/GlacialIndifference-Regular.ttf" id="16_45lcs"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
 [ext_resource type="Script" path="res://InGame/ScoreLabel.cs" id="17_tum1e"]
+[ext_resource type="Script" path="res://InGame/GameProgressBar.cs" id="18_nnnvf"]
 [ext_resource type="PackedScene" uid="uid://c1l5sc6rxl0pu" path="res://Assets/Prefabs/InGame/level_up_ui.tscn" id="20_i10d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
@@ -39,7 +43,10 @@ font_color = Color(1, 1, 1, 0.0313726)
 shadow_size = 0
 shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
 
-[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_chipFactory", "_enemyFactory", "_powerUpUi", "_projectileRoot", "_scoreLabel")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22avs"]
+bg_color = Color(1, 1, 1, 0.121569)
+
+[node name="GameSession" type="Node" node_paths=PackedStringArray("_playerBrain", "_playerHero", "_stageArea", "_chipFactory", "_enemyFactory", "_powerUpUi", "_projectileRoot", "_scoreLabel", "_gameProgressBar")]
 process_mode = 1
 script = ExtResource("1_3vmkm")
 _gameMusic = ExtResource("2_4rfsh")
@@ -52,6 +59,7 @@ _powerUpUi = NodePath("LevelUpUI")
 _projectileRoot = NodePath("Projectiles")
 _powerUpService = ExtResource("2_qh4ok")
 _scoreLabel = NodePath("ScoreLabel")
+_gameProgressBar = NodePath("ProgressBar")
 
 [node name="StageArea" type="Area2D" parent="."]
 visible = false
@@ -88,7 +96,7 @@ script = ExtResource("3_hejmq")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
-_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77"), ExtResource("10_p2h8g")])
+_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77"), ExtResource("10_p2h8g"), ExtResource("11_slupl"), ExtResource("12_kw3ym"), ExtResource("13_75efb")])
 _stageArea = NodePath("../StageArea")
 _chipFactory = NodePath("../Chips")
 
@@ -126,3 +134,18 @@ label_settings = SubResource("LabelSettings_b4n51")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("17_tum1e")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_22avs")
+max_value = 1.0
+step = 2.08165e-12
+show_percentage = false
+script = ExtResource("18_nnnvf")

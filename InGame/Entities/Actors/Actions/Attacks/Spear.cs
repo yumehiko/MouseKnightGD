@@ -19,6 +19,7 @@ namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
 public partial class Spear : AttackBase
 {
 	[Export] private Area2D _findArea;
+	[Export] private AudioStreamPlayer2D _attackSound;
 	[Export] private Node2D _bladePivot;
 	[Export] private Node2D _visualPivot;
 	[Export] private PackedScene _bladePrefab;
@@ -64,6 +65,7 @@ public partial class Spear : AttackBase
 	private void Attack()
 	{
 		if (_timer.InCooldown.Value) return;
+		_attackSound.Play();
 		_isAttackTriggered = true;
 	}
 

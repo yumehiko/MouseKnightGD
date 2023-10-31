@@ -27,8 +27,8 @@ public partial class AppSession : Node
 
 	public override void _ExitTree()
 	{
-		base._ExitTree();
 		_cts?.Cancel();
+		base._ExitTree();
 	}
 
 	private async GDTask Begin()
@@ -43,7 +43,8 @@ public partial class AppSession : Node
 				return;
 			}
 			var gameResult = await CallGame(_cts.Token);
-			GD.Print(gameResult.Score);
+			var saveData = new UserSaveData();
+			saveData.WriteHighScore(gameResult.Score);
 		}
 	}
 
