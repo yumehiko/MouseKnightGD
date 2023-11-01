@@ -1,6 +1,6 @@
 using Godot;
 
-namespace MouseKnightGD.InGame.Entities.Enemies;
+namespace photon.InGame.Entities.Enemies;
 
 public partial class EnemyPack : Resource
 {

@@ -1,4 +1,4 @@
-namespace MouseKnightGD.Core;
+namespace photon.Core;
 
 public enum Direction
 {

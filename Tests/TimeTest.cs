@@ -1,9 +1,9 @@
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.Core;
+using photon.Core;
 
-namespace MouseKnightGD.Tests;
+namespace photon.Tests;
 
 public partial class TimeTest : Node2D
 {

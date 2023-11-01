@@ -1,9 +1,7 @@
 using System.Threading;
-using Fractural.Tasks;
-using MouseKnightGD.InGame.Entities.Chips;
-using MouseKnightGD.InGame.Entities.Enemies;
+using photon.InGame.Entities.Enemies;
 
-namespace MouseKnightGD.InGame;
+namespace photon.InGame;
 
 /// <summary>
 /// Bore値を状況に応じて増減させ、難易度を調節する。

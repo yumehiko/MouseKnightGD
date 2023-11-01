@@ -3,7 +3,7 @@ using System.Threading;
 using Fractural.Tasks;
 using Godot;
 
-namespace MouseKnightGD.App;
+namespace photon.App;
 
 /// <summary>
 /// 画面全体を覆うカーテン。

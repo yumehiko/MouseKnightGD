@@ -2,10 +2,10 @@ using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Heroes;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame;
+namespace photon.InGame;
 
 public partial class ScoreLabel : Label
 {

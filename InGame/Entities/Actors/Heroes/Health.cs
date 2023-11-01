@@ -4,9 +4,8 @@ using System.Reactive.Subjects;
 using System.Threading;
 using Fractural.Tasks;
 using Reactive.Bindings;
-using Reactive.Bindings.TinyLinq;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
+namespace photon.InGame.Entities.Actors.Heroes;
 
 public class Health : IDisposable
 {

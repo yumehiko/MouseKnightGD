@@ -5,10 +5,10 @@ using System.Reactive.Linq;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Heroes;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 public partial class Rifle : AttackBase
 {

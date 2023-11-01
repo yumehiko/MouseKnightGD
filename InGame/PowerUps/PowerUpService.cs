@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fractural.Tasks;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading;
+using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.App;
-using MouseKnightGD.Core;
+using photon.Core;
+using photon.InGame.Entities.Actors.Heroes;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame.PowerUps;
+namespace photon.InGame.PowerUps;
 
 public partial class PowerUpService : Resource
 {

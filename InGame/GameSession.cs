@@ -1,20 +1,18 @@
 using System;
 using System.Reactive.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.App;
-using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
-using MouseKnightGD.InGame.Entities.Actors.Brains;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
-using MouseKnightGD.InGame.Entities.Chips;
-using MouseKnightGD.InGame.Entities.Enemies;
-using MouseKnightGD.InGame.PowerUps;
+using photon.App;
+using photon.InGame.Entities.Actors.Brains;
+using photon.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Chips;
+using photon.InGame.Entities.Enemies;
+using photon.InGame.PowerUps;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame;
+namespace photon.InGame;
 
 public partial class GameSession : Node
 {

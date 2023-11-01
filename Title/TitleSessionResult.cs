@@ -1,4 +1,4 @@
-namespace MouseKnightGD.Title;
+namespace photon.Title;
 
 public class TitleSessionResult
 {

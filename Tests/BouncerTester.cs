@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Enemies;
+using photon.InGame.Entities.Enemies;
 
-namespace MouseKnightGD.Tests;
+namespace photon.Tests;
 
 public partial class BouncerTester : Node
 {

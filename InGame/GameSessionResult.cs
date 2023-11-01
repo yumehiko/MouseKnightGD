@@ -1,4 +1,4 @@
-namespace MouseKnightGD.InGame;
+namespace photon.InGame;
 
 public class GameSessionResult
 {

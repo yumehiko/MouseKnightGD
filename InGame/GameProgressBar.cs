@@ -1,9 +1,9 @@
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.Core;
+using photon.Core;
 
-namespace MouseKnightGD.InGame;
+namespace photon.InGame;
 
 public partial class GameProgressBar : ProgressBar
 {

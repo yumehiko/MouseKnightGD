@@ -1,6 +1,6 @@
 using Godot;
 
-namespace MouseKnightGD.App;
+namespace photon.App;
 
 public partial class LoadableSession : Resource
 {

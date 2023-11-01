@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Reactive;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+using photon.InGame.Entities.Actors.Actions.Attacks;
 using Reactive.Bindings;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
+namespace photon.InGame.Entities.Actors.Heroes;
 
 public class WeaponHand
 {

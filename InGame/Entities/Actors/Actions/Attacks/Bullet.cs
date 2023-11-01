@@ -1,7 +1,7 @@
 using Godot;
-using MouseKnightGD.InGame.Entities.Enemies;
+using photon.InGame.Entities.Enemies;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 public partial class Bullet : RigidBody2D
 {

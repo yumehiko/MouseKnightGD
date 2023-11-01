@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
-using MouseKnightGD.InGame.Entities.Chips;
+using photon.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Chips;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame.Entities.Enemies;
+namespace photon.InGame.Entities.Enemies;
 
 public partial class EnemyFactory : Node
 {

@@ -1,8 +1,8 @@
 using System;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Heroes;
 
-namespace MouseKnightGD.InGame;
+namespace photon.InGame;
 
 /// <summary>
 /// このステージを表すエリア。

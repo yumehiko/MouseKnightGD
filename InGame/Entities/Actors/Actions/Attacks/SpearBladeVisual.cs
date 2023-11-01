@@ -1,6 +1,6 @@
 using Godot;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 public partial class SpearBladeVisual : Sprite2D
 {

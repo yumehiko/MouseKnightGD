@@ -1,10 +1,9 @@
 using System;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using Godot;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
+namespace photon.InGame.Entities.Actors.Heroes;
 
 public partial class HeroVisual : Sprite2D
 {

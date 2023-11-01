@@ -4,11 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.App;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.Title;
+namespace photon.Title;
 
 /// <summary>
 /// タイトル画面のセッション。

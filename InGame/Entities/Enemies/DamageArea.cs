@@ -1,10 +1,9 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
 
-namespace MouseKnightGD.InGame.Entities.Enemies;
+namespace photon.InGame.Entities.Enemies;
 
 public partial class DamageArea : Area2D
 {

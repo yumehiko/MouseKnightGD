@@ -1,7 +1,7 @@
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Heroes;
 
-namespace MouseKnightGD.InGame.Entities.Enemies;
+namespace photon.InGame.Entities.Enemies;
 
 public interface IEnemy : IEntity, IDamageable, IDieable, IRemovable
 {

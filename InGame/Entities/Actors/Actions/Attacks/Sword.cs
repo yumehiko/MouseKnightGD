@@ -4,12 +4,12 @@ using System.Reactive.Disposables;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
-using MouseKnightGD.InGame.Entities.Enemies;
+using photon.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Enemies;
 using Reactive.Bindings.Extensions;
 using Reactive.Bindings.TinyLinq;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 /// <summary>
 /// スラッシュ。

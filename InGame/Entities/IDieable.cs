@@ -1,7 +1,7 @@
 using System;
 using System.Reactive;
 
-namespace MouseKnightGD.InGame.Entities;
+namespace photon.InGame.Entities;
 
 public interface IDieable
 {

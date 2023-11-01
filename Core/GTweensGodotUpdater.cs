@@ -1,7 +1,7 @@
 using Godot;
 using GTweensGodot.Contexts;
 
-namespace MouseKnightGD.Core;
+namespace photon.Core;
 
 public partial class GTweensGodotUpdater : Node
 {

@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Subjects;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
-using MouseKnightGD.InGame.Entities.Actors.Brains;
-using MouseKnightGD.InGame.Entities.Chips;
+using photon.InGame.Entities.Actors.Brains;
 using Reactive.Bindings;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
+namespace photon.InGame.Entities.Actors.Heroes;
 
 /// <summary>
 /// ヒーロー。このゲームにおけるプレイヤーキャラクター。

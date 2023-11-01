@@ -1,7 +1,7 @@
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Heroes;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 public abstract partial class AttackBase : Node2D
 {

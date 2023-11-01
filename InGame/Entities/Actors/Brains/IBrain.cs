@@ -1,9 +1,7 @@
-using System;
-using System.Reactive;
 using Godot;
 using Reactive.Bindings;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Brains;
+namespace photon.InGame.Entities.Actors.Brains;
 
 public interface IBrain
 {

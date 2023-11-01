@@ -1,10 +1,7 @@
-using System;
-using System.Reactive;
-using System.Reactive.Linq;
 using Godot;
 using Reactive.Bindings;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Brains;
+namespace photon.InGame.Entities.Actors.Brains;
 
 /// <summary>
 /// プレイヤーの入力を管理するクラス

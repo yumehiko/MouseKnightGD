@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Heroes;
 
-namespace MouseKnightGD.InGame.Entities.Enemies;
+namespace photon.InGame.Entities.Enemies;
 
 public partial class WallCaller : EnemyBase
 {

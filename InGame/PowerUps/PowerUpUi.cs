@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.Core;
+using photon.Core;
 
-namespace MouseKnightGD.InGame.PowerUps;
+namespace photon.InGame.PowerUps;
 public partial class PowerUpUi : Control
 {
 	[Export] private PowerUpUiButton[] _powerUpUiButtons;

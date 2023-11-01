@@ -2,7 +2,7 @@ using System.Threading;
 using Fractural.Tasks;
 using Godot;
 
-namespace MouseKnightGD.Core;
+namespace photon.Core;
 
 public static class TweenExtensions
 {

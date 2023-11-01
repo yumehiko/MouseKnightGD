@@ -2,10 +2,10 @@ using System;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using MouseKnightGD.InGame;
-using MouseKnightGD.Title;
+using photon.InGame;
+using photon.Title;
 
-namespace MouseKnightGD.App;
+namespace photon.App;
 
 /// <summary>
 /// このアプリの実行セッション。

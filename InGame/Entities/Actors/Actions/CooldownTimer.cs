@@ -1,13 +1,9 @@
 using System;
-using System.Reactive;
-using System.Reactive.Subjects;
 using System.Threading;
-using System.Threading.Tasks;
 using Fractural.Tasks;
-using Godot;
 using Reactive.Bindings;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions;
+namespace photon.InGame.Entities.Actors.Actions;
 
 /// <summary>
 /// クールダウン処理のためのタイマー。

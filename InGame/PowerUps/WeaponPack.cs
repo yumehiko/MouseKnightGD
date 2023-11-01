@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Godot;
-using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Actions.Attacks;
+using photon.InGame.Entities.Actors.Heroes;
 
-namespace MouseKnightGD.InGame.PowerUps;
+namespace photon.InGame.PowerUps;
 
 public partial class WeaponPack : PowerUpBase
 {

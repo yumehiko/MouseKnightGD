@@ -1,9 +1,7 @@
 using Godot;
-using System.Collections.Generic;
-using MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
-using MouseKnightGD.InGame.Entities.Actors.Heroes;
+using photon.InGame.Entities.Actors.Actions.Attacks;
 
-namespace MouseKnightGD.InGame.PowerUps;
+namespace photon.InGame.PowerUps;
 
 public abstract partial class PowerUpStats : PowerUpBase
 {

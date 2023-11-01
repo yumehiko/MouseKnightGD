@@ -1,12 +1,10 @@
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using GTweens;
-using GTweensGodot.Contexts;
 using GTweens.Easings;
 using GTweensGodot.Extensions;
 
-namespace MouseKnightGD.App;
+namespace photon.App;
 
 public partial class MusicPlayer : AudioStreamPlayer2D
 {

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace MouseKnightGD.InGame.Entities;
+namespace photon.InGame.Entities;
 
 public interface IEntity
 {

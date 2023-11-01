@@ -1,8 +1,8 @@
 using System.Linq;
 using Godot;
-using MouseKnightGD.InGame.Entities.Enemies;
+using photon.InGame.Entities.Enemies;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Actions.Attacks;
+namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 /// <summary>
 /// スピアの刃部分。攻撃回数分だけ生成される。

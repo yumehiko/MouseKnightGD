@@ -1,6 +1,6 @@
 using Godot;
 
-namespace MouseKnightGD.InGame.Entities.Chips;
+namespace photon.InGame.Entities.Chips;
 
 public partial class Chip : RigidBody2D
 {

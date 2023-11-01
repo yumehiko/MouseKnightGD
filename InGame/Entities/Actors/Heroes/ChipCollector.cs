@@ -2,11 +2,10 @@ using System;
 using System.Reactive;
 using System.Reactive.Subjects;
 using Godot;
-using MouseKnightGD.InGame.Entities.Chips;
+using photon.InGame.Entities.Chips;
 using Reactive.Bindings;
-using Reactive.Bindings.TinyLinq;
 
-namespace MouseKnightGD.InGame.Entities.Actors.Heroes;
+namespace photon.InGame.Entities.Actors.Heroes;
 
 public partial class ChipCollector : Area2D
 {

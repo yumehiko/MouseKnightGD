@@ -1,7 +1,7 @@
 using Godot;
-using MouseKnightGD.InGame;
+using photon.InGame;
 
-namespace MouseKnightGD.Title;
+namespace photon.Title;
 
 public partial class HighScoreLabel : Label
 {

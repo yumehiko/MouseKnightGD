@@ -2,11 +2,10 @@ using System;
 using System.Reactive;
 using System.Reactive.Subjects;
 using System.Threading;
-using System.Threading.Tasks;
 using Fractural.Tasks;
 using Godot;
 
-namespace MouseKnightGD.Title;
+namespace photon.Title;
 
 /// <summary>
 /// マウスオーバーし続けたら、ゲームを終了する。

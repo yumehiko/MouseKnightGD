@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MouseKnightGD.Core;
+namespace photon.Core;
 
 public static class ListExtensions
 {
