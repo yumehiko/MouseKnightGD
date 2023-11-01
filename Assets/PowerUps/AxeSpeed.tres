@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c2tdrscbth5i0"]
+
+[ext_resource type="Texture2D" uid="uid://yxar26hfijjf" path="res://Assets/Sprites/UI/PuAxeSpeed.png" id="1_oqau1"]
+[ext_resource type="Script" path="res://InGame/PowerUps/PuAxeChargeDuration.cs" id="2_g7c1c"]
+
+[resource]
+script = ExtResource("2_g7c1c")
+NextPowerUps = null
+_describe = ExtResource("1_oqau1")

@@ -13,7 +13,7 @@
 [ext_resource type="Resource" uid="uid://cb22whgoy001s" path="res://Assets/Prefabs/Enemies/stalker_pack.tres" id="10_p2h8g"]
 [ext_resource type="Resource" uid="uid://chdvja1kisnnk" path="res://Assets/Prefabs/Enemies/stalkerV2_pack.tres" id="11_slupl"]
 [ext_resource type="Resource" uid="uid://g5da5uxipkgd" path="res://Assets/Prefabs/Enemies/tankV2_pack.tres" id="12_kw3ym"]
-[ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/chip.tscn" id="12_simin"]
+[ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/Chip.tscn" id="12_simin"]
 [ext_resource type="Resource" uid="uid://c1d6ije0yceq6" path="res://Assets/Prefabs/Enemies/wallCaller_Pack.tres" id="13_75efb"]
 [ext_resource type="FontFile" uid="uid://dfw5yuakxjmdf" path="res://Assets/Miscs/Fonts/GlacialIndifference-Regular.ttf" id="16_45lcs"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]

@@ -7,7 +7,7 @@ using System.Reactive.Subjects;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using photon.Core;
+using Godot.Extensions;
 using photon.InGame.Entities.Actors.Heroes;
 using Reactive.Bindings.Extensions;
 

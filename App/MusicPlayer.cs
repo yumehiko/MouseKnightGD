@@ -1,13 +1,14 @@
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using GTweens.Easings;
-using GTweensGodot.Extensions;
+using Godot.Extensions;
 
 namespace photon.App;
 
 public partial class MusicPlayer : AudioStreamPlayer2D
 {
+    private Tween _volumeTween;
+    
     public void SetMusic(AudioStream music, float volume = 0.0f)
     {
         Stop();
@@ -15,18 +16,25 @@ public partial class MusicPlayer : AudioStreamPlayer2D
         Stream = music;
         Play();
     }
+    
     public async GDTask Fadein(float fadeTime, CancellationToken ct)
     {
-        await this.TweenVolumeDb(0.0f, fadeTime)
-            .SetEasing(Easing.OutQuad)
-            .PlayAsync(ct);
+        _volumeTween?.Kill();
+        _volumeTween = CreateTween();
+        _volumeTween.TweenProperty(this, "volume_db", 0.0f, fadeTime)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+        await _volumeTween.PlayAsync(ct);
     }
     
     public async GDTask Fadeout(float fadeTime, CancellationToken ct)
     {
-        await this.TweenVolumeDb(-80.0f, fadeTime)
-            .SetEasing(Easing.OutQuad)
-            .PlayAsync(ct);
+        _volumeTween?.Kill();
+        _volumeTween = CreateTween();
+        _volumeTween.TweenProperty(this, "volume_db", -80.0f, fadeTime)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+        await _volumeTween.PlayAsync(ct);
         Stop();
     }
 }

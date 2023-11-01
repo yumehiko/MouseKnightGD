@@ -113,7 +113,6 @@ public partial class Rifle : AttackBase
 	{
 		const float baseMaxCooldown = 1.5f;
 		const float reductionMaxCooldownRate = 1.2f;
-		_accelerateFirePowerCount++;
 		var logicalMaxCooldown = baseMaxCooldown / Mathf.Pow(reductionMaxCooldownRate, _accelerateFirePowerCount);
 		_coolTimeMax = Mathf.Max(_coolTimeMin, logicalMaxCooldown);
 	}
@@ -121,7 +120,7 @@ public partial class Rifle : AttackBase
 	public void IncreaseFireRate()
 	{
 		const float baseMinCooldown = 0.5f;
-		const float reduceRatio = 0.11f;
+		const float reduceRatio = 0.1125f;
 		_increaseFireRatePowerCount++;
 		_coolTimeMin = baseMinCooldown * (1.0f / (1.0f + _increaseFireRatePowerCount * reduceRatio));
 		ReCalculateMaxCoolTime();

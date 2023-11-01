@@ -1,9 +1,9 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://dyivitjys4pjs"]
 
-[ext_resource type="Script" path="res://InGame/PowerUps/PuRifleCd.cs" id="1_jvt8a"]
+[ext_resource type="Script" path="res://InGame/PowerUps/PuRifleRapid.cs" id="1_77lra"]
 [ext_resource type="Texture2D" uid="uid://cmkklxhkv7u5s" path="res://Assets/Sprites/UI/PuRifleRapid.png" id="1_k0ep2"]
 
 [resource]
-script = ExtResource("1_jvt8a")
+script = ExtResource("1_77lra")
 NextPowerUps = null
 _describe = ExtResource("1_k0ep2")

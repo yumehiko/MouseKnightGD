@@ -47,6 +47,8 @@ public partial class Sword : AttackBase
 
 	public override void _ExitTree()
 	{
+		_cts?.Cancel();
+		_cts?.Dispose();
 		_disposable?.Dispose();
 		base._ExitTree();
 	}

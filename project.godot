@@ -19,13 +19,13 @@ config/icon="res://Assets/Icons/512x@1x.png"
 
 [autoload]
 
-GTweensGodotUpdater="*res://Core/GTweensGodotUpdater.cs"
 GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload.cs"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="viewport"

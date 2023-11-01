@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://biijbefq5rvff"]
+
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Axe.cs" id="1_0ciwv"]
+[ext_resource type="Texture2D" uid="uid://c7r633irf2j3a" path="res://Assets/Sprites/Circle1000.svg" id="1_vykmr"]
+[ext_resource type="AudioStream" uid="uid://521apwsme7vs" path="res://Assets/Audios/SE/WpSlash.ogg" id="4_onfnp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gknf8"]
+radius = 500.0
+
+[node name="Axe" type="Node2D" node_paths=PackedStringArray("_slashArea", "_slashSprite", "_slashSound")]
+script = ExtResource("1_0ciwv")
+_slashArea = NodePath("Area2D")
+_slashSprite = NodePath("Area2D/SlashSprite")
+_slashColor = Color(0.6, 0.88, 1, 0.87451)
+_slashSound = NodePath("SePlayer")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 0
+collision_mask = 2
+
+[node name="ChargeSprite" type="Sprite2D" parent="Area2D"]
+modulate = Color(0.027451, 0.027451, 0.027451, 0.498039)
+texture = ExtResource("1_vykmr")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="SlashSprite" type="Sprite2D" parent="Area2D"]
+modulate = Color(0.701961, 0.909804, 1, 0)
+texture = ExtResource("1_vykmr")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_gknf8")
+
+[node name="SePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_onfnp")
+max_polyphony = 4

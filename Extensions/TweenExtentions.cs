@@ -2,7 +2,7 @@ using System.Threading;
 using Fractural.Tasks;
 using Godot;
 
-namespace photon.Core;
+namespace Godot.Extensions;
 
 public static class TweenExtensions
 {

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://bmvh0muh7ruty"]
+
+[ext_resource type="Resource" uid="uid://byjbshhjar7bt" path="res://Assets/PowerUps/AxeCharge.tres" id="1_6im7g"]
+[ext_resource type="Resource" uid="uid://n2kbe51vxi54" path="res://Assets/PowerUps/AxeDamage.tres" id="2_afrbp"]
+[ext_resource type="Resource" uid="uid://c2tdrscbth5i0" path="res://Assets/PowerUps/AxeSpeed.tres" id="3_jmfca"]
+[ext_resource type="PackedScene" uid="uid://biijbefq5rvff" path="res://Assets/Weapons/InGameInstances/axe.tscn" id="4_pec5v"]
+[ext_resource type="Texture2D" uid="uid://xrnekxf1c4jr" path="res://Assets/Sprites/UI/WpAxe.png" id="5_82f75"]
+[ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="6_l5nov"]
+
+[resource]
+script = ExtResource("6_l5nov")
+_attackPrefab = ExtResource("4_pec5v")
+NextPowerUps = Array[Resource]([ExtResource("1_6im7g"), ExtResource("2_afrbp"), ExtResource("3_jmfca")])
+_describe = ExtResource("5_82f75")

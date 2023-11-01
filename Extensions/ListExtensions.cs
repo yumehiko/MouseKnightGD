@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace photon.Core;
+// ReSharper disable once CheckNamespace
+namespace Godot.Extensions;
 
 public static class ListExtensions
 {

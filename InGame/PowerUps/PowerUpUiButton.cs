@@ -1,7 +1,7 @@
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
-using photon.Core;
+using Godot.Extensions;
 
 namespace photon.InGame.PowerUps;
 

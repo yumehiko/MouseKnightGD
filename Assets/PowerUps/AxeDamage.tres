@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://n2kbe51vxi54"]
+
+[ext_resource type="Texture2D" uid="uid://dwjb5e1da5r06" path="res://Assets/Sprites/UI/PuAxeDamage.png" id="1_me2fx"]
+[ext_resource type="Script" path="res://InGame/PowerUps/PuAxeDamage.cs" id="1_sx2ux"]
+
+[resource]
+script = ExtResource("1_sx2ux")
+NextPowerUps = null
+_describe = ExtResource("1_me2fx")
