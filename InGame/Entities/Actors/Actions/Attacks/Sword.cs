@@ -27,7 +27,7 @@ public partial class Sword : AttackBase
 	private CompositeDisposable _disposable;
 	private bool _isAttackTriggered;
 	private Vector2 _slashPoint;
-	private int _damage = 4;
+	private int _damage = 18;
 	private float _criticalRate;
 	private float _cooldownReductionRateOnCritical;
 	private float _baseCooldown = 1.0f;
@@ -112,7 +112,7 @@ public partial class Sword : AttackBase
 	
 	public void IncreaseDamage()
 	{
-		_damage += 1;
+		_damage += 5;
 	}
 	
 	public void IncreaseCriticalRate()

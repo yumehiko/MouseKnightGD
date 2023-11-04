@@ -85,7 +85,7 @@ public partial class Rifle : AttackBase
 		{
 			var instance = _bulletPack.Instantiate<Bullet>();
 			_projectileRoot.AddChild(instance);
-			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 2);
+			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 6);
 		}
 		_shotSound.Play();
 		_timer.CountAsync(_coolTime, _cts.Token).Forget();

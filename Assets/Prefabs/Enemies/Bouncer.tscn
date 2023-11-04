@@ -23,7 +23,7 @@ angular_damp_mode = 1
 script = ExtResource("1_m7hdq")
 _damageArea = NodePath("DamageArea")
 _visual = NodePath("Visual")
-_maxHp = 2
+_maxHp = 6
 
 [node name="Visual" type="Sprite2D" parent="."]
 material = ExtResource("2_ohv6y")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1pdyhlxqwni"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_7j8d8"]
+[ext_resource type="Script" path="res://InGame/Entities/Chips/Chip.cs" id="2_gduss"]
+[ext_resource type="Texture2D" uid="uid://da6846oy40row" path="res://Assets/Sprites/BiggestChip.png" id="3_0l2n1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjape"]
+radius = 32.0
+
+[node name="BigChip" type="RigidBody2D"]
+collision_layer = 4
+physics_material_override = ExtResource("1_7j8d8")
+gravity_scale = 2.66454e-15
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("2_gduss")
+_value = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_0l2n1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cjape")

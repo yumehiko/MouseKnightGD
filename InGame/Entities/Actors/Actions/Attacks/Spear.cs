@@ -31,7 +31,7 @@ public partial class Spear : AttackBase
 	private int _bloodPowerCount;
 	private float _cooldownTime = 0.8f;
 	private CancellationTokenSource _cts;
-	private int _damage = 2;
+	private int _damage = 7;
 	private CompositeDisposable _disposable;
 	private bool _isAttackTriggered;
 	private int _reduceCooldownPowerCount;

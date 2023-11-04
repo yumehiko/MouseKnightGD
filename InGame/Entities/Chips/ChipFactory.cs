@@ -6,6 +6,7 @@ public partial class ChipFactory : Node
 {
 	[Export] private PackedScene _chipPack;
 	[Export] private PackedScene _bigChipPack;
+	[Export] private PackedScene _biggestChipPack;
 	private StageArea _stageArea;
 	
 	public void Initialize(StageArea stageArea)
@@ -26,13 +27,35 @@ public partial class ChipFactory : Node
 	
 	private void DeferredCreate(Vector2 point, int amount)
 	{
-		for (; amount > 0; amount--)
+		while (amount > 0)
 		{
-			var isBig = amount >= 5;
-			var chip = isBig ? _bigChipPack.Instantiate<Chip>() : _chipPack.Instantiate<Chip>();
-			chip.Awake(point);
-			AddChild(chip);
-			if (isBig) amount -= 4;
+			var cost = CreateChipByAmount(amount, point);
+			amount -= cost;
 		}
+	}
+	
+	private int CreateChipByAmount(int amount, Vector2 point)
+	{
+		var cost = 0;
+		Chip chip = null;
+		switch (amount)
+		{
+			case >= 10:
+				chip = _biggestChipPack.Instantiate<Chip>();
+				cost = 10;
+				break;
+			case >= 5:
+				chip = _bigChipPack.Instantiate<Chip>();
+				cost = 5;
+				break;
+			default:
+				chip = _chipPack.Instantiate<Chip>();
+				cost = 1;
+				break;
+		}
+		
+		chip.Awake(point);
+		AddChild(chip);
+		return cost;
 	}
 }

@@ -31,13 +31,13 @@ public partial class Axe : AttackBase
 	private bool _isCharging;
 	private bool _isMaxCharged;
 	private bool _isSlashing;
-	private int _baseDamage = 12;
+	private int _baseDamage = 48;
 	private int _chargeMaxLevel = 0;
 	private float _maxRadius = 0.128f;
 	private float _baseChargeDuration = 1.0f;
 	private const float DurationRatio = 0.35f;
 	private float _chargeDuration = 1.0f;
-	private float _baseCooldown = 1.5f;
+	private float _baseCooldown = 1.0f;
 	private Tween _chargeTween;
 	private Tween _slashTween;
 
@@ -177,6 +177,6 @@ public partial class Axe : AttackBase
 	
 	public void IncreaseDamage()
 	{
-		_baseDamage += 4;
+		_baseDamage += 16;
 	}
 }

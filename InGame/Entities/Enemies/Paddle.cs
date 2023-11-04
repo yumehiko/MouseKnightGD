@@ -6,19 +6,20 @@ using photon.InGame.Entities.Actors.Heroes;
 
 namespace photon.InGame.Entities.Enemies;
 
-public partial class WallCaller : EnemyBase
+public partial class Paddle : EnemyBase
 {
-	
 	[Export] private DamageArea _damageArea;
 	private readonly Random _random = new Random();
 	private CancellationTokenSource _cts;
 	public override void Initialize(Vector2 spawnPosition, Hero player)
 	{
+		IsBulletProof = true;
 		base.Initialize(spawnPosition, player);
-		Rotation = (float)_random.NextDouble() * Mathf.Pi;
 		_damageArea.BodyEntered += GiveDamage;
 		_cts = new CancellationTokenSource();
-		DamageActionLoop(_cts.Token).Forget();
+		var y = _random.Next(0, 2) == 0 ? 100 : -100;
+		LinearVelocity = new Vector2(0, y);
+		EnterDamageMode(_cts.Token).Forget();
 	}
 
 	public override void _ExitTree()
@@ -29,21 +30,9 @@ public partial class WallCaller : EnemyBase
 		_cts?.Dispose();
 	}
 
-	private async GDTask DamageActionLoop(CancellationToken ct)
+	private async GDTask EnterDamageMode(CancellationToken ct)
 	{
-		while (!ct.IsCancellationRequested)
-		{
-			await GDTask.Delay(TimeSpan.FromSeconds(2.0f), cancellationToken: ct);
-			if (ct.IsCancellationRequested) return;
-			await DamageAction(ct);
-		}
-	}
-
-	private async GDTask DamageAction(CancellationToken ct)
-	{
-		await _damageArea.Alert(0.75f, ct);
 		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: ct);
-		await _damageArea.FadeOut(0.5f, ct);
-		_damageArea.ExpandMul(1.5f);
+		await _damageArea.Alert(1.0f, ct);
 	}
 }

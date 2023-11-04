@@ -1,37 +1,39 @@
 [gd_scene load_steps=10 format=3 uid="uid://co5nha1ab7dpl"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_ga201"]
-[ext_resource type="Script" path="res://InGame/Entities/Enemies/Bouncer.cs" id="2_517sh"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/Paddle.cs" id="2_ce27o"]
 [ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="3_0myee"]
-[ext_resource type="Texture2D" uid="uid://cywix5vgwgln5" path="res://Assets/Sprites/Enemies/Bouncer.png" id="4_hxcg4"]
+[ext_resource type="Texture2D" uid="uid://b8ie2fiiduwi0" path="res://Assets/Sprites/Enemies/Paddle.png" id="4_1xe78"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyVisual.cs" id="5_5loxa"]
 [ext_resource type="Script" path="res://InGame/Entities/Enemies/DamageArea.cs" id="6_yu7rv"]
-[ext_resource type="Texture2D" uid="uid://bfgb1si0467gb" path="res://Assets/Sprites/Circle100.svg" id="7_i3f5j"]
+[ext_resource type="Texture2D" uid="uid://byw3trf0k8887" path="res://Assets/Sprites/Enemies/PaddleDamageArea.png" id="7_y4nif"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6mohr"]
-radius = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rxdq"]
+size = Vector2(16, 192)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cenc1"]
-radius = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bheuk"]
+size = Vector2(16, 192)
 
-[node name="Bouncer" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
-collision_layer = 2
+[node name="Paddle" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
+collision_layer = 130
 physics_material_override = ExtResource("1_ga201")
 gravity_scale = 2.66454e-15
+lock_rotation = true
 linear_damp_mode = 1
 angular_damp_mode = 1
-script = ExtResource("2_517sh")
+script = ExtResource("2_ce27o")
 _damageArea = NodePath("DamageArea")
 _visual = NodePath("Visual")
-_maxHp = 2
+_maxHp = 90
 
 [node name="Visual" type="Sprite2D" parent="."]
 material = ExtResource("3_0myee")
-texture = ExtResource("4_hxcg4")
+texture = ExtResource("4_1xe78")
 script = ExtResource("5_5loxa")
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6mohr")
+visible = false
+shape = SubResource("RectangleShape2D_3rxdq")
 
 [node name="DamageArea" type="Area2D" parent="." node_paths=PackedStringArray("_sprite2D", "_damageShape2D")]
 collision_layer = 4
@@ -42,9 +44,9 @@ _damageShape2D = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="DamageArea"]
 modulate = Color(0.901961, 0, 0.223529, 0)
-scale = Vector2(0.32, 0.32)
-texture = ExtResource("7_i3f5j")
+texture = ExtResource("7_y4nif")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
-shape = SubResource("CircleShape2D_cenc1")
+visible = false
+shape = SubResource("RectangleShape2D_bheuk")
 disabled = true

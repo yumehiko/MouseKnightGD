@@ -25,9 +25,9 @@ public partial class Laser : AttackBase
 	private CooldownTimer _timer;
 	private bool _isCharging;
 	private bool _isFiring;
-	private int _damage = 8;
+	private int _damage = 32;
 	private int _chargeCount = 0;
-	private float _chargeSpan = 0.5f;
+	private float _chargeSpan = 0.3f;
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -40,10 +40,10 @@ public partial class Laser : AttackBase
 	{
 		_weaponHand = weaponHand;
 		_barrels = new List<LaserBarrel>();
-		AddBarrel();
 		_cts = new CancellationTokenSource();
 		_disposable = new CompositeDisposable();
 		_timer = new CooldownTimer();
+		AddBarrel();
 		
 		_timer.InCooldown
 			.Where(_ => !weaponHand.IsDead)
@@ -113,6 +113,7 @@ public partial class Laser : AttackBase
 		var barrel = _barrelPack.Instantiate<LaserBarrel>();
 		_pivot.AddChild(barrel);
 		barrel.Initialize(_weaponHand);
+		barrel.SetCooldownColor(_timer.InCooldown.Value);
 		_barrels.Add(barrel);
 	}
 

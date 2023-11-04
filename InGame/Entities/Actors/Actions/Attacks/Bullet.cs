@@ -26,7 +26,22 @@ public partial class Bullet : RigidBody2D
 	{
 		if (body is EnemyBase enemy)
 		{
-			enemy.TakeDamage(_damage);
+			var isBulletProof = enemy.IsBulletProof;
+			var damage = isBulletProof ? 1 : _damage;
+			enemy.TakeDamage(damage);
+			
+			// この時点でダメージが最低値なら、削除。
+			if (_damage <= 1)
+			{
+				QueueFree();
+				return;
+			}
+			
+			// 反射後のダメージは1固定
+			_damage = 1;
+			
+			// 相手が防弾なら、自分は消えない
+			if (isBulletProof) return;
 		}
 
 		QueueFree();

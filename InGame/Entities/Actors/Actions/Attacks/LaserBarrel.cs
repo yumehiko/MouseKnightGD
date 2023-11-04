@@ -56,7 +56,7 @@ public partial class LaserBarrel : Node2D
 		// 範囲内の敵にダメージを与える
 		var bodies = _damageArea.GetOverlappingBodies();
 		var enemies = bodies.OfType<IEnemy>();
-		var damage = baseDamage + chargeCount * 2;
+		var damage = baseDamage + chargeCount * 8;
 		foreach (var enemy in enemies)
 		{
 			enemy.TakeDamage(damage);

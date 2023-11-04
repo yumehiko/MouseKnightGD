@@ -13,6 +13,7 @@ radius = 20.0
 
 [node name="Stalker" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
 collision_layer = 2
+collision_mask = 0
 physics_material_override = ExtResource("1_t8efh")
 gravity_scale = 2.66454e-15
 linear_damp_mode = 1
@@ -20,7 +21,7 @@ angular_damp_mode = 1
 script = ExtResource("2_u71b4")
 _damageArea = NodePath("DamageArea")
 _visual = NodePath("Visual")
-_maxHp = 5
+_maxHp = 20
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(2.08165e-12, -24, 52, 2.08165e-12, 2.08165e-12, 24, -18, 2.08165e-12)

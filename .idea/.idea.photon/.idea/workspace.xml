@@ -5,45 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="630d577d-b0d8-4381-afb1-535a30f94a1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/ColorPallete.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/AxeGuide.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Laser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/LaserBarrel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/LaserGuide.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/RifleGuide.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/WeaponGuideSprite.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/HealthGuide.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/IWeaponHand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuLaserAccel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuLaserAdd.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/WeaponTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Enemies/Paddle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.photon/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photon/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PowerUps/PowerUpService.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PowerUps/PowerUpService.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Chip.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Chip.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/InGame/hero.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/InGame/hero.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Bouncer.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Bouncer.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Paddle.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Paddle.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/stalker.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/stalker.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/stalkerV2.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/stalkerV2.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/tank.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/tank.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/tankV2.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/tankV2.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/wallCaller.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/wallCaller.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/bullet.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/bullet.tscn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/game_session.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/game_session.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Attacks/Spear.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Attacks/Spear.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Attacks/Sword.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Attacks/Sword.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/UI/PuRifleBarrel.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/UI/PuRifleBarrel.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/UI/UI.ai" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/UI/UI.ai" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Visuals.ai" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Visuals.ai" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/axe.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/axe.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/rifle.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/rifle.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/spear.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/spear.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/sword.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/sword.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/AttackBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/AttackBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Axe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Axe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Laser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Laser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/LaserBarrel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/LaserBarrel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Rifle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Rifle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Spear.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Spear.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Sword.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Sword.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/HeroVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/HeroVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/WeaponHand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/WeaponHand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/Entities/Chips/Chip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Chips/Chip.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Chips/ChipFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Chips/ChipFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/GameSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/GameSession.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/PowerUps/PowerUpService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/PowerUps/PowerUpService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/_TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photon.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/photon.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Enemies/EnemyBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Enemies/EnemyBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Enemies/WallCaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Enemies/WallCaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +120,7 @@
       <workItem from="1698806455668" duration="278000" />
       <workItem from="1698806744121" duration="629000" />
       <workItem from="1698844841866" duration="9290000" />
-      <workItem from="1698987684583" duration="31787000" />
+      <workItem from="1698987684583" duration="36315000" />
     </task>
     <servers />
   </component>

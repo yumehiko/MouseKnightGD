@@ -18,6 +18,7 @@ public abstract partial class EnemyBase : RigidBody2D, IEnemy
 	public IObservable<Unit> OnDeath => _onDead;
 	public IObservable<Unit> OnRemove => _onRemove;
 	public int Fun { get; set; }
+	public bool IsBulletProof { get; protected set; }
 
 	public virtual void Initialize(Vector2 spawnPosition, Hero player)
 	{

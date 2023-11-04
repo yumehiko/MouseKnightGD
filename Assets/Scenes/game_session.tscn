@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=31 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="2_4rfsh"]
@@ -15,12 +15,14 @@
 [ext_resource type="Resource" uid="uid://g5da5uxipkgd" path="res://Assets/Prefabs/Enemies/tankV2_pack.tres" id="12_kw3ym"]
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/Chip.tscn" id="12_simin"]
 [ext_resource type="Resource" uid="uid://c1d6ije0yceq6" path="res://Assets/Prefabs/Enemies/wallCaller_Pack.tres" id="13_75efb"]
+[ext_resource type="Resource" uid="uid://btoufpnadlt8b" path="res://Assets/Prefabs/Enemies/paddle_pack.tres" id="14_ivrq7"]
 [ext_resource type="FontFile" uid="uid://dfw5yuakxjmdf" path="res://Assets/Miscs/Fonts/GlacialIndifference-Regular.ttf" id="16_45lcs"]
 [ext_resource type="PackedScene" uid="uid://dx78bix7rggrm" path="res://Assets/Prefabs/BigChip.tscn" id="16_sdpk5"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
 [ext_resource type="Script" path="res://InGame/ScoreLabel.cs" id="17_tum1e"]
 [ext_resource type="Script" path="res://InGame/GameProgressBar.cs" id="18_nnnvf"]
+[ext_resource type="PackedScene" uid="uid://d1pdyhlxqwni" path="res://Assets/Prefabs/BiggestChip.tscn" id="18_qxsnu"]
 [ext_resource type="PackedScene" uid="uid://c1l5sc6rxl0pu" path="res://Assets/Prefabs/InGame/level_up_ui.tscn" id="20_i10d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvc1j"]
@@ -97,7 +99,7 @@ script = ExtResource("3_hejmq")
 
 [node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("_stageArea", "_chipFactory")]
 script = ExtResource("9_w7yn5")
-_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77"), ExtResource("10_p2h8g"), ExtResource("11_slupl"), ExtResource("12_kw3ym"), ExtResource("13_75efb")])
+_enemyPacks = Array[Resource]([ExtResource("16_vprkf"), ExtResource("7_qkt77"), ExtResource("10_p2h8g"), ExtResource("11_slupl"), ExtResource("12_kw3ym"), ExtResource("13_75efb"), ExtResource("14_ivrq7")])
 _stageArea = NodePath("../StageArea")
 _chipFactory = NodePath("../Chips")
 
@@ -105,6 +107,7 @@ _chipFactory = NodePath("../Chips")
 script = ExtResource("9_ubuin")
 _chipPack = ExtResource("12_simin")
 _bigChipPack = ExtResource("16_sdpk5")
+_biggestChipPack = ExtResource("18_qxsnu")
 
 [node name="Projectiles" type="Node2D" parent="."]
 

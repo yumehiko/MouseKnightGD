@@ -16,6 +16,7 @@ size = Vector2(458, 458)
 
 [node name="Tank" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
 collision_layer = 2
+collision_mask = 0
 mass = 2.0
 physics_material_override = ExtResource("1_1uus8")
 gravity_scale = 2.66454e-15
@@ -25,7 +26,7 @@ angular_damp_mode = 1
 script = ExtResource("2_opp0g")
 _damageArea = NodePath("DamageArea")
 _visual = NodePath("Visual")
-_maxHp = 50
+_maxHp = 200
 
 [node name="Visual" type="Sprite2D" parent="."]
 material = ExtResource("3_kync7")
