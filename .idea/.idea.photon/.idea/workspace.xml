@@ -5,35 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="630d577d-b0d8-4381-afb1-535a30f94a1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Extensions/MathfExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Axe.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuAxeChargeDuration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuAxeChargeLevel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuAxeDamage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/ColorPallete.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/AxeGuide.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Laser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/LaserBarrel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/LaserGuide.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/RifleGuide.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/WeaponGuideSprite.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/HealthGuide.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/IWeaponHand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuLaserAccel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InGame/PowerUps/PuLaserAdd.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/WeaponTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.photon/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photon/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/MusicPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/MusicPlayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PowerUps/PowerUpService.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PowerUps/PowerUpService.tres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PowerUps/RifleRapid.tres" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PowerUps/RifleRapid.tres" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Chip.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Chip.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/InGame/hero.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/InGame/hero.tscn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/game_session.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/game_session.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/UI/PuSwordCd.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/UI/PuSwordCd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/UI/PuSwordCritical.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/UI/PuSwordCritical.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Attacks/Spear.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Attacks/Spear.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Attacks/Sword.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Attacks/Sword.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/UI/PuRifleBarrel.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/UI/PuRifleBarrel.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/UI/UI.ai" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/UI/UI.ai" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Visuals.ai" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Visuals.ai" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/GTweensGodotUpdater.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/ListExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Extensions/ListExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/TweenExtentions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Extensions/TweenExtentions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/axe.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/axe.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/rifle.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/rifle.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/spear.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/spear.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/sword.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weapons/InGameInstances/sword.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/AttackBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/AttackBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Axe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Axe.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Rifle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Rifle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Spear.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Spear.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Sword.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Actions/Attacks/Sword.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/GameProgressBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/GameProgressBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/HeroVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/HeroVisual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/WeaponHand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Actors/Heroes/WeaponHand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Chips/Chip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Chips/Chip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/Entities/Chips/ChipFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/Entities/Chips/ChipFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InGame/GameSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/GameSession.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InGame/PowerUps/PowerUpService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/PowerUps/PowerUpService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/PowerUps/PowerUpUi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/PowerUps/PowerUpUi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/PowerUps/PowerUpUiButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/PowerUps/PowerUpUiButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/PowerUps/PuRifleCd.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/PowerUps/PuRifleCd.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InGame/PowerUps/PuRifleRapid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InGame/PowerUps/PuRifleRapid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/BouncerTester.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/TimeTest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_2d.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/_TODO.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photon.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/photon.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +53,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/813e9d6253504df78079d468eeba6d3b148050/bb/983f322e/ObservableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d39da081b8b5480280262cf89ad679423d1c00/04/06920ae9/Node.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d39da081b8b5480280262cf89ad679423d1c00/0e/0d70e26d/Node2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d39da081b8b5480280262cf89ad679423d1c00/e6/319350cd/Colors.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -123,7 +135,8 @@
       <workItem from="1698806276942" duration="166000" />
       <workItem from="1698806455668" duration="278000" />
       <workItem from="1698806744121" duration="629000" />
-      <workItem from="1698844841866" duration="8576000" />
+      <workItem from="1698844841866" duration="9290000" />
+      <workItem from="1698987684583" duration="31787000" />
     </task>
     <servers />
   </component>

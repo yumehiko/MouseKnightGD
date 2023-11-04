@@ -13,7 +13,4 @@
   <ItemGroup>
     <Content Include="_TODO.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\" />
-  </ItemGroup>
 </Project>

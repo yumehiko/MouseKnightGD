@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Threading;
 using Fractural.Tasks;
 using Godot;
+using photon.Core;
 using photon.InGame.Entities.Actors.Heroes;
 using photon.InGame.Entities.Enemies;
 using Reactive.Bindings.Extensions;
@@ -19,6 +20,7 @@ namespace photon.InGame.Entities.Actors.Actions.Attacks;
 public partial class Spear : AttackBase
 {
 	[Export] private Area2D _findArea;
+	[Export] private WeaponGuideSprite _guide;
 	[Export] private AudioStreamPlayer2D _attackSound;
 	[Export] private Node2D _bladePivot;
 	[Export] private Node2D _visualPivot;
@@ -36,7 +38,7 @@ public partial class Spear : AttackBase
 	private CooldownTimer _timer;
 	private readonly List<SpearBlade> _blades = new List<SpearBlade>();
 
-	public override void Initialize(WeaponHand weaponHand)
+	public override void Initialize(IWeaponHand weaponHand)
 	{
 		_timer = new CooldownTimer();
 		_cts = new CancellationTokenSource();
@@ -47,12 +49,18 @@ public partial class Spear : AttackBase
 			.Where(isOn => !isOn)
 			.Skip(1)
 			.Subscribe(_ => Attack()).AddTo(_disposable);
+		
+		_timer.InCooldown
+			.Where(_ => !weaponHand.IsDead)
+			.Subscribe(inCd => _guide.SetCooldownColor(inCd)).AddTo(_disposable);
+
+		weaponHand.OnDeath.Subscribe(_ => { }, Disable);
 	}
 
-	public override void _ExitTree()
+	private void Disable()
 	{
+		Hide();
 		_disposable?.Dispose();
-		base._ExitTree();
 	}
 
 	public override void _PhysicsProcess(double delta)

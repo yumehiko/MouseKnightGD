@@ -5,6 +5,7 @@ namespace photon.InGame.Entities.Chips;
 public partial class ChipFactory : Node
 {
 	[Export] private PackedScene _chipPack;
+	[Export] private PackedScene _bigChipPack;
 	private StageArea _stageArea;
 	
 	public void Initialize(StageArea stageArea)
@@ -25,11 +26,13 @@ public partial class ChipFactory : Node
 	
 	private void DeferredCreate(Vector2 point, int amount)
 	{
-		for (var i = 0; i < amount; i++)
+		for (; amount > 0; amount--)
 		{
-			var chip = _chipPack.Instantiate<Chip>();
+			var isBig = amount >= 5;
+			var chip = isBig ? _bigChipPack.Instantiate<Chip>() : _chipPack.Instantiate<Chip>();
 			chip.Awake(point);
 			AddChild(chip);
+			if (isBig) amount -= 4;
 		}
 	}
 }

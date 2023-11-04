@@ -1,16 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://djivfr41qoqkf"]
+[gd_scene load_steps=8 format=3 uid="uid://djivfr41qoqkf"]
 
 [ext_resource type="PackedScene" uid="uid://c6x7rkxprexol" path="res://Assets/Weapons/InGameInstances/SpearBladeVisual.tscn" id="1_520ud"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Spear.cs" id="1_w2aqq"]
 [ext_resource type="PackedScene" uid="uid://du423ka0uwfe0" path="res://Assets/Weapons/InGameInstances/SpearBlade.tscn" id="2_s6nnm"]
 [ext_resource type="AudioStream" uid="uid://cub561qdbputp" path="res://Assets/Audios/SE/WpSpear.ogg" id="4_nykqk"]
+[ext_resource type="Texture2D" uid="uid://c7b8vrixd25p4" path="res://Assets/Sprites/Attacks/SpearGuide.png" id="4_yue3f"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/WeaponGuideSprite.cs" id="5_tjly8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2iar4"]
 radius = 418.0
 
-[node name="Spear" type="Node2D" node_paths=PackedStringArray("_findArea", "_attackSound", "_bladePivot", "_visualPivot")]
+[node name="Spear" type="Node2D" node_paths=PackedStringArray("_findArea", "_guide", "_attackSound", "_bladePivot", "_visualPivot")]
+z_index = -1
 script = ExtResource("1_w2aqq")
 _findArea = NodePath("Area2D")
+_guide = NodePath("BladePivot/Guide")
 _attackSound = NodePath("AudioStreamPlayer2D")
 _bladePivot = NodePath("BladePivot")
 _visualPivot = NodePath("BladeVisualPivot")
@@ -19,9 +23,16 @@ _bladeVisualPrefab = ExtResource("1_520ud")
 
 [node name="BladePivot" type="Node2D" parent="."]
 
+[node name="Guide" type="Sprite2D" parent="BladePivot"]
+modulate = Color(1, 1, 1, 0.121569)
+texture = ExtResource("4_yue3f")
+offset = Vector2(168, 2.08165e-12)
+script = ExtResource("5_tjly8")
+
 [node name="BladeVisualPivot" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 

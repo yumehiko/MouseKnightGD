@@ -5,7 +5,6 @@ TODO
 -クリア時のボーナスタイム+3秒
 
 refactor：
-GTweenをTweenに統一
 
 バグ：
 

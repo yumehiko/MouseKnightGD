@@ -19,6 +19,7 @@ public partial class Sword : AttackBase
 {
 	[Export] private Area2D _area;
 	[Export] private Sprite2D _visual;
+	[Export] private WeaponGuideSprite _guide;
 	[Export] private CpuParticles2D _particles;
 	[Export] private AudioStreamPlayer2D _se;
 	private CooldownTimer _timer;
@@ -29,28 +30,35 @@ public partial class Sword : AttackBase
 	private int _damage = 4;
 	private float _criticalRate;
 	private float _cooldownReductionRateOnCritical;
-	private float _baseCooldown = 0.5f;
+	private float _baseCooldown = 1.0f;
 	private float ReducedCooldown => _baseCooldown * (1.0f / (1.0f + _cooldownReductionRateOnCritical));
 	private bool _isCritical;
 
-	public override void Initialize(WeaponHand weaponHand)
+	public override void Initialize(IWeaponHand weaponHand)
 	{
+		const float offset = -48.0f;
+		Position = new Vector2(0, offset);
 		_timer = new CooldownTimer();
 		_cts = new CancellationTokenSource();
-		Position = new Vector2(0, -32);
 		_disposable = new CompositeDisposable();
 		weaponHand.LeftTrigger
 			.Where(_ => !weaponHand.IsDead)
 			.Where(isOn => isOn)
 			.Subscribe(_ => Attack(_cts.Token)).AddTo(_disposable);
+		
+		_timer.InCooldown
+			.Where(_ => !weaponHand.IsDead)
+			.Subscribe(inCd => _guide.SetCooldownColor(inCd)).AddTo(_disposable);
+
+		weaponHand.OnDeath.Subscribe(_ => { }, Disable);
 	}
 
-	public override void _ExitTree()
+	private void Disable()
 	{
+		Hide();
 		_cts?.Cancel();
 		_cts?.Dispose();
 		_disposable?.Dispose();
-		base._ExitTree();
 	}
 
 	public override void _PhysicsProcess(double delta)

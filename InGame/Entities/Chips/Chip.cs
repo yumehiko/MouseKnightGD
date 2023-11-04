@@ -4,7 +4,8 @@ namespace photon.InGame.Entities.Chips;
 
 public partial class Chip : RigidBody2D
 {
-	public int Value = 1;
+	[Export] private int _value = 1;
+	public int Value => _value;
 	
 	public void Awake(Vector2 initPosition)
 	{

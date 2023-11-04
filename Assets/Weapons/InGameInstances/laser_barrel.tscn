@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://fon80xik01sn"]
+
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/LaserBarrel.cs" id="1_bbwrk"]
+[ext_resource type="Texture2D" uid="uid://damomjty0xa6k" path="res://Assets/Sprites/Attacks/AbstractParticle.png" id="2_pqrqb"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/LaserGuide.cs" id="3_f8g5d"]
+[ext_resource type="Texture2D" uid="uid://dgc7cgg73hpuu" path="res://Assets/Sprites/Attacks/Laser.png" id="4_fcymp"]
+
+[sub_resource type="Gradient" id="Gradient_y62m5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2h3t"]
+size = Vector2(4800, 38)
+
+[node name="LaserBarrel" type="Node2D" node_paths=PackedStringArray("_damageArea", "_guide", "_beamSprite", "_fireParticle")]
+script = ExtResource("1_bbwrk")
+_damageArea = NodePath("LaserBeam")
+_guide = NodePath("Guide")
+_beamSprite = NodePath("BeamSprite")
+_fireParticle = NodePath("FireEffect")
+
+[node name="FireEffect" type="CPUParticles2D" parent="."]
+position = Vector2(2400, 2.08165e-12)
+emitting = false
+amount = 256
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.25
+texture = ExtResource("2_pqrqb")
+emission_shape = 3
+emission_rect_extents = Vector2(2400, 8)
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 16.0
+initial_velocity_max = 16.0
+linear_accel_min = 16.0
+linear_accel_max = 24.0
+angle_min = -18.0
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_y62m5")
+
+[node name="LaserBeam" type="Area2D" parent="."]
+position = Vector2(2400, 2.08165e-12)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBeam"]
+shape = SubResource("RectangleShape2D_e2h3t")
+
+[node name="Guide" type="Node2D" parent="."]
+script = ExtResource("3_f8g5d")
+
+[node name="BeamSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("4_fcymp")
+offset = Vector2(2400, 2.08165e-12)

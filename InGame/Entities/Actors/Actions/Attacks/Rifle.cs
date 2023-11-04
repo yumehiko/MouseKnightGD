@@ -14,6 +14,7 @@ public partial class Rifle : AttackBase
 {
 	[Export] private PackedScene _bulletPack;
 	[Export] private AudioStreamPlayer2D _shotSound;
+	[Export] private RifleGuide _guide;
 	private float _coolTimeMax = 1.5f;
 	private float _coolTimeMin = 0.5f;
 	private float _rapidFireRate = 0.25f;
@@ -26,20 +27,25 @@ public partial class Rifle : AttackBase
 	private CompositeDisposable _disposable;
 	private CancellationTokenSource _cts;
 
-	public override void Initialize(WeaponHand weaponHand)
+	public override void Initialize(IWeaponHand weaponHand)
 	{
 		_timer = new CooldownTimer();
 		_disposable = new CompositeDisposable();
 		_cts = new CancellationTokenSource();
 		_projectileRoot = weaponHand.ProjectileRoot;
 		_barrelAngles = new List<Vector2>();
+		_guide.Initialize(_barrelAngles);
 		// 上下左右にバレルアングルを設定する
-		_barrelAngles.Add(Vector2.Up);
-		_barrelAngles.Add(Vector2.Down);
-		_barrelAngles.Add(Vector2.Left);
-		_barrelAngles.Add(Vector2.Right);
+		AddBarrel(Vector2.Up);
+		AddBarrel(Vector2.Down);
+		AddBarrel(Vector2.Left);
+		AddBarrel(Vector2.Right);
 		
 		_coolTime = _coolTimeMax;
+		
+		_timer.InCooldown
+			.Where(_ => !weaponHand.IsDead)
+			.Subscribe(inCd => _guide.SetCooldownColor(inCd)).AddTo(_disposable);
 		
 		weaponHand.LeftTrigger
 			.Where(_ => !weaponHand.IsDead)
@@ -57,12 +63,14 @@ public partial class Rifle : AttackBase
 			.Where(inCd => !inCd)
 			.Where(_ => weaponHand.LeftTrigger.Value)
 			.Subscribe(_ => Shot()).AddTo(_disposable);
+		
+		weaponHand.OnDeath.Subscribe(_ => { }, Disable);
 	}
 
-	public override void _ExitTree()
+	private void Disable()
 	{
+		Hide();
 		_disposable?.Dispose();
-		base._ExitTree();
 	}
 
 	private void ReleaseTrigger()
@@ -77,7 +85,7 @@ public partial class Rifle : AttackBase
 		{
 			var instance = _bulletPack.Instantiate<Bullet>();
 			_projectileRoot.AddChild(instance);
-			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 3);
+			instance.Shot(GlobalPosition, barrelAngle, 640.0f, 2);
 		}
 		_shotSound.Play();
 		_timer.CountAsync(_coolTime, _cts.Token).Forget();
@@ -85,14 +93,23 @@ public partial class Rifle : AttackBase
 	}
 	
 	// --- パワーアップ用 ---
+
+	private void AddBarrel(Vector2 angle)
+	{
+		_barrelAngles.Add(angle);
+	}
 	
 	public void AddBarrel()
 	{
-		var randomX = GD.Randf() * 2.0f - 1.0f;
-		var randomY = GD.Randf() * 2.0f - 1.0f;
+		for (var i = 0; i < 2; i++)
+		{
+			var randomX = GD.Randf() * 2.0f - 1.0f;
+			var randomY = GD.Randf() * 2.0f - 1.0f;
 		
-		var randomAngle = new Vector2(randomX, randomY).Normalized();
-		_barrelAngles.Add(randomAngle);
+			var randomAngle = new Vector2(randomX, randomY).Normalized();
+			AddBarrel(randomAngle);
+			_guide.AddGuide(randomAngle);
+		}
 	}
 	
 	
@@ -120,7 +137,7 @@ public partial class Rifle : AttackBase
 	public void IncreaseFireRate()
 	{
 		const float baseMinCooldown = 0.5f;
-		const float reduceRatio = 0.1125f;
+		const float reduceRatio = 0.12f;
 		_increaseFireRatePowerCount++;
 		_coolTimeMin = baseMinCooldown * (1.0f / (1.0f + _increaseFireRatePowerCount * reduceRatio));
 		ReCalculateMaxCoolTime();

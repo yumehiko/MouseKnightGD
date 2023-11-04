@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://gpki0c2a83p1"]
+
+[ext_resource type="Resource" uid="uid://cpjxknciwoxv2" path="res://Assets/PowerUps/LaserAdd.tres" id="1_vtk5y"]
+[ext_resource type="Resource" uid="uid://bf4d4mo73klgd" path="res://Assets/PowerUps/LaserAccel.tres" id="2_cdvui"]
+[ext_resource type="Texture2D" uid="uid://cixhxt372knhj" path="res://Assets/Sprites/UI/WpLaser.png" id="2_wq06x"]
+[ext_resource type="PackedScene" uid="uid://c04m87lytyvip" path="res://Assets/Weapons/InGameInstances/laser.tscn" id="4_16wu1"]
+[ext_resource type="Script" path="res://InGame/PowerUps/WeaponPack.cs" id="6_virt8"]
+
+[resource]
+script = ExtResource("6_virt8")
+_attackPrefab = ExtResource("4_16wu1")
+NextPowerUps = Array[Resource]([ExtResource("1_vtk5y"), ExtResource("2_cdvui")])
+_describe = ExtResource("2_wq06x")

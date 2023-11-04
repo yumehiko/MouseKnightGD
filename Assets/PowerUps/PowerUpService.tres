@@ -1,11 +1,12 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://d0bi8epko3ufw"]
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://d0bi8epko3ufw"]
 
 [ext_resource type="Script" path="res://InGame/PowerUps/PowerUpService.cs" id="1_p502g"]
 [ext_resource type="Resource" uid="uid://5ynfhgcrlk60" path="res://Assets/Weapons/RiflePack.tres" id="1_v282k"]
 [ext_resource type="Resource" uid="uid://bsghvpx2u0epu" path="res://Assets/Weapons/SwordPack.tres" id="2_3kdpq"]
 [ext_resource type="Resource" uid="uid://duvvpjelpjim8" path="res://Assets/Weapons/SpearPack.tres" id="2_vdxpg"]
 [ext_resource type="Resource" uid="uid://bmvh0muh7ruty" path="res://Assets/Weapons/AxePack.tres" id="4_rs4tv"]
+[ext_resource type="Resource" uid="uid://gpki0c2a83p1" path="res://Assets/Weapons/LaserPack.tres" id="5_wa1hw"]
 
 [resource]
 script = ExtResource("1_p502g")
-_initWeaponPacks = Array[Resource]([ExtResource("1_v282k"), ExtResource("2_vdxpg"), ExtResource("2_3kdpq"), ExtResource("4_rs4tv")])
+_initWeaponPacks = Array[Resource]([ExtResource("1_v282k"), ExtResource("2_vdxpg"), ExtResource("2_3kdpq"), ExtResource("4_rs4tv"), ExtResource("5_wa1hw")])

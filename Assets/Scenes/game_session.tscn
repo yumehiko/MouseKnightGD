@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bv75pxtmkco6h"]
+[gd_scene load_steps=29 format=3 uid="uid://bv75pxtmkco6h"]
 
 [ext_resource type="Script" path="res://InGame/GameSession.cs" id="1_3vmkm"]
 [ext_resource type="AudioStream" uid="uid://co0nivgvat2o1" path="res://Assets/Audios/Musics/Karashi.ogg" id="2_4rfsh"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dd43uh6mssi6r" path="res://Assets/Prefabs/Chip.tscn" id="12_simin"]
 [ext_resource type="Resource" uid="uid://c1d6ije0yceq6" path="res://Assets/Prefabs/Enemies/wallCaller_Pack.tres" id="13_75efb"]
 [ext_resource type="FontFile" uid="uid://dfw5yuakxjmdf" path="res://Assets/Miscs/Fonts/GlacialIndifference-Regular.ttf" id="16_45lcs"]
+[ext_resource type="PackedScene" uid="uid://dx78bix7rggrm" path="res://Assets/Prefabs/BigChip.tscn" id="16_sdpk5"]
 [ext_resource type="Resource" uid="uid://mj72ucifsljv" path="res://Assets/Prefabs/Enemies/bouncer_pack.tres" id="16_vprkf"]
 [ext_resource type="Texture2D" uid="uid://bl612861u0flk" path="res://Assets/Sprites/Stage/BackParticle.png" id="17_6nw2x"]
 [ext_resource type="Script" path="res://InGame/ScoreLabel.cs" id="17_tum1e"]
@@ -103,6 +104,7 @@ _chipFactory = NodePath("../Chips")
 [node name="Chips" type="Node" parent="."]
 script = ExtResource("9_ubuin")
 _chipPack = ExtResource("12_simin")
+_bigChipPack = ExtResource("16_sdpk5")
 
 [node name="Projectiles" type="Node2D" parent="."]
 

@@ -12,6 +12,7 @@ public partial class HeroVisual : Sprite2D
     [Export] private AudioStream _invisibleSe;
     [Export] private AudioStreamPlayer2D _chipSePlayer;
     [Export] private CpuParticles2D _deathParticle;
+    [Export] private HealthGuide _healthGuide;
     [Export] private Color _fullDamageColor;
 
     private CompositeDisposable _disposable;
@@ -19,7 +20,8 @@ public partial class HeroVisual : Sprite2D
     public void Initialize(Health health, ChipCollector chipCollector)
     {
         _disposable = new CompositeDisposable();
-        health.Current.Subscribe(current => SyncColor(current, health.Max.Value)).AddTo(_disposable);
+        _healthGuide.Initialize(health.Max.Value);
+        health.Current.Subscribe(current => SyncHealth(current, health.Max.Value)).AddTo(_disposable);
         health.OnDamage.Subscribe(_ => OnDamage() ).AddTo(_disposable);
         health.OnDeath.Subscribe(_ => Death()).AddTo(_disposable);
         health.IsInvisible.Subscribe(Invisible).AddTo(_disposable);
@@ -32,12 +34,13 @@ public partial class HeroVisual : Sprite2D
         _disposable?.Dispose();
     }
 
-    private void SyncColor(int currentHp, int maxHp)
+    private void SyncHealth(int currentHp, int maxHp)
     {
         var normalizedCurrentHealth = (float) currentHp / maxHp;
         var s = 1.0f - normalizedCurrentHealth;
         var color = Color.FromHsv(_fullDamageColor.H, s, _fullDamageColor.V);
         Modulate = color;
+        _healthGuide.SetHealthAmount(currentHp);
     }
 
     private void OnDamage()

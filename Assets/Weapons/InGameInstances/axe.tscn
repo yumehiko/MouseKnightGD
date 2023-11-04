@@ -1,18 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://biijbefq5rvff"]
+[gd_scene load_steps=9 format=3 uid="uid://biijbefq5rvff"]
 
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/Axe.cs" id="1_0ciwv"]
 [ext_resource type="Texture2D" uid="uid://c7r633irf2j3a" path="res://Assets/Sprites/Circle1000.svg" id="1_vykmr"]
-[ext_resource type="AudioStream" uid="uid://521apwsme7vs" path="res://Assets/Audios/SE/WpSlash.ogg" id="4_onfnp"]
+[ext_resource type="AudioStream" uid="uid://bsplfj6megyux" path="res://Assets/Audios/SE/WpAxeSlash.ogg" id="3_o7nrg"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Actions/Attacks/AxeGuide.cs" id="3_p7b06"]
+[ext_resource type="AudioStream" uid="uid://cnpij6iln66bq" path="res://Assets/Audios/SE/WpAxeCharge.ogg" id="4_1fdoe"]
+[ext_resource type="Texture2D" uid="uid://damomjty0xa6k" path="res://Assets/Sprites/Attacks/AbstractParticle.png" id="6_64ax5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gknf8"]
 radius = 500.0
 
-[node name="Axe" type="Node2D" node_paths=PackedStringArray("_slashArea", "_slashSprite", "_slashSound")]
+[sub_resource type="Gradient" id="Gradient_y62m5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Axe" type="Node2D" node_paths=PackedStringArray("_slashArea", "_slashSprite", "_chargeSprite", "_guide", "_slashSound", "_chargeSound", "_criticalEffect")]
+z_index = -1
 script = ExtResource("1_0ciwv")
 _slashArea = NodePath("Area2D")
 _slashSprite = NodePath("Area2D/SlashSprite")
+_chargeSprite = NodePath("Area2D/ChargeSprite")
+_guide = NodePath("Guide")
 _slashColor = Color(0.6, 0.88, 1, 0.87451)
-_slashSound = NodePath("SePlayer")
+_chargingColor = Color(0.027451, 0.027451, 0.027451, 0.498039)
+_maxChargedColor = Color(0, 0, 0, 1)
+_slashSound = NodePath("SlashSe")
+_chargeSound = NodePath("ChargeSe")
+_criticalEffect = NodePath("CriticalEffect")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1e-05, 1e-05)
@@ -33,6 +46,31 @@ offset = Vector2(2.08165e-12, 2.08165e-12)
 visible = false
 shape = SubResource("CircleShape2D_gknf8")
 
-[node name="SePlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_onfnp")
+[node name="Guide" type="Node2D" parent="."]
+script = ExtResource("3_p7b06")
+
+[node name="SlashSe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_o7nrg")
 max_polyphony = 4
+
+[node name="ChargeSe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1fdoe")
+
+[node name="CriticalEffect" type="CPUParticles2D" parent="."]
+scale = Vector2(1.28, 1.28)
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.25
+texture = ExtResource("6_64ax5")
+emission_shape = 2
+emission_sphere_radius = 50.0
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+angle_min = -18.0
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_y62m5")

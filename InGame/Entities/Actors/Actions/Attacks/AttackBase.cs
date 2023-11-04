@@ -5,5 +5,5 @@ namespace photon.InGame.Entities.Actors.Actions.Attacks;
 
 public abstract partial class AttackBase : Node2D
 {
-    public abstract void Initialize(WeaponHand weaponHand);
+    public abstract void Initialize(IWeaponHand weaponHand);
 }

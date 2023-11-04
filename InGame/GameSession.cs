@@ -114,7 +114,7 @@ public partial class GameSession : Node
 		_loopCts = null;
 		_powerUpService.UnRegister(); // レベルアップ機能を停止。
 		_enemyFactory.KillAll();
-		await GDTask.Delay(TimeSpan.FromSeconds(3.0f), cancellationToken: _sessionCts.Token);
+		await GDTask.Delay(TimeSpan.FromSeconds(8.0f), cancellationToken: _sessionCts.Token);
 		_playerHero.Die();
 	}
 }

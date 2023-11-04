@@ -79,8 +79,8 @@ public partial class PowerUpService : Resource
     private void GainNextLevelUpChip()
     {
         const int baseValue = 5;
-        const float levelUpRate = 1.4f;
-        _nextLevelUpChip = Mathf.RoundToInt(baseValue * Mathf.Pow(levelUpRate, _level));
+        const float levelUpRate = 1.32f;
+        _nextLevelUpChip = Mathf.RoundToInt(baseValue * Mathf.Pow(levelUpRate, _level)) + _level * 2;
     }
     
     private IReadOnlyList<PowerUpBase> PickPowerUpChoices(List<WeaponPack> weapons)
@@ -111,14 +111,27 @@ public partial class PowerUpService : Resource
         var weaponPickChance = Mathf.Pow(0.25f, _player.WeaponHand.WeaponCount);
         var pick = GD.Randf();
         var weaponPick = pick < weaponPickChance && shuffledWeaponQueue.Count > 0;
-        
+        WeaponPack weapon = null;
         if (weaponPick)
         {
-            var weapon = shuffledWeaponQueue.Dequeue();
+            weapon = shuffledWeaponQueue.Dequeue();
             return weapon;
         }
 
-        var powerUp = shuffledPowerUpQueue.Dequeue();
-        return powerUp;
+        // 武器がピックされない場合、パワーアップをピックする。
+        if (shuffledPowerUpQueue.Count > 0)
+        {
+            var powerUp = shuffledPowerUpQueue.Dequeue();
+            return powerUp;
+        }
+        
+        // 武器ピックが選ばれず、しかしパワーアップ候補が0の場合、武器をピックする。
+        if (shuffledWeaponQueue.Count > 0)
+        {
+            weapon = shuffledWeaponQueue.Dequeue();
+            return weapon;
+        }
+        
+        throw new Exception("パワーアップ候補が0です。");
     }
 }

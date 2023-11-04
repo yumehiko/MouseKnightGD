@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://briedp4eubfjp"]
+
+[ext_resource type="Script" path="res://Tests/WeaponTest.cs" id="1_m6y1b"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Brains/PlayerBrain.cs" id="2_ee803"]
+[ext_resource type="PackedScene" uid="uid://c04m87lytyvip" path="res://Assets/Weapons/InGameInstances/laser.tscn" id="3_es0y2"]
+[ext_resource type="Texture2D" uid="uid://vltvbtw5gbp7" path="res://Assets/Sprites/Hero/Hero.png" id="4_x2h8r"]
+
+[node name="WeaponTestScene" type="Node2D"]
+
+[node name="WeaponTest" type="Node2D" parent="." node_paths=PackedStringArray("_brain", "_weapon", "_projectileRoot")]
+script = ExtResource("1_m6y1b")
+_brain = NodePath("Brain")
+_weapon = NodePath("Laser")
+_projectileRoot = NodePath("../ProjectileRoot")
+
+[node name="HeroSprite" type="Sprite2D" parent="WeaponTest"]
+texture = ExtResource("4_x2h8r")
+
+[node name="Brain" type="Node" parent="WeaponTest"]
+script = ExtResource("2_ee803")
+
+[node name="Laser" parent="WeaponTest" instance=ExtResource("3_es0y2")]
+
+[node name="ProjectileRoot" type="Node2D" parent="."]

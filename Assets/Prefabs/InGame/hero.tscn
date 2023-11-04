@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dq3qa3kw50pld"]
+[gd_scene load_steps=15 format=3 uid="uid://dq3qa3kw50pld"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_ob8sp"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/Hero.cs" id="2_3ebh7"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bbsrtinaeduew" path="res://Assets/Audios/SE/HeroDeath.wav" id="6_ac1d3"]
 [ext_resource type="Texture2D" uid="uid://enf3j1jr0egt" path="res://Assets/Sprites/Hero/HeroDeathParticle.png" id="7_eqdma"]
 [ext_resource type="AudioStream" uid="uid://d3ymv1t5wa4j3" path="res://Assets/Audios/SE/HeroInvisible.wav" id="7_f7lh5"]
+[ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/HealthGuide.cs" id="8_8qoy6"]
 [ext_resource type="AudioStream" uid="uid://dphgos1bkdxjt" path="res://Assets/Audios/SE/PickChip.wav" id="8_20v0o"]
 [ext_resource type="Script" path="res://InGame/Entities/Actors/Heroes/ChipCollector.cs" id="9_i1y3p"]
 
@@ -18,7 +19,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_biavq"]
-radius = 40.0
+radius = 48.0
 
 [node name="Hero" type="RigidBody2D" node_paths=PackedStringArray("_visual", "_chipCollector")]
 position = Vector2(960, 540)
@@ -33,7 +34,7 @@ script = ExtResource("2_3ebh7")
 _visual = NodePath("Visual")
 _chipCollector = NodePath("ChipCollector")
 
-[node name="Visual" type="Sprite2D" parent="." node_paths=PackedStringArray("_deathSePlayer", "_chipSePlayer", "_deathParticle")]
+[node name="Visual" type="Sprite2D" parent="." node_paths=PackedStringArray("_deathSePlayer", "_chipSePlayer", "_deathParticle", "_healthGuide")]
 material = ExtResource("3_kqq1p")
 texture = ExtResource("4_1kjtg")
 script = ExtResource("5_x4y8q")
@@ -42,10 +43,14 @@ _deathSe = ExtResource("6_ac1d3")
 _invisibleSe = ExtResource("7_f7lh5")
 _chipSePlayer = NodePath("../ChipCollector/ChipSound")
 _deathParticle = NodePath("../DeathParticle")
+_healthGuide = NodePath("HealthGuide")
 _fullDamageColor = Color(0, 0.698039, 1, 1)
 
 [node name="DeathSe" type="AudioStreamPlayer2D" parent="Visual"]
 stream = ExtResource("6_ac1d3")
+
+[node name="HealthGuide" type="Node2D" parent="Visual"]
+script = ExtResource("8_8qoy6")
 
 [node name="DeathParticle" type="CPUParticles2D" parent="."]
 material = ExtResource("3_kqq1p")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://co5nha1ab7dpl"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://ceq18xnccby7j" path="res://Assets/Miscs/PhysicsMaterials/Bounce.tres" id="1_ga201"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/Bouncer.cs" id="2_517sh"]
+[ext_resource type="Material" uid="uid://7uspri3gqlmi" path="res://Assets/Sprites/CanvasItemMaterials/GlowMaterial.tres" id="3_0myee"]
+[ext_resource type="Texture2D" uid="uid://cywix5vgwgln5" path="res://Assets/Sprites/Enemies/Bouncer.png" id="4_hxcg4"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/EnemyVisual.cs" id="5_5loxa"]
+[ext_resource type="Script" path="res://InGame/Entities/Enemies/DamageArea.cs" id="6_yu7rv"]
+[ext_resource type="Texture2D" uid="uid://bfgb1si0467gb" path="res://Assets/Sprites/Circle100.svg" id="7_i3f5j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6mohr"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cenc1"]
+radius = 16.0
+
+[node name="Bouncer" type="RigidBody2D" node_paths=PackedStringArray("_damageArea", "_visual")]
+collision_layer = 2
+physics_material_override = ExtResource("1_ga201")
+gravity_scale = 2.66454e-15
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("2_517sh")
+_damageArea = NodePath("DamageArea")
+_visual = NodePath("Visual")
+_maxHp = 2
+
+[node name="Visual" type="Sprite2D" parent="."]
+material = ExtResource("3_0myee")
+texture = ExtResource("4_hxcg4")
+script = ExtResource("5_5loxa")
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6mohr")
+
+[node name="DamageArea" type="Area2D" parent="." node_paths=PackedStringArray("_sprite2D", "_damageShape2D")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("6_yu7rv")
+_sprite2D = NodePath("Sprite2D")
+_damageShape2D = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="DamageArea"]
+modulate = Color(0.901961, 0, 0.223529, 0)
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("7_i3f5j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("CircleShape2D_cenc1")
+disabled = true
