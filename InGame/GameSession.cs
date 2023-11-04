@@ -90,7 +90,7 @@ public partial class GameSession : Node
 
 	private async GDTask ProgressCount(CancellationTokenSource loopCts)
 	{
-		const float musicLength = 481.0f;
+		const float musicLength = 480.0f;
 		await _gameProgressBar.StartAsync(musicLength, loopCts.Token);
 		await BeatGame(loopCts);
 	}
@@ -102,6 +102,7 @@ public partial class GameSession : Node
 		loopCts?.Dispose();
 		_loopCts = null;
 		var result = new GameSessionResult(_playerHero.Score.Value);
+		_scoreLabel.Emphasis();
 		await GDTask.Delay(TimeSpan.FromSeconds(4.0f), cancellationToken: _sessionCts.Token);
 		_tcs.TrySetResult(result);
 	}

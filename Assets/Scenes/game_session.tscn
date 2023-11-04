@@ -42,7 +42,6 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 line_spacing = 8.0
 font = ExtResource("16_45lcs")
 font_size = 240
-font_color = Color(1, 1, 1, 0.0313726)
 shadow_size = 0
 shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
 
@@ -129,6 +128,7 @@ color_ramp = SubResource("Gradient_ju6ya")
 [node name="LevelUpUI" parent="." instance=ExtResource("20_i10d6")]
 
 [node name="ScoreLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.0313726)
 z_index = -100
 anchors_preset = 15
 anchor_right = 1.0
